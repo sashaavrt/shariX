@@ -7,7 +7,7 @@ Admin system implemented as a Django application.
 1) Download or clone repository
 
 ```bash
-git clone -b ****** http://****** name_project
+git clone http://git.sharix-app.org/ShariX_Open/sharix-open-webapp-base.git name_project
 ```
 
 2) Install with install_win.bat (for Windows) or install_linux.sh (for Linux)
