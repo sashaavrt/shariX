@@ -1,0 +1,15 @@
+# Virtualenv
+env/
+venv/
+#module
+todo/
+# VSCode
+.vscode
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Other
+*.sqlite3

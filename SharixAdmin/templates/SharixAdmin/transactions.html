@@ -1,0 +1,15 @@
+{% extends 'SharixAdmin/index.html' %}
+{% load render_table from django_tables2 %}
+{% block contenthome %}
+    <h1 >{{ title }}</h1>
+    <h3 >Ползователь: {{ request.user.username }}</h3>
+    <h3 >Баланс: {{ wallet.balance }} баллов</h3>
+    <form class="d-flex" method="post">
+        {% csrf_token %}
+        <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      {% comment %} {% render_table  table %} {% endcomment %}
+      
+    
+{% endblock contenthome %}
