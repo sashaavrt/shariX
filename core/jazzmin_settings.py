@@ -116,12 +116,12 @@ JAZZMIN_SETTINGS = {
     # # UI Tweaks #
     # #############
     # # Relative paths to custom CSS/JS scripts (must be present in static files)
-    # "custom_css": None,
-    # "custom_js": None,
-    # # Whether to link font from fonts.googleapis.com (use custom_css to supply font otherwise)
-    # "use_google_fonts_cdn": True,
+     "custom_css": None,
+     "custom_js": None,
+    # Whether to link font from fonts.googleapis.com (use custom_css to supply font otherwise)
+     "use_google_fonts_cdn": True,
     # # Whether to show the UI customizer on the sidebar
-    # "show_ui_builder": False,
+    "show_ui_builder": True,
 
     ###############
     # Change view #
@@ -137,4 +137,36 @@ JAZZMIN_SETTINGS = {
     #"changeform_format_overrides": {"SharixAdmin.SharixUser": "collapsible", "auth.group": "vertical_tabs"},
     # Add a language dropdown into the admin
     #"language_chooser": True,
+}
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-navy",
+    "accent": "accent-navy",
+    "navbar": "navbar-navy navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-navy",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": True,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "default",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
+        "info": "btn-outline-info",
+        "warning": "btn-outline-warning",
+        "danger": "btn-outline-danger",
+        "success": "btn-outline-success"
+    },
+    "actions_sticky_top": False
 }
