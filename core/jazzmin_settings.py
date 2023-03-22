@@ -31,7 +31,7 @@ JAZZMIN_SETTINGS = {
 
     # List of model admins to search from the search bar, search bar omitted if excluded
     # If you want to use a single search field you dont need to use a list, you can use a simple string 
-    "search_model": ["SharixAdmin.SharixUser", "auth.Group"],
+    "search_model": ["SharixAdmin.SharixUser"],
 
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
     "user_avatar": None,
@@ -53,7 +53,7 @@ JAZZMIN_SETTINGS = {
         {"model": "SharixAdmin.SharixUser"},
 
         # App with dropdown menu to all its models pages (Permissions checked against models)
-        {"app": "books"},
+        {"app": "tickets"},
     ],
 
     #############
@@ -97,11 +97,17 @@ JAZZMIN_SETTINGS = {
 
     # # Custom icons for side menu apps/models See https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2
     # # for the full list of 5.13.0 free icon classes
-    # # "icons": {
-    # #     "auth": "fas fa-users-cog",
-    # #     "auth.user": "fas fa-user",
-    # #     "auth.Group": "fas fa-users",
-    # # },
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "SharixAdmin": "fas fa-users-cog",
+        "SharixAdmin.SharixUser": "fas fa-user",
+        "tickets.Task": "fas fa-check",
+        "tickets.TaskList": "fas fa-list",
+        "tickets.Comment": "fas fa-comment",
+        "tickets.Attachment": "fas fa-file",
+    },
     # # Icons that are used when one is not manually specified
     # # "default_icon_parents": "fas fa-chevron-circle-right",
     # # "default_icon_children": "fas fa-circle",
@@ -139,19 +145,19 @@ JAZZMIN_SETTINGS = {
     #"language_chooser": True,
 }
 JAZZMIN_UI_TWEAKS = {
-    "navbar_small_text": False,
-    "footer_small_text": False,
+    "navbar_small_text": True,
+    "footer_small_text": True,
     "body_small_text": False,
-    "brand_small_text": False,
-    "brand_colour": "navbar-navy",
+    "brand_small_text": True,
+    "brand_colour": "navbar-light",
     "accent": "accent-navy",
     "navbar": "navbar-navy navbar-dark",
     "no_navbar_border": False,
     "navbar_fixed": False,
     "layout_boxed": False,
     "footer_fixed": False,
-    "sidebar_fixed": False,
-    "sidebar": "sidebar-dark-navy",
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-light-navy",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": False,
