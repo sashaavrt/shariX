@@ -21,10 +21,12 @@ urlpatterns = [
     
     #path('v1/auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken'), name='auth'),
-    path('api/', include(router.urls)),
+    path('platform/api/', include(router.urls), name="sharix-api"),
     path('senderphone/', PhoneSender.as_view()),
     #schemas
     path('schemav1/', login_required(Schema.as_view()), name='schemav1'),
     path('schemav2/', login_required(Plate.as_view()),  name='schemav2'),
     path('schemav3/', schema_v3, name='schema'),
+
+    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
