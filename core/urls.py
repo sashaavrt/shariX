@@ -7,10 +7,11 @@ from django.conf.urls.static import static
 
 urlpatterns = (
     [
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('', include('SharixAdmin.urls')),
     path('tickets/', include("tickets.urls"), name='tickets'),
-   
+    
 
 ] 
 + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

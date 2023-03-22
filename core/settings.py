@@ -3,6 +3,7 @@ import os
 from core.db_settings import *
 from core.api_settings import *
 from core.tickets_mail_settings import *
+#from core.jazzmin_settings import *
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -17,6 +18,7 @@ CSRF_TRUSTED_ORIGINS = []
 
 # Application definition
 INSTALLED_APPS = [
+    'jazzmin.apps.JazzminConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,6 +38,7 @@ INSTALLED_APPS = [
     'schema_graph',
     'drf_yasg',
     'django_spaghetti',
+    
 ]
 
 MIDDLEWARE = [
@@ -46,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.admindocs.middleware.XViewMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'

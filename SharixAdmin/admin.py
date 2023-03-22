@@ -40,6 +40,7 @@ send_phone.short_description = u"Отправить сообщение на но
     
 @admin.register(SharixUser)
 class SharixUserAdmin(adm.UserAdmin):
+    
     list_display = (
         'username',
         'phone_number',
@@ -53,17 +54,17 @@ class SharixUserAdmin(adm.UserAdmin):
     )
     fieldsets = (
         ("Главное", {'fields': ('phone_number', 'password')}),
-        ('Персональные данные', {'fields': (('username', 'email'), ('first_name','last_name'))}),
-        ('Разрешения', {'fields': (('is_staff', 'is_active', 'is_superuser'),)}),
+        ('Персональные данные', {'fields': ('username', 'email', 'first_name','last_name')}),
+        ('Разрешения', {'fields': ('is_staff', 'is_active', 'is_superuser',)}),
         ('Прочие разрешения', {'fields': ('groups', 'user_permissions'), 'classes': ['collapse']}),
-        ('Прочее', {'fields': (('last_login', 'date_joined'),)}),
+        ('Прочее', {'fields': ('last_login', 'date_joined',)}),
     )
     add_fieldsets = (
         ("Главное", {'fields': ('phone_number', 'password1', 'password2')}),
-        ('Персональные данные', {'fields': (('username', 'email'), ('first_name','last_name'))}),
-        ('Разрешения', {'fields': (('is_staff', 'is_active', 'is_superuser'),)}),
+        ('Персональные данные', {'fields': ('username', 'email', 'first_name','last_name')}),
+        ('Разрешения', {'fields': ('is_staff', 'is_active', 'is_superuser',)}),
         ('Прочие разрешения', {'fields': ('groups', 'user_permissions'), 'classes': ['collapse']}),
-        ('Прочее', {'fields': (('last_login', 'date_joined'),)}),
+        ('Прочее', {'fields': ('last_login', 'date_joined',)}),
     )
     #raw_id_fields = ('groups', 'user_permissions')
     actions = [send_phone]
