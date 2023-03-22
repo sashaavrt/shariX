@@ -9,7 +9,7 @@ urlpatterns = (
     [
     path('admin/', admin.site.urls),
     path('', include('SharixAdmin.urls')),
-    path('todo/', include("todo.urls"), name='todo'),
+    path('tickets/', include("tickets.urls"), name='tickets'),
    
 
 ] 

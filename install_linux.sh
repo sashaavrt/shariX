@@ -1,6 +1,6 @@
 #!/bin/sh
 
-git clone -b tickets_module http://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git todo
+git clone -b tickets_module http://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git tickets
 
 python3 -m venv env
 

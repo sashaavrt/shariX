@@ -2,7 +2,7 @@
 env/
 venv/
 #module
-todo/
+tickets/
 # VSCode
 .vscode
 

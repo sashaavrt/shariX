@@ -2,7 +2,7 @@ from pathlib import Path
 import os
 from core.db_settings import *
 from core.api_settings import *
-from core.todo_mail_settings import *
+from core.tickets_mail_settings import *
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'SharixAdmin.apps.SharixadminConfig',
-    'todo.apps.TodoConfig',
+    'tickets.apps.ticketsConfig',
     'django_tables2',
     "django.contrib.sites",
     "django.contrib.flatpages",
@@ -75,7 +75,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
             ],
             'libraries': {
-                'custom_tags':'todo.template_tags.custom_tags'
+                'custom_tags':'tickets.template_tags.custom_tags'
             }
         },
     },

@@ -28,9 +28,9 @@
                       <span class="hidemenu">{{ item.title }}</span>
                     </a>
                   </li>
-                  {% elif item.link == 'todo' %}
+                  {% elif item.link == 'tickets' %}
                   <li class="nav-item">
-                    <a href="{% url 'todo:lists' %}" class="nav-link" >
+                    <a href="{% url 'tickets:lists' %}" class="nav-link" >
                       {% with 'SharixAdmin/img/menu/'|add:item.sel|add:'.svg' as image_static %}
                         <img  src="{% static image_static %}" alt="" style="width: 30px; height: 30px;"> 
                       {% endwith %}

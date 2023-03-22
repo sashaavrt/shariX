@@ -100,7 +100,7 @@ menu = [
     {'title':'Мои связи',               'link':'test-page', 'sel':'people'},
     {'title':'Сотрудничество',          'link':'test-page', 'sel':'sotrud'},
     {'title':'Техподдержка',            'link':'test-page', 'sel':'gear'},
-    {'title':'Мои заявки',              'link':'todo', 'sel':'tikets'},
+    {'title':'Мои заявки',              'link':'tickets', 'sel':'tikets'},
 ]
 
 def get_context(request, page_context) -> dict:
