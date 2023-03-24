@@ -6,7 +6,7 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy, resolve, reverse
 from django.contrib.auth.decorators import login_required
 from .forms import *
-from .models import *
+from SharixAdmin.models import *
 from django.contrib.auth import logout
 from django.db.models import Q
 from .tables import *

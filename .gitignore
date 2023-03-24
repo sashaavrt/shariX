@@ -3,6 +3,7 @@ env/
 venv/
 #module
 tickets/
+metaservicesynced/
 # VSCode
 .vscode
 
