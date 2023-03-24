@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'SharixAdmin.apps.SharixadminConfig',
     'tickets.apps.ticketsConfig',
-    'metaservicesynced.apps.MetaservicesyncedConfig'
+    'metaservicesynced.apps.MetaservicesyncedConfig',
     'django_tables2',
     "django.contrib.sites",
     "django.contrib.flatpages",
