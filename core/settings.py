@@ -4,16 +4,16 @@ from core.db_settings import *
 from core.api_settings import *
 from core.tickets_mail_settings import *
 from core.jazzmin_settings import *
+import core.config as conf
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-t064c*-&=sq48kon3()$mge6cos*#x%*c$dr#1*n*+b$s6fw=*'
+SECRET_KEY = conf.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = conf.DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = conf.ALLOWED_HOSTS
 CSRF_TRUSTED_ORIGINS = []
 
 # Application definition
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'schema_graph',
     'drf_yasg',
     'django_spaghetti',
-    
 ]
 
 MIDDLEWARE = [
@@ -65,7 +64,9 @@ INTERNAL_IPS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / "templates"
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,9 +124,9 @@ SITE_ID = 1
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/root/sharix-webuser/SharixAdmin/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "core", "static", "/root/sharix-webuser/SharixAdmin/static/")]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = conf.STATIC_URL
+STATICFILES_DIRS = conf.STATICFILES_DIRS
+STATIC_ROOT = conf.STATIC_ROOT
 # Uploaded media
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"

@@ -4,6 +4,8 @@ venv/
 #module
 tickets/
 metaservicesynced/
+staticfiles/
+core/config.py
 # VSCode
 .vscode
 
@@ -14,3 +16,4 @@ __pycache__/
 
 # Other
 *.sqlite3
+.env
