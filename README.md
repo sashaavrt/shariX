@@ -8,7 +8,7 @@ Admin system implemented as a Django application.
 ```bash
 git clone http://git.sharix-app.org/ShariX_Open/sharix-open-webapp-base.git name_project
 ```
-2) Set up a configuration file ```nano core/config_template.py```
+1) Set up a configuration file
 ```python
 #Create file config.py with this setting or rename this file to config.py
 
