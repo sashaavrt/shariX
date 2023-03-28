@@ -19,7 +19,7 @@ REST_FRAMEWORK = {
 SPAGHETTI_SAUCE = {
     'apps': ['auth', 'SharixAdmin', 
              'tickets', 'admin', 
-             'flatpages', 'sessions', 'sites'],
+             'flatpages', 'sessions', 'sites', 'metaservicesynced'],
     'show_fields': False,
     'show_proxy':True,
 }
