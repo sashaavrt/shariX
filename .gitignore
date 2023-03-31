@@ -6,7 +6,7 @@ tickets/
 metaservicesynced/
 staticfiles/
 core/config.py
-migrations/000*.py
+000*.py
 # VSCode
 .vscode
 
