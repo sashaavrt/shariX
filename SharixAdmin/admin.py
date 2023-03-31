@@ -6,6 +6,7 @@ from SharixAdmin.models import *
 from django import forms
 from xmpp import cli
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Permission
 import django.contrib.auth.admin as adm
 
 class MessageForm(forms.Form):
@@ -37,6 +38,14 @@ def send_phone(modeladmin, request, queryset):
     return render(request, "SharixAdmin/senderform.html", {"items":queryset, "form":form, 'title':'Отправка сообщений на номер телефона'})
 send_phone.short_description = u"Отправить сообщение на номер телефона"
 
+@admin.register(Permission)
+class PermissionsAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+        'content_type',
+        'codename',
+    )
     
 @admin.register(SharixUser)
 class SharixUserAdmin(adm.UserAdmin):
