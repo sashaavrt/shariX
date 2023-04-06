@@ -11,6 +11,8 @@ urlpatterns = (
     path('admin/', admin.site.urls),
     path('', include('SharixAdmin.urls')),
     path('tickets/', include("tickets.urls"), name='tickets'),
+    #metaservice
+    path('metaservicesynced/', include("metaservicesynced.urls"), name="metaservicesynced"),
     
 
 ] 

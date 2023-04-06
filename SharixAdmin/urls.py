@@ -5,6 +5,7 @@ from rest_framework import routers
 from django_spaghetti.views import Plate
 from schema_graph.views import Schema
 from django.contrib.auth.decorators import login_required
+
 router = routers.SimpleRouter()
 router.register(r'sharix-users', SharixUserMVS)
 router.register(r'group', GroupMVS)
@@ -27,6 +28,6 @@ urlpatterns = [
     path('schemav1/', login_required(Schema.as_view()), name='schemav1'),
     path('schemav2/', login_required(Plate.as_view()),  name='schemav2'),
     path('schemav3/', schema_v3, name='schema'),
-
+    
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

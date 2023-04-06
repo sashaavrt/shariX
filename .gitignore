@@ -6,7 +6,7 @@ tickets/
 metaservicesynced/
 staticfiles/
 core/config.py
-migrations/*
+migrations/
 !__init__.py
 # VSCode
 .vscode
