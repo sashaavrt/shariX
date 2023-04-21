@@ -11,6 +11,8 @@ from django.contrib.auth import logout
 from django.db.models import Q
 from .tables import *
 from django import template
+from metaservicesynced.models import ServiceType
+from django.core import serializers
 # Create your views here.
 
 
@@ -35,6 +37,16 @@ def transactions(request):
         })
         
     return render(request, 'SharixAdmin/transactions.html', context)
+
+@login_required
+def servicetype(request):
+    service_types = ServiceType.objects.all()
+    context = get_context(request, {
+        'title':'Услуги сервиса',
+        'service_types':service_types,
+        })
+        
+    return render(request, 'SharixAdmin/servicetype.html', context)
 
 @login_required
 def trans_id(request, trans_id):
@@ -103,6 +115,7 @@ menu = [
     {'title':'Сотрудничество',          'link':'test-page', 'sel':'sotrud'},
     {'title':'Техподдержка',            'link':'test-page', 'sel':'gear'},
     {'title':'Мои заявки',              'link':'tickets', 'sel':'tikets'},
+    {'title':'Услуги сервиса',          'link':'servicetype', 'sel':'tikets'},
 ]
 
 def get_context(request, page_context) -> dict:

@@ -1,0 +1,423 @@
+{% extends 'SharixAdmin/index.html' %} {% block contenthome %}
+<div class="d-flex justify-content-between align-items-center">
+	<h1>{{ title }}</h1>
+	<button
+		type="button"
+		class="btn btn-outline-success"
+		data-bs-target="#modal-create"
+		data-bs-toggle="modal">
+		Добавить услугу
+	</button>
+</div>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th colspan="2">Название</th>
+			</tr>
+		</thead>
+		<tbody>
+      {% comment %} Print all records {% endcomment %}
+			{% for service_type in service_types %}
+			<tr>
+				<th class="row-id" scope="row">{{service_type.id}}</th>
+				<td class="w-100">{{service_type.caption}}</td>
+				<td>
+					<div class="btn-group">
+						<button
+							class="btn btn-outline-info"
+							data-bs-target="#modal-edit"
+							data-bs-toggle="modal">
+							Изменить
+						</button>
+						<button
+							class="btn btn-outline-danger"
+							data-bs-target="#modal-confirm-delete"
+							data-bs-toggle="modal">
+							Удалить
+						</button>
+					</div>
+				</td>
+			</tr>
+      {% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% comment %} modal confirm delete {% endcomment %}
+<form
+action="/metaservicesynced/api/servicetype/"
+method="delete">
+<div class="modal fade" id="modal-confirm-delete">
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Подтвердите удаление</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Вы уверены, что хотите удалить запись "Larry the Bird" из списка услуг
+          "Друг-спортсмен"?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger">Удалить</button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          data-bs-dismiss="modal">
+          Отмена
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+{% comment %} modal confirm delete ends {% endcomment %} 
+
+
+{% comment %} modal edit {% endcomment %}
+<form
+	action="/metaservicesynced/api/servicetype/"
+	novalidate
+	method="patch"
+	class="form-modal">
+	<div class="modal fade" id="modal-edit">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg modal-fullscreen-lg-down">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>Изменить услугу</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					{% comment %} Main information {% endcomment %}
+					<div class="input-group mb-3">
+						<span class="input-group-text">ID</span>
+						<span class="form-control field-id"></span>
+						<span class="input-group-text">Статус</span>
+						<span class="form-control field-status"></span>
+						<span class="input-group-text">Статус тикета</span>
+						<span class="form-control field-ticket-status"></span>
+					</div>
+					{% comment %} Caption {% endcomment %}
+					<div class="form-floating mb-3">
+						<input
+							class="form-control form-control-sm field-caption"
+							type="text"
+							name="caption"
+							id="caption"
+							placeholder="Caption of a service"
+							required
+							value="" />
+						<label class="form-label" for="caption">Наименование</label>
+						<div class="invalid-feedback">Поле обязательно</div>
+					</div>
+					{% comment %} Description {% endcomment %}
+					<div class="form-floating mb-3">
+						<textarea
+							class="form-control form-control-sm field-description"
+							type="text"
+							name="description"
+							id="description"
+							placeholder="Description of a service"
+							required></textarea>
+						<label class="form-label" for="description">Описание</label>
+						<div class="invalid-feedback">Поле обязательно</div>
+					</div>
+					{% comment %} Requirements {% endcomment %}
+					<div class="form-floating mb-3">
+						<input
+							class="form-control form-control-sm field-requirements"
+							type="text"
+							name="requirements"
+							id="requirements"
+							placeholder="Pequirements of a service"
+							required
+							value="" />
+						<label class="form-label" for="requirements">Требования</label>
+						<div class="invalid-feedback">Поле обязательно</div>
+					</div>
+					{% comment %} Price type {% endcomment %}
+					<div class="form-floating mb-3">
+						<select
+							class="form-select form-select field-type"
+							type="text"
+							name="price_type"
+							id="price_type"
+							placeholder="Тип ценнообразования"
+							required>
+							<option value="0" selected>---</option>
+						</select>
+						<label class="form-label" for="price_type">Тип ценообразования</label>
+					</div>
+					<div class="invalid-feedback">Поле обязательно</div>
+					{% comment %} Is visible {% endcomment %}
+					<div class="form-check">
+						<input
+							type="checkbox"
+							name="is_visible"
+							id="is_visible"
+							class="form-check-input field-visible"
+							{% if service_type.is_visible %}
+                checked
+              {% endif %} />
+						<label for="is_visible">Видимость</label>
+					</div>
+					{% comment %} Is global {% endcomment %}
+					<div class="form-check">
+						<input
+							type="checkbox"
+							name="is_global"
+							id="is_global"
+							class="form-check-input field-global"
+							{% if service_type.is_global %}
+                checked
+              {% endif %} />
+						<label for="is_global">Глобальность</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success">Сохранить</button>
+					<button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+						Отмена
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+{% comment %} modal edit ends {% endcomment %} 
+
+{% comment %} modal new {%endcomment %}
+<form
+	action="/metaservicesynced/api/servicetype/"
+	method="post"
+	novalidate
+	class="form-modal">
+	{% csrf_token %}
+	<div class="modal fade" id="modal-create">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg modal-fullscreen-lg-down">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>Добавить услугу</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					{% comment %} Main information {% endcomment %}
+					<div class="input-group mb-3">
+						<span class="input-group-text">ID</span>
+						<span class="form-control">None</span>
+						<span class="input-group-text">Статус</span>
+						<span class="form-control text-secondary">None</span>
+						<input type="hidden" name="status" value="Active" />
+					</div>
+					{% comment %} Codename {% endcomment %}
+					<div class="form-floating mb-3">
+						<input
+							class="form-control form-control-sm"
+							type="text"
+							name="codename"
+							id="codename"
+							placeholder="Codename of a service"
+							required />
+						<label class="form-label" for="codename"
+							>Латинское наименование услуги в системе</label
+						>
+						<div class="invalid-feedback">Обязательное поле</div>
+					</div>
+					{% comment %} Caption {% endcomment %}
+					<div class="form-floating mb-3">
+						<input
+							class="form-control form-control-sm"
+							type="text"
+							name="caption"
+							id="caption"
+							placeholder="Caption of a service"
+							required />
+						<label class="form-label" for="caption">Наименование</label>
+						<div class="invalid-feedback">Обязательное поле</div>
+					</div>
+					{% comment %} Description {% endcomment %}
+					<div class="form-floating mb-3">
+						<textarea
+							class="form-control form-control-sm"
+							type="text"
+							name="description"
+							id="description"
+							placeholder="Description of a service"
+							required></textarea>
+						<label class="form-label" for="description">Описание</label>
+						<div class="invalid-feedback">Обязательное поле</div>
+					</div>
+					{% comment %} Requirements {% endcomment %}
+					<div class="form-floating mb-3">
+						<input
+							class="form-control form-control-sm"
+							type="text"
+							name="requirements"
+							id="requirements"
+							placeholder="Pequirements of a service"
+							required />
+						<label class="form-label" for="requirements">Требования</label>
+						<div class="invalid-feedback">Обязательное поле</div>
+					</div>
+					{% comment %} Price type {% endcomment %}
+					<div class="form-floating mb-3">
+						<select
+							class="form-select form-select"
+							type="text"
+							name="price_type"
+							id="price_type"
+							placeholder="Тип ценнообразования"
+							required>
+							<option selected>3</option>
+						</select>
+						<label class="form-label" for="price_type">Тип ценообразования</label>
+					</div>
+					<div class="invalid-feedback">Обязательное поле</div>
+					{% comment %} Id metaservice {% endcomment %}
+					<div class="form-floating mb-3">
+						<input
+							class="form-control form-control-sm"
+							type="number"
+							name="id_metaservice"
+							id="id_metaservice"
+							placeholder="Id metaservice of the service"
+							required
+							max="9223372036854775807"
+							min="-9223372036854775808" />
+						<label class="form-label" for="id_metaservice"
+							>Уникальный идентификатор мета-сервиса</label
+						>
+						<div class="invalid-feedback">Обязательное поле</div>
+					</div>
+					{% comment %} link_agreement {% endcomment %}
+					<div class="form-floating mb-3">
+						<input
+							class="form-control form-control-sm"
+							type="url"
+							name="link_agreement"
+							id="link_agreement"
+							placeholder="Link agreement of the service"
+							required />
+						<label class="form-label" for="link_agreement">Ссылка на договор</label>
+						<div class="invalid-feedback">Неверный формат ссылки</div>
+					</div>
+					{% comment %} Is visible {% endcomment %}
+					<div class="form-check">
+						<input
+							type="checkbox"
+							name="is_visible"
+							id="is_visible"
+							class="form-check-input"
+							value="1" />
+						<label for="is_visible">Видимость</label>
+					</div>
+					{% comment %} Is global {% endcomment %}
+					<div class="form-check">
+						<input
+							type="checkbox"
+							name="is_global"
+							id="is_global"
+							class="form-check-input"
+							value="1" />
+						<label for="is_global">Глобальность</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success">Сохранить</button>
+					<button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+						Отмена
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+{% comment %} modal new ends {% endcomment %}
+
+<script defer>
+  {% comment %} Get data of a record {% endcomment %}
+  async function getData(id) {
+    return await fetch('/metaservicesynced/api/servicetype/' + id)
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+        
+      } else {
+        console.log('Error')
+      }
+    })
+    .then(data => {
+      return data
+    })
+    .catch(e => {console.log('Error')})
+  }
+
+
+	{% comment %} Bootstrap input validity script {% endcomment %}
+	var modalForms = document.getElementsByClassName("form-modal");
+	for (var i = 0; i < modalForms.length; i++) {
+	    var serviceModalForm = modalForms[i];
+	    serviceModalForm.addEventListener("submit", e => {
+	    if (!serviceModalForm.checkValidity()) {
+	    e.preventDefault();
+	    };
+	    e.target.classList.add("was-validated");
+	})
+	}
+
+	{% comment %} add Event to all Edit buttons {% endcomment %}
+	var editButtons = document.getElementsByClassName("btn-outline-info");
+	for (let i = 0; i < editButtons.length; i++) {
+	  var editButton = editButtons[i];
+	  editButton.addEventListener("click", fillEditForm);
+	};
+
+  {% comment %} add Event to all delete buttons {% endcomment %}
+	var editButtons = document.getElementsByClassName("btn-outline-info");
+	for (let i = 0; i < editButtons.length; i++) {
+	  var editButton = editButtons[i];
+	  editButton.addEventListener("click", deleteRecord);
+	};
+
+  function deleteRecord(id) {
+    // delete query
+  }
+
+  {% comment %} Get the id of the row whose button was clicked {% endcomment %}
+	function getRowId(button) {
+	  var row = button.parentElement.parentElement.parentElement;
+	  var rowId = parseInt(row.getElementsByClassName("row-id")[0].innerText);
+    return rowId
+	};
+
+  {% comment %} Fill form fields with data {% endcomment %}
+  function fillEditForm(event) {
+    var id = getRowId(event.target)
+    getData(id).then(data => {
+      fillFormFields(data)
+    })
+  }
+
+  function fillFormFields(data) {
+    editForm = document.getElementById("modal-edit")
+
+    // Get and fill all the fields
+    editForm.getElementsByClassName("field-id")[0].innerText = data["id"]
+    editForm.getElementsByClassName("field-status")[0].innerText = data["status"]
+    editForm.getElementsByClassName("field-ticket-status")[0].innerText = data["ticket_status"]
+    editForm.getElementsByClassName("field-caption")[0].value= data["caption"]
+    editForm.getElementsByClassName("field-description")[0].innerText = data["description"]
+    editForm.getElementsByClassName("field-requirements")[0].value = data["requirements"]
+    editForm.getElementsByClassName("field-type")[0].value = 0
+    editForm.getElementsByClassName("field-visible")[0].checked = parseInt(data["is_visible"])
+    editForm.getElementsByClassName("field-global")[0].checked = parseInt(data["is_global"]) 
+  }
+
+</script>
+{% endblock contenthome %}

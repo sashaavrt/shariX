@@ -19,6 +19,7 @@ urlpatterns = [
     path('logout/', logout_view, name='logoutweb'),
     path('balance/', balance, name='balance'),
     path('test/', testPage, name='test-page'),
+    path('servicetype/', servicetype, name='servicetype'),
     
     #path('v1/auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken'), name='auth'),
