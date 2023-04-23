@@ -1,0 +1,33 @@
+{% extends 'SharixAdmin/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="text-center" style="margin-top: 150px;">
+    <div class="form-signin" style="width: 100%; max-width:330px; margin: auto; display:block;">
+        <form class="m-2 p-2" method="post">
+            <img class="mb-4" src="{% static 'SharixAdmin/img/logo.svg' %}" alt="" width="72" >
+            <h1 class="h3 mb-3 fw-normal">Авторизуйтесь</h1>
+            {% csrf_token %}
+            
+            {% for item in form %}
+                <div class="form-floating my-3">
+                    {{item}}
+                    <label for="{{ item.id_for_label }}">{{ item.label }}</label>
+                </div>
+                {% if item.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ item.errors }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    Пожалуйста, введите правильные Номер телефона и пароль.
+                </div>
+            {% endif %}
+            <button class="w-100 btn btn-lg" type="submit" style="background-color: #479FF8; color: white;">Войти</button>
+            <p class="mt-5 mb-3 text-muted">© 2022</p>
+          </form>
+    </div>
+</div>
+{% endblock %}

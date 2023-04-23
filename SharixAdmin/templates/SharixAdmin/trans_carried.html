@@ -1,0 +1,25 @@
+{% extends 'SharixAdmin/index.html' %}
+
+{% block contenthome %}
+    <h1 >{{ title }}</h1>
+    <h3 >Ползователь: {{ request.user.username }}</h3>
+    <h3 >Баланс: {{ wallet.balance }} р.</h3>
+    {% if balance_err %}
+    <div class="alert alert-danger" role="alert">
+        {{ balance_err }}
+    </div>
+    {% endif %}
+    <ul class="list-group">
+        <li class="list-group-item active">{{ model.name_operation }}</li>
+        <li class="list-group-item">Цена: {{ model.price }}</li>
+        <li class="list-group-item">Валделец: {{ model.wallet.user.username }}</li>
+        <li class="list-group-item">Дата услуги: {{ model.date_operation }}</li>
+        <li class="list-group-item">Проведено: {{ model.is_carried_out }}</li>
+    </ul>
+    {% if not model.is_carried_out %}
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-success my-3" type="submit">Провести</button>
+    </form>
+    {% endif %}
+{% endblock contenthome %}

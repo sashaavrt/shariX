@@ -1,0 +1,21 @@
+# Virtualenv
+env/
+venv/
+#module
+tickets/
+metaservicesynced/
+staticfiles/
+core/config.py
+migrations/
+!__init__.py
+# VSCode
+.vscode
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Other
+*.sqlite3
+.env
