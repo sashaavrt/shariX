@@ -13,6 +13,8 @@ from .tables import *
 from django import template
 from metaservicesynced.models import ServiceType
 from django.core import serializers
+from django_tables2 import SingleTableView
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
 # Create your views here.
 
 
@@ -115,7 +117,7 @@ menu = [
     {'title':'Сотрудничество',          'link':'test-page', 'sel':'sotrud'},
     {'title':'Техподдержка',            'link':'test-page', 'sel':'gear'},
     {'title':'Мои заявки',              'link':'tickets', 'sel':'tikets'},
-    {'title':'Услуги сервиса',          'link':'servicetype', 'sel':'tikets'},
+    {'title':'Услуги сервиса',          'link':'service_type', 'sel':'hdd-network'},
 ]
 
 def get_context(request, page_context) -> dict:
@@ -126,6 +128,70 @@ def get_context(request, page_context) -> dict:
     }
     context = dict(list(base_context.items()) + list(page_context.items()))
     return context
+
+
+class ServiceTypeUpdateView(UpdateView):
+    model = ServiceType
+    form_class = ServiceTypeUpdateForm
+    template_name = "SharixAdmin/service_type_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Услуги сервиса',
+            'object': self.object,
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('service_type')
+
+
+class ServiceTypeCreate(CreateView):
+    model = ServiceType
+    form_class = ServiceTypeCreateForm
+    template_name = "SharixAdmin/service_type_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Услуги сервиса',
+            'object': self.object,
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('service_type')
+    
+class ServiceTypeDelete(DeleteView):
+    model = ServiceType
+    template_name = "SharixAdmin/service_type_delete.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Услуги сервиса',
+            'object': self.object,
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('service_type')
+
+
+class ServiceTypeListView(SingleTableView):
+    table_class = ServiceTypeTable
+    queryset = ServiceType.objects.all()
+    template_name = 'SharixAdmin/service_type.html'
+    # paginate_by = 2
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Услуги сервиса',
+            'object_list': context['object_list'],
+        }))
+        return context
 
 
 

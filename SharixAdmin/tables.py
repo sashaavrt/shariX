@@ -1,4 +1,5 @@
 import django_tables2 as tables
+from metaservicesynced.models import *
 from .models import *
 from django.utils.html import format_html
 
@@ -25,4 +26,22 @@ class TransactionsWalletTable(tables.Table):
         return format_html("<a href='{}'>{}</a>", record.get_absolute_url(), value)
         
 
+class ServiceTypeTable(tables.Table):
+
+    id = tables.Column(verbose_name='ID', attrs={"td":{"width":"5%"}})
+    caption = tables.LinkColumn('service_type/edit/', verbose_name='Название услуги', text = lambda record: record.caption,
+        args=[tables.A('pk')], attrs={'th':{'scope':'col'}, "td":{"width":"100%"},})
+    deletee = tables.LinkColumn('service_type/delete/', verbose_name='', text = "Удалить",
+        args=[tables.A('pk')], attrs={'th':{'scope':'col'}, "td":{"width":"auto"},})
     
+    class Meta:
+        model = ServiceType
+        attrs = {"class": "table table-layout-fixed text-start"}
+        exclude = ('codename','description','requirements',
+                   'price_type','status','ticket_status', 
+                   'id_metaservice', 'link_agreement',
+                   'is_global', 'is_visible',)
+
+    def render_delete(self, value, record):
+        return format_html('<a href="/service_type/delete" class="btn btn-outline-danger">Удалить</a>')
+        

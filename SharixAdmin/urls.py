@@ -21,6 +21,12 @@ urlpatterns = [
     path('test/', testPage, name='test-page'),
     path('servicetype/', servicetype, name='servicetype'),
     
+    path('service_type/', login_required(ServiceTypeListView.as_view()), name='service_type'),
+    path('service_type/edit/<int:pk>', login_required(ServiceTypeUpdateView.as_view()), name='service_type/edit/'),
+    path('service_type/add/', login_required(ServiceTypeCreate.as_view()), name='service_type/add/'),
+    path('service_type/delete/<int:pk>', login_required(ServiceTypeDelete.as_view()), name='service_type/delete/'),
+
+
     #path('v1/auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken'), name='auth'),
     path('platform/api/', include(router.urls), name="sharix-api"),
