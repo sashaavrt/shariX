@@ -118,6 +118,7 @@ menu = [
     {'title':'Техподдержка',            'link':'test-page', 'sel':'gear'},
     {'title':'Мои заявки',              'link':'tickets', 'sel':'tikets'},
     {'title':'Услуги сервиса',          'link':'service_type', 'sel':'hdd-network'},
+    {'title':'Информация о сервисе',    'link':'partner_information/add/', 'sel':'hdd-network'},
 ]
 
 def get_context(request, page_context) -> dict:
@@ -163,6 +164,7 @@ class ServiceTypeCreate(CreateView):
     def get_success_url(self):
         return reverse('service_type')
     
+
 class ServiceTypeDelete(DeleteView):
     model = ServiceType
     template_name = "SharixAdmin/service_type_delete.html"
@@ -194,7 +196,39 @@ class ServiceTypeListView(SingleTableView):
         return context
 
 
+class ServiceInformationUpdateView(UpdateView):
+    model = Service
+    form_class = ServiceInformationUpdateForm
+    template_name = "SharixAdmin/service_information_form.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Информация о сервисе',
+            'object': self.object,
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('test-page')
+
+class ServiceInformationCreate(CreateView):
+    model = Service
+    form_class = ServiceInformationCreateForm
+    template_name = "SharixAdmin/service_information_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Информация о сервисе',
+            'object': self.object,
+            
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('test-page')
+    
 
 #Shema views
 @login_required

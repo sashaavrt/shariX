@@ -19,12 +19,14 @@ urlpatterns = [
     path('logout/', logout_view, name='logoutweb'),
     path('balance/', balance, name='balance'),
     path('test/', testPage, name='test-page'),
-    path('servicetype/', servicetype, name='servicetype'),
     
     path('service_type/', login_required(ServiceTypeListView.as_view()), name='service_type'),
     path('service_type/edit/<int:pk>', login_required(ServiceTypeUpdateView.as_view()), name='service_type/edit/'),
     path('service_type/add/', login_required(ServiceTypeCreate.as_view()), name='service_type/add/'),
     path('service_type/delete/<int:pk>', login_required(ServiceTypeDelete.as_view()), name='service_type/delete/'),
+
+    path('service_information/add/', login_required(ServiceInformationCreate.as_view()), name='partner_information/add/'),
+    path('service_information/edit/<int:pk>', login_required(ServiceInformationUpdateView.as_view()), name='partner_information/edit/'),
 
 
     #path('v1/auth/', include('djoser.urls')),
