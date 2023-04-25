@@ -14,6 +14,11 @@ from django_tables2 import SingleTableView
 from .tables import *
 from django import template
 from django.views.generic.edit import UpdateView, CreateView
+from metaservicesynced.models import ServiceType
+from django.core import serializers
+from django_tables2 import SingleTableView
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
+
 # Create your views here.
 
 
@@ -38,6 +43,16 @@ def transactions(request):
         })
         
     return render(request, 'SharixAdmin/transactions.html', context)
+
+@login_required
+def servicetype(request):
+    service_types = ServiceType.objects.all()
+    context = get_context(request, {
+        'title':'Услуги сервиса',
+        'service_types':service_types,
+        })
+        
+    return render(request, 'SharixAdmin/servicetype.html', context)
 
 @login_required
 def trans_id(request, trans_id):
@@ -108,8 +123,10 @@ menu = [
     {'title':'Мои заявки',              'link':'tickets', 'sel':'tikets'},
     {'title':'Исполнители',             'link':'provider', 'sel':'people'},
     {'title':'Тарифы услуг',            'link':'service_tariff', 'sel':'person'},
-    {'title':'Партнеры',            'link':'partners', 'sel':'people'},
-    {'title':'Ресурсы',            'link':'resource', 'sel':'sotrud'},
+    {'title':'Партнеры',                'link':'partners', 'sel':'people'},
+    {'title':'Ресурсы',                 'link':'resource', 'sel':'sotrud'},
+    {'title':'Услуги сервиса',          'link':'service_type', 'sel':'hdd-network'},
+    {'title':'Информация о сервисе',    'link':'partner_information/add/', 'sel':'hdd-network'},
 
 ]
 
@@ -198,7 +215,18 @@ class ServiceTariffListView(SingleTableView):
     queryset = Service.objects.all()
     template_name = 'SharixAdmin/service_tariff.html'
     # paginate_by = 2
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Исполнители',
+            'object_list': context['object_list'],
+        }))
+        return context
 
+class ServiceTypeUpdateView(UpdateView):
+    model = ServiceType
+    form_class = ServiceTypeUpdateForm
+    template_name = "SharixAdmin/service_type_form.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -220,6 +248,22 @@ class ResourceListView(SingleTableView):
             'object_list': context['object_list'],
         }))
         return context
+
+class ServiceTypeCreate(CreateView):
+    model = ServiceType
+    form_class = ServiceTypeCreateForm
+    template_name = "SharixAdmin/service_type_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Услуги сервиса',
+            'object': self.object,
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('service_type')
     
 @login_required
 def change_partners_status(request):
@@ -246,6 +290,71 @@ def change_resource_status(request):
         return JsonResponse({'status': 'success'})
     else:
         return JsonResponse({'status': 'error'})
+    
+
+class ServiceTypeDelete(DeleteView):
+    model = ServiceType
+    template_name = "SharixAdmin/service_type_delete.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Услуги сервиса',
+            'object': self.object,
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('service_type')
+
+
+class ServiceTypeListView(SingleTableView):
+    table_class = ServiceTypeTable
+    queryset = ServiceType.objects.all()
+    template_name = 'SharixAdmin/service_type.html'
+    # paginate_by = 2
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Услуги сервиса',
+            'object_list': context['object_list'],
+        }))
+        return context
+
+
+class ServiceInformationUpdateView(UpdateView):
+    model = Service
+    form_class = ServiceInformationUpdateForm
+    template_name = "SharixAdmin/service_information_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Информация о сервисе',
+            'object': self.object,
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('test-page')
+
+class ServiceInformationCreate(CreateView):
+    model = Service
+    form_class = ServiceInformationCreateForm
+    template_name = "SharixAdmin/service_information_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Информация о сервисе',
+            'object': self.object,
+            
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('test-page')
 
 #Shema views
 @login_required

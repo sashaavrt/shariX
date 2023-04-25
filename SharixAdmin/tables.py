@@ -26,7 +26,6 @@ class TransactionsWalletTable(tables.Table):
         return format_html("<a href='{}'>{}</a>", record.get_absolute_url(), value)
         
 class PartnersTable(tables.Table):
-
     id = tables.Column(verbose_name='ID', attrs={"td":{"width":"5%"}})
     legal_name = tables.Column(verbose_name='Юрлицо', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
     repr_id = tables.Column(accessor='repr_id.full_name', order_by=('repr_id.first_name', 'repr_id.last_name'), verbose_name='Ответственный', attrs={"td":{"width":"15%"}})
@@ -110,3 +109,24 @@ class ServiceTariffTable(tables.Table):
             return format_html('<input class="form-check-input status-toggle" disabled  checked type="checkbox"')
         else:
             return format_html('<input class="form-check-input status-toggle" disabled  type="checkbox"')
+
+class ServiceTypeTable(tables.Table):
+
+    id = tables.Column(verbose_name='ID', attrs={"td":{"width":"5%"}})
+    caption = tables.LinkColumn('service_type/edit/', verbose_name='Название услуги', text = lambda record: record.caption,
+        args=[tables.A('pk')], attrs={'th':{'scope':'col'}, "td":{"width":"100%"},})
+    deletee = tables.LinkColumn('service_type/delete/', verbose_name='', text = "Удалить",
+        args=[tables.A('pk')], attrs={'th':{'scope':'col'}, "td":{"width":"auto"},})
+    
+    class Meta:
+        model = ServiceType
+        attrs = {"class": "table table-layout-fixed text-start"}
+        exclude = ('codename','description','requirements',
+                   'price_type','status','ticket_status', 
+                   'id_metaservice', 'link_agreement',
+                   'is_global', 'is_visible',)
+
+    def render_delete(self, value, record):
+        return format_html('<a href="/service_type/delete" class="btn btn-outline-danger">Удалить</a>')
+        
+

@@ -22,7 +22,7 @@ urlpatterns = [
    
     path('partners/', login_required(PartnersListView.as_view()), name='partners'),
     path('partners/change_status/', change_partners_status, name='partners/change_status'),
-    
+
     path('resource/', login_required(ResourceListView.as_view()), name='resource'),
     path('resource/change_status/', change_resource_status, name='resource/change_status'),
     
@@ -32,6 +32,15 @@ urlpatterns = [
     path('service_tariff/', login_required(ServiceTariffListView.as_view()), name='service_tariff'),
     path('service_tariff/add/', login_required(ServiceTariffCreate.as_view()), name='service_tariff/add/'),
     path('service_tariff/edit/<int:pk>', login_required(ServiceTariffUpdateView.as_view()), name='service_tariff/edit/'),
+
+    path('service_type/', login_required(ServiceTypeListView.as_view()), name='service_type'),
+    path('service_type/edit/<int:pk>', login_required(ServiceTypeUpdateView.as_view()), name='service_type/edit/'),
+    path('service_type/add/', login_required(ServiceTypeCreate.as_view()), name='service_type/add/'),
+    path('service_type/delete/<int:pk>', login_required(ServiceTypeDelete.as_view()), name='service_type/delete/'),
+
+    path('service_information/add/', login_required(ServiceInformationCreate.as_view()), name='partner_information/add/'),
+    path('service_information/edit/<int:pk>', login_required(ServiceInformationUpdateView.as_view()), name='partner_information/edit/'),
+
 
 
     #path('v1/auth/', include('djoser.urls')),
