@@ -1,6 +1,7 @@
 import django_tables2 as tables
 from .models import *
 from django.utils.html import format_html
+from metaservicesynced.models import *
 
 class TransactionsWalletTable(tables.Table):
     # id = tables.Column(order_by=True)
@@ -25,4 +26,45 @@ class TransactionsWalletTable(tables.Table):
         return format_html("<a href='{}'>{}</a>", record.get_absolute_url(), value)
         
 
-    
+class ProviderTable(tables.Table):
+
+    id = tables.Column(verbose_name='ID', attrs={"td":{"width":"5%"}})
+    user_id = tables.Column(accessor='user_id.full_name', order_by=('user_id.first_name', 'user_id.last_name'), verbose_name='ФИО', attrs={"td":{"width":"15%"}})
+    status = tables.Column(verbose_name='Статус', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}}) 
+    check = tables.BooleanColumn(verbose_name='', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    paginate_by = 10
+    class Meta:
+        model = Provider
+        attrs = {"class": "table table-layout-fixed"}
+        exclude = ('type','company_id','id_metaservice', 'requirements', 
+                   'ticket_status', 'location_type', 'default_location', 
+                   'is_global', 'is_visible')
+
+    def render_check(self, value, record):
+        if record.status == 'active':
+            return format_html('<input class="form-check-input status-toggle" checked type="checkbox" id="flexCheckDefault" data-provider-id="{}">', record.id)
+        else:
+            return format_html('<input class="form-check-input status-toggle" type="checkbox" id="flexCheckDefault" data-provider-id="{}">', record.id)
+
+class ServiceTariffTable(tables.Table):
+
+    id = tables.Column(verbose_name='ID', attrs={"td":{"width":"5%"}})
+    servicetype_id = tables.LinkColumn('service_tariff/edit/', verbose_name='Название тарифа', text = lambda record: record.servicetype_id.caption,
+        args=[tables.A('pk')], attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    ticket_status = tables.Column(verbose_name='Название схемы услуги', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}}) 
+    check = tables.BooleanColumn(verbose_name='Активность', orderable=False, attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+
+
+    class Meta:
+        model = Service
+        attrs = {"class": "table table-layout-fixed"}
+        exclude = ('resource_id','id_provider','price_alg',
+                   'price_min','price_amount','id_metaservice', 
+                   'requirements', 'service_status', 'price_km',
+                   'is_global', 'is_visible','status')
+
+    def render_check(self, value, record):
+        if record.status == 'active':
+            return format_html('<input class="form-check-input status-toggle" disabled  checked type="checkbox"')
+        else:
+            return format_html('<input class="form-check-input status-toggle" disabled  type="checkbox"')

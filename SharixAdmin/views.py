@@ -1,16 +1,18 @@
 
 import json
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy, resolve, reverse
 from django.contrib.auth.decorators import login_required
+from django_tables2 import SingleTableView
 from .forms import *
 from SharixAdmin.models import *
 from django.contrib.auth import logout
 from django.db.models import Q
 from .tables import *
 from django import template
+from django.views.generic.edit import UpdateView, CreateView
 # Create your views here.
 
 
@@ -103,6 +105,8 @@ menu = [
     {'title':'Сотрудничество',          'link':'test-page', 'sel':'sotrud'},
     {'title':'Техподдержка',            'link':'test-page', 'sel':'gear'},
     {'title':'Мои заявки',              'link':'tickets', 'sel':'tikets'},
+    {'title':'Исполнители',             'link':'provider', 'sel':'people'},
+    {'title':'Тарифы услуг',            'link':'service_tariff', 'sel':'person'},
 ]
 
 def get_context(request, page_context) -> dict:
@@ -115,7 +119,78 @@ def get_context(request, page_context) -> dict:
     return context
 
 
+@login_required
+def change_provider_status(request):
+    if request.method == 'POST':
+        provider_id = request.POST.get('provider_id')
+        new_status = request.POST.get('new_status')
+        
+        provider = Provider.objects.get(pk=provider_id)
+        provider.status = new_status
+        provider.save()
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error'})
 
+class ServiceTariffUpdateView(UpdateView):
+    model = Service
+    form_class = ServiceTariffUpdateForm
+    template_name = "SharixAdmin/service_tariff_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Тарифы услуг',
+            'object': self.object,
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('service_tariff')
+
+class ServiceTariffCreate(CreateView):
+    model = Service
+    form_class = ServiceTariffCreateForm
+    template_name = "SharixAdmin/service_tariff_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Тарифы услуг',
+            'object': self.object,
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('service_tariff')
+
+class ProviderListView(SingleTableView):
+    table_class = ProviderTable
+    queryset = Provider.objects.all()
+    template_name = 'SharixAdmin/provider.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Исполнители',
+            'object_list': context['object_list'],
+        }))
+        return context
+
+class ServiceTariffListView(SingleTableView):
+    table_class = ServiceTariffTable
+    queryset = Service.objects.all()
+    template_name = 'SharixAdmin/service_tariff.html'
+    # paginate_by = 2
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Тарифы услуг',
+            'object_list': context['object_list'],
+        }))
+        return context
 
 #Shema views
 @login_required

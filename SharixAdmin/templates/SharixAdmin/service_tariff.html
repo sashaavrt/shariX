@@ -1,0 +1,48 @@
+{% extends 'SharixAdmin/index.html' %}
+{% load render_table from django_tables2 %}
+
+{% block contenthome %}
+    <h1 >{{ title }}</h1>
+    <div class="container text-center mt-2">
+          {% render_table table %}
+
+          {% comment %} {% if table.page %}
+            <nav aria-label="...">
+              <ul class="pagination">
+                {% if table.page.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ table.page.previous_page_number }}" tabindex="-1">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link">Previous</span>
+                </li>
+                {% endif %}
+                {% for page in table.page_range %}
+                  {% if page == table.page.number %}
+                  <li class="page-item active">
+                    <span class="page-link">{{ page }} <span class="sr-only">(current)</span></span>
+                  </li>
+                  {% else %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{page }}">{{ page }}</a>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+                {% if table.page.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ table.page.next_page_number }}">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link">Next</span>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
+          {% endif %} {% endcomment %}
+    </div>
+    <div class="container text-end mt-2">
+      <a class="btn btn-primary" href="/service_tariff/add">Добавить</a>
+    </div>
+{% endblock contenthome %}

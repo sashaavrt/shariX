@@ -20,6 +20,14 @@ urlpatterns = [
     path('balance/', balance, name='balance'),
     path('test/', testPage, name='test-page'),
     
+    path('provider/', login_required(ProviderListView.as_view()), name='provider'),
+    path('provider/change_status/', change_provider_status, name='provider/change_status'),
+
+    path('service_tariff/', login_required(ServiceTariffListView.as_view()), name='service_tariff'),
+    path('service_tariff/add/', login_required(ServiceTariffCreate.as_view()), name='service_tariff/add/'),
+    path('service_tariff/edit/<int:pk>', login_required(ServiceTariffUpdateView.as_view()), name='service_tariff/edit/'),
+
+
     #path('v1/auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken'), name='auth'),
     path('platform/api/', include(router.urls), name="sharix-api"),
