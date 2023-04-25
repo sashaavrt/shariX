@@ -27,14 +27,10 @@ class PartnerInformationUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Company
-        fields = ['legal_name', 'address', 'repr_id']
+        fields = ['legal_name', 'address', 'repr_id' ]
         widgets = {
-            # 'status': forms.TextInput(attrs={'readonly': True}),
-            # 'ticket_status': forms.TextInput(attrs={'readonly': True}),
-            
-            # 'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
+            'description': forms.Select(attrs={'class': 'form-select'}),
             'repr_id': forms.Select(attrs={'class': 'form-select'}),
-            # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
         }
         
 class PartnerInformationCreateForm(forms.ModelForm):
@@ -45,15 +41,11 @@ class PartnerInformationCreateForm(forms.ModelForm):
             if 'class' not in self.fields[field].widget.attrs:
                 self.fields[field].widget.attrs.update({'class':'form-control'})
                 
-    # legal_name = forms.CharField(label = "Название",
-    #     widget=forms.TextInput(attrs={'class':'form-control'}))
     class Meta:
         model = Company
         fields = ['legal_name', 'address', 'repr_id']
         
         widgets = {
-            # 'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
+            'description': forms.Select(attrs={'class': 'form-select'}),
             'repr_id': forms.Select(attrs={'class': 'form-select'}),
-            # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
-            # 'ticket_status': forms.Select(attrs={'class': 'form-select'}),
         }

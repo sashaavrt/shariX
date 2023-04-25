@@ -29,10 +29,13 @@ class TransactionsWalletTable(tables.Table):
 class ServiceTable(tables.Table):
 
     id = tables.Column(verbose_name='ID', attrs={"td":{"width":"5%"}})
-    servicetype_id = tables.Column(verbose_name='Название тарифа', accessor = 'servicetype_id.caption',
+    servicetype_id = tables.Column(verbose_name='Описание услуги (сервиса)', accessor = 'servicetype_id.caption',
         attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
-    # servicetype_id = tables.Column(verbose_name='Название тарифа', accessor = 'servicetype_id.description',
-    #     attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    
+    # description = tables.Column(verbose_name='Название тарифа', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    # description = tables.Column(verbose_name='Описание строки тарифов', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    # price_type = tables.Column(verbose_name='Тип тарифа', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    
     price_km = tables.Column(verbose_name='Стоимость км.', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
     price_min = tables.Column(verbose_name='Стоимость мин.', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
     price_amount = tables.Column(verbose_name='Стоимость услуги', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
