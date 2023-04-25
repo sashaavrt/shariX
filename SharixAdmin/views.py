@@ -6,18 +6,22 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy, resolve, reverse
 from django.contrib.auth.decorators import login_required
 from django_tables2 import SingleTableView
+
+from metaservicesynced.models import *
 from .forms import *
 from SharixAdmin.models import *
 from django.contrib.auth import logout
 from django.db.models import Q
+
 from django_tables2 import SingleTableView
 from .tables import *
 from django import template
 from django.views.generic.edit import UpdateView, CreateView
-from metaservicesynced.models import ServiceType
 from django.core import serializers
 from django_tables2 import SingleTableView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
+
+
 
 # Create your views here.
 
@@ -56,9 +60,6 @@ def servicetype(request):
 
 @login_required
 def trans_id(request, trans_id):
-    
-    
-    
     context = get_context(request, {
         'title':'Услуга'
         })
@@ -127,8 +128,16 @@ menu = [
     {'title':'Ресурсы',                 'link':'resource', 'sel':'sotrud'},
     {'title':'Услуги сервиса',          'link':'service_type', 'sel':'hdd-network'},
     {'title':'Информация о сервисе',    'link':'partner_information/add/', 'sel':'hdd-network'},
-
+    {'title':'Информация о партнере',   'link':'partner_information/add/', 'sel':'person'},
+    {'title':'Тарифы',                  'link':'service', 'sel':'tikets'},
 ]
+
+def partner_information(request):
+    context = get_context(request, {
+        'title':'Информация о партнере',
+        })
+    
+    return render(request, 'SharixAdmin/partner_information.html', context)
 
 def get_context(request, page_context) -> dict:
     base_context = {
@@ -138,6 +147,7 @@ def get_context(request, page_context) -> dict:
     }
     context = dict(list(base_context.items()) + list(page_context.items()))
     return context
+
 
 class PartnersListView(SingleTableView):
     table_class = PartnersTable
@@ -278,6 +288,7 @@ def change_partners_status(request):
     else:
         return JsonResponse({'status': 'error'})
 
+
 @login_required
 def change_resource_status(request):
     if request.method == 'POST':
@@ -356,12 +367,67 @@ class ServiceInformationCreate(CreateView):
     def get_success_url(self):
         return reverse('test-page')
 
+class ServiceListView(SingleTableView):
+    table_class = ServiceTable
+    queryset = Service.objects.all()
+    template_name = 'SharixAdmin/service.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Тарифы',
+            'object_list': context['object_list'],
+        }))
+        return context
+    
+@login_required
+def change_service_status(request):
+    if request.method == 'POST':
+        service_id = request.POST.get('service_id')
+        new_status = request.POST.get('new_status')
+        
+        service = Service.objects.get(pk=service_id)
+        service.status = new_status
+        service.save()
+
 #Shema views
 @login_required
 def schema_v3(request):
     
     return render(request, "SharixAdmin/schema.html")
 
+
+class PartnerInformationUpdateView(UpdateView):
+    model = Company
+    form_class = PartnerInformationUpdateForm
+    template_name = "SharixAdmin/partner_information_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Информация о партнере',
+            'object': self.object,
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('test-page')
+
+class PartnerInformationCreate(CreateView):
+    model = Company
+    form_class = PartnerInformationCreateForm
+    template_name = "SharixAdmin/partner_information_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Информация о партнере',
+            'object': self.object,
+        }))
+        return context
+    
+    def get_success_url(self):
+        return reverse('test-page')
 
 
 

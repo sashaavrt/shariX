@@ -4,6 +4,7 @@ from .models import *
 from django.utils.html import format_html
 from metaservicesynced.models import *
 
+
 class TransactionsWalletTable(tables.Table):
     # id = tables.Column(order_by=True)
     id = tables.Column(verbose_name='#', orderable=False,                                       attrs={"td":{"width":"5%"}})
@@ -71,6 +72,7 @@ class ProviderTable(tables.Table):
 
     id = tables.Column(verbose_name='ID', attrs={"td":{"width":"5%"}})
     user_id = tables.Column(accessor='user_id.full_name', order_by=('user_id.first_name', 'user_id.last_name'), verbose_name='ФИО', attrs={"td":{"width":"15%"}})
+
     status = tables.Column(verbose_name='Статус', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}}) 
     check = tables.BooleanColumn(verbose_name='', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
     paginate_by = 10
@@ -129,4 +131,32 @@ class ServiceTypeTable(tables.Table):
     def render_delete(self, value, record):
         return format_html('<a href="/service_type/delete" class="btn btn-outline-danger">Удалить</a>')
         
+    def render_name_operation(self, value, record):
+        return format_html("<a href='{}'>{}</a>", record.get_absolute_url(), value)
+   
+class ServiceTable(tables.Table):
 
+    id = tables.Column(verbose_name='ID', attrs={"td":{"width":"5%"}})
+    servicetype_id = tables.Column(verbose_name='Описание услуги (сервиса)', accessor = 'servicetype_id.caption',
+        attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    
+    # description = tables.Column(verbose_name='Название тарифа', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    # description = tables.Column(verbose_name='Описание строки тарифов', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    # price_type = tables.Column(verbose_name='Тип тарифа', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    
+    price_km = tables.Column(verbose_name='Стоимость км.', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    price_min = tables.Column(verbose_name='Стоимость мин.', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    price_amount = tables.Column(verbose_name='Стоимость услуги', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+
+    class Meta:
+        model = Service
+        attrs = {"class": "table table-layout-fixed"}
+        exclude = ('resource_id', 'requirements', 'id_provider',
+                   'id_metaservice', 'price_alg', 'service_status', 'ticket_status',
+                    'is_global', 'is_visible')
+
+    def render_check(self, value, record):
+        if record.status == 'active':
+            return format_html('<input class="form-check-input status-toggle" checked type="checkbox" id="flexCheckDefault" data-service-id="{}">', record.id)
+        else:
+            return format_html('<input class="form-check-input status-toggle" type="checkbox" id="flexCheckDefault" data-service-id="{}">', record.id)     

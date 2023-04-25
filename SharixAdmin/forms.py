@@ -1,9 +1,11 @@
 from django.contrib.auth.forms import AuthenticationForm
 
-from metaservicesynced.models import Service
+from metaservicesynced.models import *
 from .models import SharixUser
 from django import forms
 from metaservicesynced.models import ServiceType, Service
+from .models import SharixUser
+from django import forms
 
 class LoginUserForm(AuthenticationForm):
 
@@ -111,11 +113,11 @@ class ServiceInformationCreateForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(ServiceInformationCreateForm, self).__init__(*args, **kwargs)
-
         # Добавляет стиль бутстрапа form-control всем полям таблицы если у них нет своих стилей
         for field in iter(self.fields):
             if 'class' not in self.fields[field].widget.attrs:
                 self.fields[field].widget.attrs.update({'class':'form-control'})
+
 
     class Meta:
         model = Service
@@ -129,4 +131,32 @@ class ServiceInformationCreateForm(forms.ModelForm):
             #'repr_id': forms.Select(attrs={'class': 'form-select'}),
             # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
             # 'ticket_status': forms.Select(attrs={'class': 'form-select'}),
+        }
+
+class PartnerInformationUpdateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PartnerInformationUpdateForm, self).__init__(*args, **kwargs)
+        # Добавляет стиль бутстрапа form-control всем полям таблицы если у них нет своих стилей
+        for field in iter(self.fields):
+            if 'class' not in self.fields[field].widget.attrs:
+                self.fields[field].widget.attrs.update({'class':'form-control'})
+
+    class Meta:
+        model = Company
+        fields = ['legal_name', 'address', 'repr_id' ]
+        widgets = {
+            'description': forms.Select(attrs={'class': 'form-select'}),
+            'repr_id': forms.Select(attrs={'class': 'form-select'}),
+        }
+        
+class PartnerInformationCreateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PartnerInformationCreateForm, self).__init__(*args, **kwargs)          
+    class Meta:
+        model = Company
+        fields = ['legal_name', 'address', 'repr_id']
+        
+        widgets = {
+            'description': forms.Select(attrs={'class': 'form-select'}),
+            'repr_id': forms.Select(attrs={'class': 'form-select'}),
         }
