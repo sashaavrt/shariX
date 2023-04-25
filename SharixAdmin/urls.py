@@ -19,6 +19,12 @@ urlpatterns = [
     path('logout/', logout_view, name='logoutweb'),
     path('balance/', balance, name='balance'),
     path('test/', testPage, name='test-page'),
+   
+    path('partners/', login_required(PartnersListView.as_view()), name='partners'),
+    path('partners/change_status/', change_partners_status, name='partners/change_status'),
+    
+    path('resource/', login_required(ResourceListView.as_view()), name='resource'),
+    path('resource/change_status/', change_resource_status, name='resource/change_status'),
     
     path('provider/', login_required(ProviderListView.as_view()), name='provider'),
     path('provider/change_status/', change_provider_status, name='provider/change_status'),

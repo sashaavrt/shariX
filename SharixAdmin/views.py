@@ -10,6 +10,7 @@ from .forms import *
 from SharixAdmin.models import *
 from django.contrib.auth import logout
 from django.db.models import Q
+from django_tables2 import SingleTableView
 from .tables import *
 from django import template
 from django.views.generic.edit import UpdateView, CreateView
@@ -107,6 +108,9 @@ menu = [
     {'title':'Мои заявки',              'link':'tickets', 'sel':'tikets'},
     {'title':'Исполнители',             'link':'provider', 'sel':'people'},
     {'title':'Тарифы услуг',            'link':'service_tariff', 'sel':'person'},
+    {'title':'Партнеры',            'link':'partners', 'sel':'people'},
+    {'title':'Ресурсы',            'link':'resource', 'sel':'sotrud'},
+
 ]
 
 def get_context(request, page_context) -> dict:
@@ -118,7 +122,19 @@ def get_context(request, page_context) -> dict:
     context = dict(list(base_context.items()) + list(page_context.items()))
     return context
 
+class PartnersListView(SingleTableView):
+    table_class = PartnersTable
+    queryset = Company.objects.all()
+    template_name = 'SharixAdmin/partners.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Партнеры',
+            'object_list': context['object_list'],
+        }))
+        return context
+    
 @login_required
 def change_provider_status(request):
     if request.method == 'POST':
@@ -191,6 +207,45 @@ class ServiceTariffListView(SingleTableView):
             'object_list': context['object_list'],
         }))
         return context
+    
+class ResourceListView(SingleTableView):
+    table_class =  ResourceTable
+    queryset = Resource.objects.all()
+    template_name = 'SharixAdmin/resource.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Ресурсы',
+            'object_list': context['object_list'],
+        }))
+        return context
+    
+@login_required
+def change_partners_status(request):
+    if request.method == 'POST':
+        partners_id = request.POST.get('partners_id')
+        new_status = request.POST.get('new_status')
+        
+        partners = Company.objects.get(pk=partners_id)
+        partners.status = new_status
+        partners.save()
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error'})
+
+@login_required
+def change_resource_status(request):
+    if request.method == 'POST':
+        resource_id = request.POST.get('resource_id')
+        new_status = request.POST.get('new_status')
+        
+        resource = Resource.objects.get(pk=resource_id)
+        resource.status = new_status
+        resource.save()
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error'})
 
 #Shema views
 @login_required
