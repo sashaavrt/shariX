@@ -1,5 +1,3 @@
-
-import json
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.views import LoginView
@@ -26,27 +24,27 @@ from django.views.generic.edit import UpdateView, CreateView, DeleteView
 # Create your views here.
 
 
-@login_required
-def index(request):
+# @login_required
+# def index(request):
 
-    ph_num = str(request.user.phone_number)
-    convert_ph_num = f"+{ph_num[:1]} ({ph_num[1:4]}) {ph_num[4:7]}-{ph_num[7:9]}-{ph_num[9:11]}"
-    #print(convert_ph_num)
-    context = get_context(request, {
-        'title':'Главная/баланс',
-        'phone':convert_ph_num
-    })
+#     ph_num = str(request.user.phone_number)
+#     convert_ph_num = f"+{ph_num[:1]} ({ph_num[1:4]}) {ph_num[4:7]}-{ph_num[7:9]}-{ph_num[9:11]}"
+#     #print(convert_ph_num)
+#     context = get_context(request, {
+#         'title':'Главная/баланс',
+#         'phone':convert_ph_num
+#     })
     
-    return render(request, 'SharixAdmin/main.html', context)
+#     return render(request, 'SharixAdmin/main.html', context)
 
-@login_required
-def transactions(request):
+# @login_required
+# def transactions(request):
     
-    context = get_context(request, {
-        'title':'История платежей',
-        })
+#     context = get_context(request, {
+#         'title':'История платежей',
+#         })
         
-    return render(request, 'SharixAdmin/transactions.html', context)
+#     return render(request, 'SharixAdmin/transactions.html', context)
 
 @login_required
 def servicetype(request):
@@ -393,7 +391,6 @@ def change_service_status(request):
 #Shema views
 @login_required
 def schema_v3(request):
-    
     return render(request, "SharixAdmin/schema.html")
 
 

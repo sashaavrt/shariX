@@ -1,5 +1,6 @@
 from django.urls import path, include, re_path
-from .views import *
+from .views_old import *
+from SharixAdmin.views import *
 from .apiviews import *
 from rest_framework import routers
 from django_spaghetti.views import Plate
