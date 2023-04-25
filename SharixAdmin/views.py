@@ -1,7 +1,7 @@
 
 import json
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy, resolve, reverse
 from django.contrib.auth.decorators import login_required
@@ -9,6 +9,7 @@ from .forms import *
 from SharixAdmin.models import *
 from django.contrib.auth import logout
 from django.db.models import Q
+from django_tables2 import SingleTableView
 from .tables import *
 from django import template
 # Create your views here.
@@ -103,6 +104,8 @@ menu = [
     {'title':'Сотрудничество',          'link':'test-page', 'sel':'sotrud'},
     {'title':'Техподдержка',            'link':'test-page', 'sel':'gear'},
     {'title':'Мои заявки',              'link':'tickets', 'sel':'tikets'},
+     {'title':'Партнеры',            'link':'partners', 'sel':'people'},
+    {'title':'Ресурсы',            'link':'resource', 'sel':'sotrud'},
 ]
 
 def get_context(request, page_context) -> dict:
@@ -114,8 +117,57 @@ def get_context(request, page_context) -> dict:
     context = dict(list(base_context.items()) + list(page_context.items()))
     return context
 
+class PartnersListView(SingleTableView):
+    table_class = PartnersTable
+    queryset = Company.objects.all()
+    template_name = 'SharixAdmin/partners.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Партнеры',
+            'object_list': context['object_list'],
+        }))
+        return context
+    
+class ResourceListView(SingleTableView):
+    table_class =  ResourceTable
+    queryset = Resource.objects.all()
+    template_name = 'SharixAdmin/resource.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Ресурсы',
+            'object_list': context['object_list'],
+        }))
+        return context
+    
+@login_required
+def change_partners_status(request):
+    if request.method == 'POST':
+        partners_id = request.POST.get('partners_id')
+        new_status = request.POST.get('new_status')
+        
+        partners = Company.objects.get(pk=partners_id)
+        partners.status = new_status
+        partners.save()
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error'})
+
+@login_required
+def change_resource_status(request):
+    if request.method == 'POST':
+        resource_id = request.POST.get('resource_id')
+        new_status = request.POST.get('new_status')
+        
+        resource = Resource.objects.get(pk=resource_id)
+        resource.status = new_status
+        resource.save()
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error'})
 
 #Shema views
 @login_required
