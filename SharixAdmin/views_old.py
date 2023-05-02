@@ -46,385 +46,376 @@ from django.views.generic.edit import UpdateView, CreateView, DeleteView
         
 #     return render(request, 'SharixAdmin/transactions.html', context)
 
-@login_required
-def servicetype(request):
-    service_types = ServiceType.objects.all()
-    context = get_context(request, {
-        'title':'Услуги сервиса',
-        'service_types':service_types,
-        })
+
+# @login_required
+# def trans_id(request, trans_id):
+#     context = get_context(request, {
+#         'title':'Услуга'
+#         })
+#     return render(request, 'SharixAdmin/trans_carried.html', context)
+
+# @login_required
+# def balance(request):
+#     context = get_context(request, {
+#         'title':'Пополнить баланс'
+#         })
+#     if request.method == 'POST':
+#         if float(request.POST['price']) > 0:
+#             context = get_context(request, {
+#                 'title':'Пополнить баланс',
+#                 'msg':'Оплата прошла успешно ;)'
+#                 })
+#             return render(request, "SharixAdmin/balance_success.html", context)
+#         else:
+#             context = get_context(request, {
+#                 'title':'Пополнить баланс',
+#                 'msg':'Оплата не прошла ;('
+#                 })
+#             return render(request, "SharixAdmin/balance_success.html", context)
+
+    
+#     return render(request, "SharixAdmin/balance.html", context)
+
+
+# def logout_view(request):
+#     logout(request)
+#     return HttpResponseRedirect(reverse('authweb'))
+
+# class LoginSharix(LoginView):
+#     form_class = LoginUserForm
+#     template_name = 'SharixAdmin/auth.html'
+
+    
+#     def get_success_url(self):
+#         print(self.request.GET['next'])
         
-    return render(request, 'SharixAdmin/servicetype.html', context)
+#         return reverse_lazy('home')
 
-@login_required
-def trans_id(request, trans_id):
-    context = get_context(request, {
-        'title':'Услуга'
-        })
-    return render(request, 'SharixAdmin/trans_carried.html', context)
+# def testPage(request):
+#     context = get_context(request, {
+#         'title':'Страница в разработке'
+#         })
+#     return render(request, "SharixAdmin/test.html", context)
 
-@login_required
-def balance(request):
-    context = get_context(request, {
-        'title':'Пополнить баланс'
-        })
-    if request.method == 'POST':
-        if float(request.POST['price']) > 0:
-            context = get_context(request, {
-                'title':'Пополнить баланс',
-                'msg':'Оплата прошла успешно ;)'
-                })
-            return render(request, "SharixAdmin/balance_success.html", context)
-        else:
-            context = get_context(request, {
-                'title':'Пополнить баланс',
-                'msg':'Оплата не прошла ;('
-                })
-            return render(request, "SharixAdmin/balance_success.html", context)
 
+
+
+# menu = [
+#     {'title':'Главная/баланс',          'link':'home', 'sel':'house'},
+#     {'title':'Платежная информация',    'link':'test-page', 'sel':'credit-card'},
+#     {'title':'История платежей',        'link':'trans','sel':'clock-history'},
+#     {'title':'Курсы',                   'link':'course', 'sel':'education'},
+#     {'title':'Личная информация',       'link':'test-page', 'sel':'person'},
+#     {'title':'Управление сервисами',    'link':'test-page', 'sel':'hdd-network'},
+#     {'title':'Мои связи',               'link':'test-page', 'sel':'people'},
+#     {'title':'Сотрудничество',          'link':'test-page', 'sel':'sotrud'},
+#     {'title':'Техподдержка',            'link':'test-page', 'sel':'gear'},
+#     {'title':'Мои заявки',              'link':'tickets', 'sel':'tikets'},
+#     {'title':'Исполнители',             'link':'provider', 'sel':'people'},
+#     {'title':'Тарифы услуг',            'link':'service_tariff', 'sel':'person'},
+#     {'title':'Партнеры',                'link':'partners', 'sel':'people'},
+#     {'title':'Ресурсы',                 'link':'resource', 'sel':'sotrud'},
+#     {'title':'Услуги сервиса',          'link':'service_type', 'sel':'hdd-network'},
+#     {'title':'Информация о сервисе',    'link':'partner_information/add/', 'sel':'hdd-network'},
+#     {'title':'Информация о партнере',   'link':'partner_information/add/', 'sel':'person'},
+#     {'title':'Тарифы',                  'link':'service', 'sel':'tikets'},
+# ]
+
+# def partner_information(request):
+#     context = get_context(request, {
+#         'title':'Информация о партнере',
+#         })
     
-    return render(request, "SharixAdmin/balance.html", context)
+#     return render(request, 'SharixAdmin/partner_information.html', context)
+
+# def get_context(request, page_context) -> dict:
+#     base_context = {
+#         "title":page_context['title'],
+#         'url_path':resolve(request.path_info).url_name,
+#         'menu':menu
+#     }
+#     context = dict(list(base_context.items()) + list(page_context.items()))
+#     return context
 
 
-def logout_view(request):
-    logout(request)
-    return HttpResponseRedirect(reverse('authweb'))
+# class PartnersListView(SingleTableView):
+#     table_class = PartnersTable
+#     queryset = Company.objects.all()
+#     template_name = 'SharixAdmin/partners.html'
 
-class LoginSharix(LoginView):
-    form_class = LoginUserForm
-    template_name = 'SharixAdmin/auth.html'
-
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Партнеры',
+#             'object_list': context['object_list'],
+#         }))
+#         return context
     
-    def get_success_url(self):
-        print(self.request.GET['next'])
+# @login_required
+# def change_provider_status(request):
+#     if request.method == 'POST':
+#         provider_id = request.POST.get('provider_id')
+#         new_status = request.POST.get('new_status')
         
-        return reverse_lazy('home')
+#         provider = Provider.objects.get(pk=provider_id)
+#         provider.status = new_status
+#         provider.save()
+#         return JsonResponse({'status': 'success'})
+#     else:
+#         return JsonResponse({'status': 'error'})
 
-def testPage(request):
-    context = get_context(request, {
-        'title':'Страница в разработке'
-        })
-    return render(request, "SharixAdmin/test.html", context)
+# class ServiceTariffUpdateView(UpdateView):
+#     model = Service
+#     form_class = ServiceTariffUpdateForm
+#     template_name = "SharixAdmin/service_tariff_form.html"
 
-
-
-
-menu = [
-    {'title':'Главная/баланс',          'link':'home', 'sel':'house'},
-    {'title':'Платежная информация',    'link':'test-page', 'sel':'credit-card'},
-    {'title':'История платежей',        'link':'trans','sel':'clock-history'},
-    {'title':'Курсы',                   'link':'course', 'sel':'education'},
-    {'title':'Личная информация',       'link':'test-page', 'sel':'person'},
-    {'title':'Управление сервисами',    'link':'test-page', 'sel':'hdd-network'},
-    {'title':'Мои связи',               'link':'test-page', 'sel':'people'},
-    {'title':'Сотрудничество',          'link':'test-page', 'sel':'sotrud'},
-    {'title':'Техподдержка',            'link':'test-page', 'sel':'gear'},
-    {'title':'Мои заявки',              'link':'tickets', 'sel':'tikets'},
-    {'title':'Исполнители',             'link':'provider', 'sel':'people'},
-    {'title':'Тарифы услуг',            'link':'service_tariff', 'sel':'person'},
-    {'title':'Партнеры',                'link':'partners', 'sel':'people'},
-    {'title':'Ресурсы',                 'link':'resource', 'sel':'sotrud'},
-    {'title':'Услуги сервиса',          'link':'service_type', 'sel':'hdd-network'},
-    {'title':'Информация о сервисе',    'link':'partner_information/add/', 'sel':'hdd-network'},
-    {'title':'Информация о партнере',   'link':'partner_information/add/', 'sel':'person'},
-    {'title':'Тарифы',                  'link':'service', 'sel':'tikets'},
-]
-
-def partner_information(request):
-    context = get_context(request, {
-        'title':'Информация о партнере',
-        })
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Тарифы услуг',
+#             'object': self.object,
+#         }))
+#         return context
     
-    return render(request, 'SharixAdmin/partner_information.html', context)
+#     def get_success_url(self):
+#         return reverse('service_tariff')
 
-def get_context(request, page_context) -> dict:
-    base_context = {
-        "title":page_context['title'],
-        'url_path':resolve(request.path_info).url_name,
-        'menu':menu
-    }
-    context = dict(list(base_context.items()) + list(page_context.items()))
-    return context
+# class ServiceTariffCreate(CreateView):
+#     model = Service
+#     form_class = ServiceTariffCreateForm
+#     template_name = "SharixAdmin/service_tariff_form.html"
 
-
-class PartnersListView(SingleTableView):
-    table_class = PartnersTable
-    queryset = Company.objects.all()
-    template_name = 'SharixAdmin/partners.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Партнеры',
-            'object_list': context['object_list'],
-        }))
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Тарифы услуг',
+#             'object': self.object,
+#         }))
+#         return context
     
-@login_required
-def change_provider_status(request):
-    if request.method == 'POST':
-        provider_id = request.POST.get('provider_id')
-        new_status = request.POST.get('new_status')
+#     def get_success_url(self):
+#         return reverse('service_tariff')
+
+# class ProviderListView(SingleTableView):
+#     table_class = ProviderTable
+#     queryset = Provider.objects.all()
+#     template_name = 'SharixAdmin/provider.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Исполнители',
+#             'object_list': context['object_list'],
+#         }))
+#         return context
+
+# class ServiceTariffListView(SingleTableView):
+#     table_class = ServiceTariffTable
+#     queryset = Service.objects.all()
+#     template_name = 'SharixAdmin/service_tariff.html'
+#     
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Исполнители',
+#             'object_list': context['object_list'],
+#         }))
+#         return context
+
+# class ServiceTypeUpdateView(UpdateView):
+#     model = ServiceType
+#     form_class = ServiceTypeUpdateForm
+#     template_name = "SharixAdmin/service_type_form.html"
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Тарифы услуг',
+#             'object_list': context['object_list'],
+#         }))
+#         return context
+    
+# class ResourceListView(SingleTableView):
+#     table_class =  ResourceTable
+#     queryset = Resource.objects.all()
+#     template_name = 'SharixAdmin/resource.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Ресурсы',
+#             'object_list': context['object_list'],
+#         }))
+#         return context
+
+# class ServiceTypeCreate(CreateView):
+#     model = ServiceType
+#     form_class = ServiceTypeCreateForm
+#     template_name = "SharixAdmin/service_type_form.html"
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Услуги сервиса',
+#             'object': self.object,
+#         }))
+#         return context
+    
+#     def get_success_url(self):
+#         return reverse('service_type')
+    
+# @login_required
+# def change_partners_status(request):
+#     if request.method == 'POST':
+#         partners_id = request.POST.get('partners_id')
+#         new_status = request.POST.get('new_status')
         
-        provider = Provider.objects.get(pk=provider_id)
-        provider.status = new_status
-        provider.save()
-        return JsonResponse({'status': 'success'})
-    else:
-        return JsonResponse({'status': 'error'})
+#         partners = Company.objects.get(pk=partners_id)
+#         partners.status = new_status
+#         partners.save()
+#         return JsonResponse({'status': 'success'})
+#     else:
+#         return JsonResponse({'status': 'error'})
 
-class ServiceTariffUpdateView(UpdateView):
-    model = Service
-    form_class = ServiceTariffUpdateForm
-    template_name = "SharixAdmin/service_tariff_form.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Тарифы услуг',
-            'object': self.object,
-        }))
-        return context
-    
-    def get_success_url(self):
-        return reverse('service_tariff')
-
-class ServiceTariffCreate(CreateView):
-    model = Service
-    form_class = ServiceTariffCreateForm
-    template_name = "SharixAdmin/service_tariff_form.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Тарифы услуг',
-            'object': self.object,
-        }))
-        return context
-    
-    def get_success_url(self):
-        return reverse('service_tariff')
-
-class ProviderListView(SingleTableView):
-    table_class = ProviderTable
-    queryset = Provider.objects.all()
-    template_name = 'SharixAdmin/provider.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Исполнители',
-            'object_list': context['object_list'],
-        }))
-        return context
-
-class ServiceTariffListView(SingleTableView):
-    table_class = ServiceTariffTable
-    queryset = Service.objects.all()
-    template_name = 'SharixAdmin/service_tariff.html'
-    # paginate_by = 2
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Исполнители',
-            'object_list': context['object_list'],
-        }))
-        return context
-
-class ServiceTypeUpdateView(UpdateView):
-    model = ServiceType
-    form_class = ServiceTypeUpdateForm
-    template_name = "SharixAdmin/service_type_form.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Тарифы услуг',
-            'object_list': context['object_list'],
-        }))
-        return context
-    
-class ResourceListView(SingleTableView):
-    table_class =  ResourceTable
-    queryset = Resource.objects.all()
-    template_name = 'SharixAdmin/resource.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Ресурсы',
-            'object_list': context['object_list'],
-        }))
-        return context
-
-class ServiceTypeCreate(CreateView):
-    model = ServiceType
-    form_class = ServiceTypeCreateForm
-    template_name = "SharixAdmin/service_type_form.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Услуги сервиса',
-            'object': self.object,
-        }))
-        return context
-    
-    def get_success_url(self):
-        return reverse('service_type')
-    
-@login_required
-def change_partners_status(request):
-    if request.method == 'POST':
-        partners_id = request.POST.get('partners_id')
-        new_status = request.POST.get('new_status')
+# @login_required
+# def change_resource_status(request):
+#     if request.method == 'POST':
+#         resource_id = request.POST.get('resource_id')
+#         new_status = request.POST.get('new_status')
         
-        partners = Company.objects.get(pk=partners_id)
-        partners.status = new_status
-        partners.save()
-        return JsonResponse({'status': 'success'})
-    else:
-        return JsonResponse({'status': 'error'})
-
-
-@login_required
-def change_resource_status(request):
-    if request.method == 'POST':
-        resource_id = request.POST.get('resource_id')
-        new_status = request.POST.get('new_status')
-        
-        resource = Resource.objects.get(pk=resource_id)
-        resource.status = new_status
-        resource.save()
-        return JsonResponse({'status': 'success'})
-    else:
-        return JsonResponse({'status': 'error'})
+#         resource = Resource.objects.get(pk=resource_id)
+#         resource.status = new_status
+#         resource.save()
+#         return JsonResponse({'status': 'success'})
+#     else:
+#         return JsonResponse({'status': 'error'})
     
 
-class ServiceTypeDelete(DeleteView):
-    model = ServiceType
-    template_name = "SharixAdmin/service_type_delete.html"
+# class ServiceTypeDelete(DeleteView):
+#     model = ServiceType
+#     template_name = "SharixAdmin/service_type_delete.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Услуги сервиса',
-            'object': self.object,
-        }))
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Услуги сервиса',
+#             'object': self.object,
+#         }))
+#         return context
     
-    def get_success_url(self):
-        return reverse('service_type')
+#     def get_success_url(self):
+#         return reverse('service_type')
 
 
-class ServiceTypeListView(SingleTableView):
-    table_class = ServiceTypeTable
-    queryset = ServiceType.objects.all()
-    template_name = 'SharixAdmin/service_type.html'
-    # paginate_by = 2
+# class ServiceTypeListView(SingleTableView):
+#     table_class = ServiceTypeTable
+#     queryset = ServiceType.objects.all()
+#     template_name = 'SharixAdmin/service_type.html'
+#     # paginate_by = 2
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Услуги сервиса',
-            'object_list': context['object_list'],
-        }))
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Услуги сервиса',
+#             'object_list': context['object_list'],
+#         }))
+#         return context
 
 
-class ServiceInformationUpdateView(UpdateView):
-    model = Service
-    form_class = ServiceInformationUpdateForm
-    template_name = "SharixAdmin/service_information_form.html"
+# class ServiceInformationUpdateView(UpdateView):
+#     model = Service
+#     form_class = ServiceInformationUpdateForm
+#     template_name = "SharixAdmin/service_information_form.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Информация о сервисе',
-            'object': self.object,
-        }))
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Информация о сервисе',
+#             'object': self.object,
+#         }))
+#         return context
     
-    def get_success_url(self):
-        return reverse('test-page')
+#     def get_success_url(self):
+#         return reverse('test-page')
 
-class ServiceInformationCreate(CreateView):
-    model = Service
-    form_class = ServiceInformationCreateForm
-    template_name = "SharixAdmin/service_information_form.html"
+# class ServiceInformationCreate(CreateView):
+#     model = Service
+#     form_class = ServiceInformationCreateForm
+#     template_name = "SharixAdmin/service_information_form.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Информация о сервисе',
-            'object': self.object,
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Информация о сервисе',
+#             'object': self.object,
             
-        }))
-        return context
+#         }))
+#         return context
     
-    def get_success_url(self):
-        return reverse('test-page')
+#     def get_success_url(self):
+#         return reverse('test-page')
 
-class ServiceListView(SingleTableView):
-    table_class = ServiceTable
-    queryset = Service.objects.all()
-    template_name = 'SharixAdmin/service.html'
+# class ServiceListView(SingleTableView):
+#     table_class = ServiceTable
+#     queryset = Service.objects.all()
+#     template_name = 'SharixAdmin/service.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Тарифы',
-            'object_list': context['object_list'],
-        }))
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Тарифы',
+#             'object_list': context['object_list'],
+#         }))
+#         return context
     
-@login_required
-def change_service_status(request):
-    if request.method == 'POST':
-        service_id = request.POST.get('service_id')
-        new_status = request.POST.get('new_status')
+# @login_required
+# def change_service_status(request):
+#     if request.method == 'POST':
+#         service_id = request.POST.get('service_id')
+#         new_status = request.POST.get('new_status')
         
-        service = Service.objects.get(pk=service_id)
-        service.status = new_status
-        service.save()
+#         service = Service.objects.get(pk=service_id)
+#         service.status = new_status
+#         service.save()
 
-#Shema views
-@login_required
-def schema_v3(request):
-    return render(request, "SharixAdmin/schema.html")
+# #Shema views
+# @login_required
+# def schema_v3(request):
+#     return render(request, "SharixAdmin/schema.html")
 
 
-class PartnerInformationUpdateView(UpdateView):
-    model = Company
-    form_class = PartnerInformationUpdateForm
-    template_name = "SharixAdmin/partner_information_form.html"
+# class PartnerInformationUpdateView(UpdateView):
+#     model = Company
+#     form_class = PartnerInformationUpdateForm
+#     template_name = "SharixAdmin/partner_information_form.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Информация о партнере',
-            'object': self.object,
-        }))
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Информация о партнере',
+#             'object': self.object,
+#         }))
+#         return context
     
-    def get_success_url(self):
-        return reverse('test-page')
+#     def get_success_url(self):
+#         return reverse('test-page')
 
-class PartnerInformationCreate(CreateView):
-    model = Company
-    form_class = PartnerInformationCreateForm
-    template_name = "SharixAdmin/partner_information_form.html"
+# class PartnerInformationCreate(CreateView):
+#     model = Company
+#     form_class = PartnerInformationCreateForm
+#     template_name = "SharixAdmin/partner_information_form.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
-            'title': 'Информация о партнере',
-            'object': self.object,
-        }))
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update(get_context(self.request, {
+#             'title': 'Информация о партнере',
+#             'object': self.object,
+#         }))
+#         return context
     
-    def get_success_url(self):
-        return reverse('test-page')
+#     def get_success_url(self):
+#         return reverse('test-page')
 
 
 
