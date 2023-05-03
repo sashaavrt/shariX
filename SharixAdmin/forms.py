@@ -67,6 +67,7 @@ class ServiceTariffCreateForm(forms.ModelForm):
 class ServiceTypeUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ServiceTypeUpdateForm, self).__init__(*args, **kwargs)
+    class Meta:
         model = ServiceType
         fields = ['status','ticket_status','id_metaservice','codename',
                   'description','requirements','price_type','link_agreement',
@@ -79,6 +80,7 @@ class ServiceTypeUpdateForm(forms.ModelForm):
 class ServiceTypeCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ServiceTypeCreateForm, self).__init__(*args, **kwargs)
+    class Meta:
         model = ServiceType
         fields = '__all__'
 
