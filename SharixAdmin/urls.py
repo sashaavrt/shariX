@@ -39,8 +39,8 @@ urlpatterns = [
     path('service_type/add/', login_required(ServiceTypeCreate.as_view()), name='service_type/add/'),
     path('service_type/delete/<int:pk>', login_required(ServiceTypeDelete.as_view()), name='service_type/delete/'),
 
-    path('service_information/add/', login_required(ServiceInformationCreate.as_view()), name='partner_information/add/'),
-    path('service_information/edit/<int:pk>', login_required(ServiceInformationUpdateView.as_view()), name='partner_information/edit/'),
+    path('service_information/add/', login_required(ServiceInformationCreate.as_view()), name='service_information/add/'),
+    path('service_information/edit/<int:pk>', login_required(ServiceInformationUpdateView.as_view()), name='service_information/edit/'),
 
 
 

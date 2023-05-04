@@ -16,7 +16,7 @@ menu = [
     {'title':'Партнеры',                'link':'partners', 'sel':'people'},
     {'title':'Ресурсы',                 'link':'resource', 'sel':'sotrud'},
     {'title':'Услуги сервиса',          'link':'service_type', 'sel':'hdd-network'},
-    {'title':'Информация о сервисе',    'link':'partner_information/add/', 'sel':'hdd-network'},
+    {'title':'Информация о сервисе',    'link':'service_information/add/', 'sel':'hdd-network'},
     {'title':'Информация о партнере',   'link':'partner_information/add/', 'sel':'person'},
     {'title':'Тарифы',                  'link':'service', 'sel':'tikets'},
 ]
