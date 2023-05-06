@@ -1,6 +1,6 @@
 #!/bin/sh
 
-git clone -b tickets_module http://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git tickets
+git clone -b unstable http://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git tickets
 
 git clone -b metasynced_module http://git.sharix-app.org/ShariX_Open/sharix-open-backend.git metaservicesynced
 
