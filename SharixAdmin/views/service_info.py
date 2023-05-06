@@ -1,10 +1,11 @@
 from SharixAdmin.forms import ServiceInformationCreateForm, ServiceInformationUpdateForm
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic.edit import CreateView, UpdateView
 from metaservicesynced.models import Service
 from SharixAdmin.views.context import get_context
 from django.urls import reverse
 
-class ServiceInformationCreate(CreateView):
+class ServiceInformationCreate(UserPassesTestMixin, CreateView):
     model = Service
     form_class = ServiceInformationCreateForm
     template_name = "SharixAdmin/service_information_form.html"
@@ -21,7 +22,13 @@ class ServiceInformationCreate(CreateView):
     def get_success_url(self):
         return reverse('test-page')
     
-class ServiceInformationUpdateView(UpdateView):
+    def test_func(self) -> bool or None:
+        group_names = ('METASERVICE-ADMIN')
+        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+            return True
+        return False
+    
+class ServiceInformationUpdateView(UserPassesTestMixin, UpdateView):
     model = Service
     form_class = ServiceInformationUpdateForm
     template_name = "SharixAdmin/service_information_form.html"
@@ -36,3 +43,9 @@ class ServiceInformationUpdateView(UpdateView):
     
     def get_success_url(self):
         return reverse('test-page')
+    
+    def test_func(self) -> bool or None:
+        group_names = ('METASERVICE-ADMIN')
+        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+            return True
+        return False

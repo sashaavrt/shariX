@@ -1,11 +1,13 @@
 from django_tables2 import SingleTableView
+from django.contrib.auth.mixins import UserPassesTestMixin
+from SharixAdmin.groups import group_required
 from SharixAdmin.tables import ResourceTable
 from django.contrib.auth.decorators import login_required
 from metaservicesynced.models import Resource
 from SharixAdmin.views.context import get_context
 from django.http import JsonResponse
 
-class ResourceListView(SingleTableView):
+class ResourceListView(UserPassesTestMixin, SingleTableView):
     table_class = ResourceTable
     queryset = Resource.objects.all()
     template_name = 'SharixAdmin/resource.html'
@@ -18,8 +20,14 @@ class ResourceListView(SingleTableView):
         }))
         return context
     
+    def test_func(self) -> bool or None:
+        group_names = ('PARTNER-ADMIN')
+        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+            return True
+        return False
 
 @login_required
+@group_required('PARTNER-ADMIN')
 def change_resource_status(request):
     if request.method == 'POST':
         resource_id = request.POST.get('resource_id')

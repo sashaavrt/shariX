@@ -1,12 +1,13 @@
 from django_tables2 import SingleTableView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from SharixAdmin.tables import ServiceTypeTable
+from django.contrib.auth.mixins import UserPassesTestMixin
 from SharixAdmin.forms import ServiceTypeCreateForm, ServiceTypeUpdateForm
 from metaservicesynced.models import ServiceType
 from django.urls import reverse
 from SharixAdmin.views.context import get_context
 
-class ServiceTypeCreate(CreateView):
+class ServiceTypeCreate(UserPassesTestMixin, CreateView):
     model = ServiceType
     form_class = ServiceTypeCreateForm
     template_name = "SharixAdmin/service_type_form.html"
@@ -22,8 +23,14 @@ class ServiceTypeCreate(CreateView):
     def get_success_url(self):
         return reverse('service_type')
     
+    def test_func(self) -> bool or None:
+        group_names = ('METASERVICE-ADMIN')
+        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+            return True
+        return False
+    
 
-class ServiceTypeListView(SingleTableView):
+class ServiceTypeListView(UserPassesTestMixin, SingleTableView):
     table_class = ServiceTypeTable
     queryset = ServiceType.objects.all()
     template_name = 'SharixAdmin/service_type.html'
@@ -36,8 +43,13 @@ class ServiceTypeListView(SingleTableView):
         }))
         return context
 
+    def test_func(self) -> bool or None:
+        group_names = ('METASERVICE-ADMIN')
+        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+            return True
+        return False
 
-class ServiceTypeUpdateView(UpdateView):
+class ServiceTypeUpdateView(UserPassesTestMixin, UpdateView):
     model = ServiceType
     form_class = ServiceTypeUpdateForm
     template_name = "SharixAdmin/service_type_form.html"
@@ -50,8 +62,14 @@ class ServiceTypeUpdateView(UpdateView):
         }))
         return context
     
+    def test_func(self) -> bool or None:
+        group_names = ('METASERVICE-ADMIN')
+        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+            return True
+        return False
+    
 
-class ServiceTypeDelete(DeleteView):
+class ServiceTypeDelete(UserPassesTestMixin, DeleteView):
     model = ServiceType
     template_name = "SharixAdmin/service_type_delete.html"
 
@@ -65,3 +83,9 @@ class ServiceTypeDelete(DeleteView):
     
     def get_success_url(self):
         return reverse('service_type')
+    
+    def test_func(self) -> bool or None:
+        group_names = ('METASERVICE-ADMIN')
+        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+            return True
+        return False

@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from SharixAdmin.forms import PartnerInformationCreateForm, PartnerInformationUpdateForm
+from SharixAdmin.groups import group_required
 from metaservicesynced.models import Company
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic.edit import UpdateView, CreateView
 from SharixAdmin.views.context import get_context
 from django.urls import reverse
 
-class PartnerInformationCreate(CreateView):
+class PartnerInformationCreate(UserPassesTestMixin, CreateView):
     model = Company
     form_class = PartnerInformationCreateForm
     template_name = "SharixAdmin/partner_information_form.html"
@@ -21,7 +23,13 @@ class PartnerInformationCreate(CreateView):
     def get_success_url(self):
         return reverse('test-page')
     
-class PartnerInformationUpdateView(UpdateView):
+    def test_func(self) -> bool or None:
+        group_names = ('PARTNER-ADMIN')
+        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+            return True
+        return False
+    
+class PartnerInformationUpdateView(UserPassesTestMixin, UpdateView):
     model = Company
     form_class = PartnerInformationUpdateForm
     template_name = "SharixAdmin/partner_information_form.html"
@@ -36,6 +44,12 @@ class PartnerInformationUpdateView(UpdateView):
     
     def get_success_url(self):
         return reverse('test-page')
+    
+    def test_func(self) -> bool or None:
+        group_names = ('PARTNER-ADMIN')
+        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+            return True
+        return False
     
 def partner_information(request):
     context = get_context(request, {
