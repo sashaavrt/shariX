@@ -21,7 +21,7 @@ class ServiceListView(UserPassesTestMixin, SingleTableView):
     
     def test_func(self) -> bool or None:
         group_names = ('PARTNER-ADMIN')
-        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+        if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
 

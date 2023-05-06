@@ -25,7 +25,8 @@ menu = [
      'roles':['METASERVICE-ADMIN']},
     {'title':'Информация о партнере',   'link':'partner_information/add/', 'sel':'person',
      'roles':['PARTNER-ADMIN']},
-    {'title':'Тарифы',                  'link':'service', 'sel':'tikets'},
+    {'title':'Тарифы',                  'link':'service', 'sel':'tikets',
+     'roles':['PARTNER-ADMIN']},
 ]
 
 def get_context(request, page_context) -> dict:

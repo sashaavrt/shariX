@@ -25,7 +25,7 @@ class ServiceTypeCreate(UserPassesTestMixin, CreateView):
     
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
-        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+        if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
     
@@ -45,7 +45,7 @@ class ServiceTypeListView(UserPassesTestMixin, SingleTableView):
 
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
-        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+        if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
 
@@ -64,7 +64,7 @@ class ServiceTypeUpdateView(UserPassesTestMixin, UpdateView):
     
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
-        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+        if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
     
@@ -86,6 +86,6 @@ class ServiceTypeDelete(UserPassesTestMixin, DeleteView):
     
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
-        if bool(self.request.user.groups.filter(name__in=group_names)) or self.request.user.is_superuser:
+        if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
