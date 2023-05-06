@@ -2,7 +2,7 @@
 git clone -b unstable http://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git tickets
 git clone -b metasynced_module http://git.sharix-app.org/ShariX_Open/sharix-open-backend.git metaservicesynced
 python3 -m venv webapp-base
-source env/bin/activate
+source webapp-base/bin/activate
 pip3 install --upgrade pip
 pip3 install -r requirements.txt
 #python3 manage.py makemigrations
