@@ -1,6 +1,6 @@
 from .index import index
 from .transactions import transactions
-from .context import get_context
+#from .context import get_context
 from .service import *
 from .service_type import *
 from .service_tariff import *
