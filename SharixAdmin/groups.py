@@ -14,6 +14,8 @@ def create_groups(sender, **kwargs):
     Group.objects.get_or_create(name='PARTNER-SUPERVISOR')
     Group.objects.get_or_create(name='PARTNER-TECHSUPPORT')
     Group.objects.get_or_create(name='GUEST')
+    Group.objects.get_or_create(name='CLIENT')
+    Group.objects.get_or_create(name='PROVIDER')
     
 
 

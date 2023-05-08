@@ -153,12 +153,21 @@ class PartnerInformationUpdateForm(forms.ModelForm):
         
 class PartnerInformationCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(PartnerInformationCreateForm, self).__init__(*args, **kwargs)          
+        super(PartnerInformationCreateForm, self).__init__(*args, **kwargs)       
+        for field in iter(self.fields):
+            if 'class' not in self.fields[field].widget.attrs:
+                self.fields[field].widget.attrs.update({'class':'form-control'})
+   
+    # legal_name = forms.Fi()
     class Meta:
         model = Company
         fields = ['legal_name', 'address', 'repr_id']
-        
+
         widgets = {
             'description': forms.Select(attrs={'class': 'form-select'}),
             'repr_id': forms.Select(attrs={'class': 'form-select'}),
         }
+
+
+        #     username = forms.CharField(label="Номер телефона",
+        # widget=forms.TextInput(attrs={'class':'form-control'}))

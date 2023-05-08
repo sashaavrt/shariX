@@ -57,7 +57,7 @@ class ServiceTypeUpdateView(UserPassesTestMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Тарифы услуг',
+            'title': 'Услуги сервиса',
             'object_list': context['object_list'],
         }))
         return context

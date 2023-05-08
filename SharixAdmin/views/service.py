@@ -20,13 +20,13 @@ class ServiceListView(UserPassesTestMixin, SingleTableView):
         return context
     
     def test_func(self) -> bool or None:
-        group_names = ('PARTNER-ADMIN')
+        group_names = ('PROVIDER')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
 
 @login_required
-@group_required('PARTNER-ADMIN')
+@group_required('PROVIDER')
 def change_service_status(request):
     if request.method == 'POST':
         service_id = request.POST.get('service_id')

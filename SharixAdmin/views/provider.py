@@ -1,11 +1,13 @@
 from django_tables2 import SingleTableView
+from SharixAdmin.groups import group_required
 from SharixAdmin.tables import ProviderTable
 from metaservicesynced.models import Provider
 from django.contrib.auth.decorators import login_required
 from SharixAdmin.views.context import get_context
 from django.http import JsonResponse
+from django.contrib.auth.mixins import UserPassesTestMixin
 
-class ProviderListView(SingleTableView):
+class ProviderListView(UserPassesTestMixin, SingleTableView):
     table_class = ProviderTable
     queryset = Provider.objects.all()
     template_name = 'SharixAdmin/provider.html'
@@ -18,7 +20,15 @@ class ProviderListView(SingleTableView):
         }))
         return context
     
+    def test_func(self) -> bool or None:
+        group_names = ('PARTNER-ADMIN')
+        if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
+            return True
+        return False
+
+    
 @login_required
+@group_required('PARTNER-ADMIN')
 def change_provider_status(request):
     if request.method == 'POST':
         provider_id = request.POST.get('provider_id')
