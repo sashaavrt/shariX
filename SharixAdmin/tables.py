@@ -160,3 +160,14 @@ class ServiceTable(tables.Table):
             return format_html('<input class="form-check-input status-toggle" checked type="checkbox" id="flexCheckDefault" data-service-id="{}">', record.id)
         else:
             return format_html('<input class="form-check-input status-toggle" type="checkbox" id="flexCheckDefault" data-service-id="{}">', record.id)     
+
+class UserInfoTable(tables.Table):
+
+    id = tables.Column(verbose_name='ID', attrs={"td":{"width":"5%"}})
+
+    class Meta:
+        model = SharixUser
+        attrs = {"class": "table table-layout-fixed"}
+        exclude = ('password', 'phone_number', 
+                   'last_login','is_staff', 'is_superuser',
+                   'date_joined')
