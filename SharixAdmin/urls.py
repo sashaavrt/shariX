@@ -41,9 +41,6 @@ urlpatterns = [
 
     path('service_information/add/', login_required(ServiceInformationCreate.as_view()), name='service_information/add/'),
     path('service_information/edit/<int:pk>', login_required(ServiceInformationUpdateView.as_view()), name='service_information/edit/'),
-
-
-
     
     path('service/', ServiceListView.as_view(), name='service'),
     path('service/change_status/', change_service_status, name='service/change_status'),
@@ -51,6 +48,10 @@ urlpatterns = [
     path('partner_information/add/', login_required(PartnerInformationCreate.as_view()), name='partner_information/add/'),
     path('partner_information/edit/<int:pk>', login_required(PartnerInformationUpdateView.as_view()), name='partner_information/edit/'),
     #path('v1/auth/', include('djoser.urls'), name='auth-reg'),
+
+    path('user_information', login_required(UserListView.as_view()), name='user_information'),
+
+    #path('v1/auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken'), name='auth'),
     path('platform/api/', include(router.urls), name="sharix-api"),
     path('senderphone/', PhoneSender.as_view()),

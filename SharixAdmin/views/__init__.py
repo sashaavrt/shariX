@@ -14,3 +14,4 @@ from .test import testPage
 from .balance import balance
 from .trans_id import trans_id
 from .schema import schema_v3
+from .user_info import UserListView

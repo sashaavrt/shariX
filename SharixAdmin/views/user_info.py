@@ -1,0 +1,26 @@
+from django_tables2 import SingleTableView
+from SharixAdmin.tables import UserInfoTable
+from SharixAdmin.models import SharixUser
+from SharixAdmin.views.context import get_context
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.models import Group
+
+class UserListView(UserPassesTestMixin, SingleTableView):
+    table_class = UserInfoTable
+    queryset = SharixUser.objects.all()
+    template_name = 'SharixAdmin/user_information.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(get_context(self.request, {
+            'title': 'Управление пользователями',
+            'object_list': context['object_list'],
+            'groups': Group.objects.all()
+        }))
+        return context
+    
+    def test_func(self) -> bool or None:
+        group_names = ('PROVIDER')
+        if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
+            return True
+        return False
