@@ -8,7 +8,7 @@ class SharixUser(AbstractUser):
     Пользователь - здесь находиться описание сущности!
     """
     #pk = models.BigAutoField(help_text="А здесь можно добавить описание поля")
-    phone_number = models.CharField(max_length=20, unique=True, blank=False, verbose_name='Номер телефона', help_text="А здесь можно добавить описание поля")
+    phone_number = models.CharField(max_length=60, unique=True, blank=False, verbose_name='Номер телефона', help_text="А здесь можно добавить описание поля")
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['username']

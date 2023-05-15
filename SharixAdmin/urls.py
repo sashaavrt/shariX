@@ -5,6 +5,7 @@ from rest_framework import routers
 from django_spaghetti.views import Plate
 from schema_graph.views import Schema
 from django.contrib.auth.decorators import login_required
+from core.config import DEBUG
 
 router = routers.SimpleRouter()
 router.register(r'sharix-users', SharixUserMVS)
@@ -49,7 +50,7 @@ urlpatterns = [
     
     path('partner_information/add/', login_required(PartnerInformationCreate.as_view()), name='partner_information/add/'),
     path('partner_information/edit/<int:pk>', login_required(PartnerInformationUpdateView.as_view()), name='partner_information/edit/'),
-    #path('v1/auth/', include('djoser.urls')),
+    #path('v1/auth/', include('djoser.urls'), name='auth-reg'),
     path('auth/', include('djoser.urls.authtoken'), name='auth'),
     path('platform/api/', include(router.urls), name="sharix-api"),
     path('senderphone/', PhoneSender.as_view()),
@@ -60,3 +61,5 @@ urlpatterns = [
     
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
+if DEBUG:
+    urlpatterns += path('v1/auth/', include('djoser.urls')),
