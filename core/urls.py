@@ -13,6 +13,7 @@ urlpatterns = (
     path('tickets/', include("tickets.urls"), name='tickets'),
     #metaservice
     path('metaservicesynced/', include("metaservicesynced.urls"), name="metaservicesynced"),
+    path('openlocal/', include("openlocal.urls"), name="openlocal"),
     
 
 ] 

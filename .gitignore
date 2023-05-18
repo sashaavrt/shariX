@@ -4,6 +4,7 @@ venv/
 #module
 tickets/
 metaservicesynced/
+openlocal/
 SharixAdmin/templates/SharixAdmin/
 staticfiles/
 core/config.py
