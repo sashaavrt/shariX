@@ -14,6 +14,4 @@ class LoginSharix(LoginView):
 
     
     def get_success_url(self):
-        print(self.request.GET['next'])
-        
         return reverse_lazy('home')

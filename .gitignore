@@ -21,3 +21,6 @@ __pycache__/
 # Other
 *.sqlite3
 .env
+
+# Vim
+*~
