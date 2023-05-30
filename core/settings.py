@@ -5,6 +5,8 @@ from core.api_settings import *
 from core.tickets_mail_settings import *
 from core.jazzmin_settings import *
 import core.config as conf
+from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -18,6 +20,7 @@ CSRF_TRUSTED_ORIGINS = conf.CSRF_TRUSTED_ORIGINS
 
 # Application definition
 INSTALLED_APPS = [
+    'design_template',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +48,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -121,6 +125,15 @@ USE_I18N = True
 USE_TZ = True
 
 SITE_ID = 1
+
+LANGUAGES = [
+    ('ru', _('Russian')),
+    ('en', _('English')),
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
