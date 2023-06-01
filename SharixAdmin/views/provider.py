@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from SharixAdmin.views.context import get_context
 from django.http import JsonResponse
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.utils.translation import gettext as _
 
 class ProviderListView(UserPassesTestMixin, SingleTableView):
     table_class = ProviderTable
@@ -15,7 +16,7 @@ class ProviderListView(UserPassesTestMixin, SingleTableView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Исполнители',
+            'title': _('Performers'),
             'object_list': context['object_list'],
         }))
         return context

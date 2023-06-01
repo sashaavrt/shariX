@@ -5,7 +5,6 @@ venv/
 tickets/
 metaservicesynced/
 openlocal/
-SharixAdmin/templates/SharixAdmin/
 staticfiles/
 core/config.py
 SharixAdmin/migrations/

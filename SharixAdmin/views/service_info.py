@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from metaservicesynced.models import Service
 from SharixAdmin.views.context import get_context
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 class ServiceInformationCreate(UserPassesTestMixin, CreateView):
     model = Service
@@ -13,7 +14,7 @@ class ServiceInformationCreate(UserPassesTestMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Информация о сервисе',
+            'title': _('Information about the service'),
             'object': self.object,
             
         }))
@@ -36,7 +37,7 @@ class ServiceInformationUpdateView(UserPassesTestMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Информация о сервисе',
+            'title': 'Information about the service',
             'object': self.object,
         }))
         return context
