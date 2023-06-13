@@ -2,6 +2,8 @@
 env/
 venv/
 #module
+webservice_running/
+design_template/
 tickets/
 metaservicesynced/
 openlocal/
