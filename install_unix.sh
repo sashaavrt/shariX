@@ -1,4 +1,6 @@
 #!/bin/bash
+git clone https://git.sharix-app.org/ShariX_Open/sharix-open-webapp-design-template.git
+git checkout unstable
 git clone https://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git 
 git checkout unstable
 git clone https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git
