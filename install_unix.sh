@@ -3,6 +3,7 @@ git clone -b unstable https://git.sharix-app.org/ShariX_Open/sharix-open-tickets
 git clone -b metasynced_module https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git metaservicesynced
 git clone -b master https://git.sharix-app.org/ShariX_Open/sharix-open-local.git openlocal
 git clone -b master https://git.sharix-app.org/ShariX_Open/sharix-open-config.git conf
+git clone -b unstable https://git.sharix-app.org/ShariX_Open/sharix-open-webservice-running.git
 python3 -m venv env
 source env/bin/activate
 pip3 install --upgrade pip

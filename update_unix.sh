@@ -11,3 +11,6 @@ cd ..
 cd openlocal/
 git pull
 cd ..
+cd webservice_running/
+git pull
+cd ..

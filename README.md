@@ -34,7 +34,7 @@ from pathlib import Path
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "SharixAdmin/static/", BASE_DIR / "tickets/static/"]
+[BASE_DIR / "SharixAdmin/static/", BASE_DIR / "tickets/static/", BASE_DIR /"design_template/static"]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 ```
 3) Run a **install_win.bat**
