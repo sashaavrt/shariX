@@ -1,8 +1,13 @@
 @echo off
-git clone -b unstable https://git.sharix-app.org/ShariX_Open/sharix-open-webapp-design-template.git design_template 
-git clone -b unstable http://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git tickets
-git clone -b metasynced_module http://git.sharix-app.org/ShariX_Open/sharix-open-backend.git metaservicesynced
-git clone -b master https://git.sharix-app.org/ShariX_Open/sharix-open-local.git openlocal
-git clone -b unstable https://git.sharix-app.org/ShariX_Open/sharix-open-webservice-running.git
+git clone https://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git 
+git checkout unstable
+git clone https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git
+git checkout metasynced_module
+git clone https://git.sharix-app.org/ShariX_Open/sharix-open-local.git
+git checkout unstable
+git clone https://git.sharix-app.org/ShariX_Open/sharix-open-config.git
+git checkout unstable 
+git clone https://git.sharix-app.org/ShariX_Open/sharix-open-webservice-running.git
+git checkout unstable 
 python -m venv env
 .\env\Scripts\activate && pip install -r requirements.txt && python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser && python manage.py runserver
