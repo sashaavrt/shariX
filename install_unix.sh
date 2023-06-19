@@ -28,4 +28,6 @@ python3 manage.py migrate
 python3 manage.py collectstatic
 #python3 manage.py createsuperuser
 deactivate
+chmod -x update_unix.sh install_unix.sh bin/webuser.sh
+chmod u+x update_unix.sh install_unix.sh bin/webuser.sh
 cp sharix-open-config/sharix_open.service /etc/systemd/system/
