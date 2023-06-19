@@ -6,7 +6,7 @@ cd ..
 git clone https://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git tickets 
 cd tickets
 git checkout unstable
-git cd ..
+cd ..
 git clone https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git metaservicesynced
 cd metaservicesynced
 git checkout unstable
@@ -26,6 +26,6 @@ pip3 install -r requirements.txt
 python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py collectstatic
-python3 manage.py createsuperuser
+#python3 manage.py createsuperuser
 deactivate
 cp sharix-open-config/sharix_open.service /etc/systemd/system/
