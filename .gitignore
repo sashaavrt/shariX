@@ -1,7 +1,6 @@
 # Virtualenv
 env/
 venv/
-./
 #module
 webservice_running/
 design_template/
