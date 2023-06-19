@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'SharixAdmin.apps.SharixadminConfig',
     'tickets.apps.ticketsConfig',
     'metaservicesynced.apps.MetaservicesyncedConfig',
-    'openlocal.apps.OpenlocalConfig',
+    'webservice_running.apps.WebserviceRunningConfig',
     'django_tables2',
     "django.contrib.sites",
     "django.contrib.flatpages",

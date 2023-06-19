@@ -18,8 +18,7 @@ urlpatterns = (
         path('design/', include("design_template.urls"), name='design'),
         #metaservice
         path('metaservicesynced/', include("metaservicesynced.urls"), name="metaservicesynced"),
-        path('openlocal/', include("openlocal.urls"), name="openlocal"),
-        prefix_default_language=False,
+        path('webservice/', include("webservice_running.urls"), name='webservice_running'), prefix_default_language=False,
     )
 
     
