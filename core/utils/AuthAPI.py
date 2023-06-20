@@ -33,11 +33,11 @@ class AuthAPI:
     @property
     def token(self):
         if self._token is None:
-            self.__create_token()
+            self._create_token()
         return self._token
 
     @property
     def headers(self):
         if self._token is None:
-            self.__create_token()
+            self._create_token()
         return self._headers
