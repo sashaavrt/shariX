@@ -1,3 +1,5 @@
+from datetime import timezone
+import datetime
 from django.shortcuts import render
 from SharixAdmin.forms import PartnerInformationCreateForm, PartnerInformationUpdateForm
 from SharixAdmin.groups import group_required
@@ -8,10 +10,44 @@ from SharixAdmin.views.context import get_context
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
+from core.utils.AuthAPI import AuthAPI
+from tickets.models import Task
+from core.config import API_URL
+api = AuthAPI("89855703300", "12345")
+import requests
+from django.urls import reverse_lazy
+
 class PartnerInformationCreate(UserPassesTestMixin, CreateView):
     model = Company
     form_class = PartnerInformationCreateForm
     template_name = "SharixAdmin/partner_information_form.html"
+    success_url = reverse_lazy("SharixAdmin:partners")
+
+    def form_valid(self, form):
+        form.instance.representative_id = self.request.user
+        #responce = super().form_valid(form)
+        
+        #print(responce)
+        new_ticket = {
+            "task_list": 1,
+            "created_by": self.request.user.pk,
+            "type": 1,
+            "title": "service_create",
+            "note": str(form.data),
+        }
+        
+        
+        resp = requests.post(f"{API_URL}/tickets/api/tickets/", data=new_ticket, headers=api.headers)
+        #print(resp.json())
+        jso = resp.json()
+        print(resp.content)
+        print(resp.json())
+        print(resp)
+        #form.cleaned_data['ticket_status'] = Task.objects.get(pk=int(jso['id']))
+        form.instance.ticket_status = Task.objects.get(pk=int(jso['id']))
+        print(form.cleaned_data)
+        responce = super().form_valid(form)
+        return responce
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -22,7 +58,7 @@ class PartnerInformationCreate(UserPassesTestMixin, CreateView):
         return context
     
     def get_success_url(self):
-        return reverse('test-page')
+        return reverse('partners')
     
     def test_func(self) -> bool or None:
         group_names = ('PARTNER-ADMIN')
@@ -51,7 +87,8 @@ class PartnerInformationUpdateView(UserPassesTestMixin, UpdateView):
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
-    
+
+
 def partner_information(request):
     context = get_context(request, {
         'title':_('Partner Information'),

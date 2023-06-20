@@ -134,9 +134,9 @@ LANGUAGES = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = conf.STATIC_URL
-STATICFILES_DIRS = conf.STATICFILES_DIRS
-STATIC_ROOT = conf.STATIC_ROOT
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "SharixAdmin/static/", BASE_DIR / "tickets/static/"]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Uploaded media
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"

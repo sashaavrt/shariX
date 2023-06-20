@@ -62,5 +62,5 @@ urlpatterns = [
     
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
-if DEBUG:
-    urlpatterns += path('v1/auth/', include('djoser.urls')),
+#if DEBUG:
+#    urlpatterns += path('v1/auth/', include('djoser.urls')),
