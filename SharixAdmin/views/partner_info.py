@@ -1,5 +1,3 @@
-from datetime import timezone
-import datetime
 from django.shortcuts import render
 from SharixAdmin.forms import PartnerInformationCreateForm, PartnerInformationUpdateForm
 from SharixAdmin.groups import group_required
@@ -25,9 +23,6 @@ class PartnerInformationCreate(UserPassesTestMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.representative_id = self.request.user
-        #responce = super().form_valid(form)
-        
-        #print(responce)
         new_ticket = {
             "task_list": 1,
             "created_by": self.request.user.pk,
@@ -36,14 +31,11 @@ class PartnerInformationCreate(UserPassesTestMixin, CreateView):
             "note": str(form.data),
         }
         
-        
         resp = requests.post(f"{API_URL}/tickets/api/tickets/", data=new_ticket, headers=api.headers)
-        #print(resp.json())
         jso = resp.json()
         print(resp.content)
         print(resp.json())
         print(resp)
-        #form.cleaned_data['ticket_status'] = Task.objects.get(pk=int(jso['id']))
         form.instance.ticket_status = Task.objects.get(pk=int(jso['id']))
         print(form.cleaned_data)
         responce = super().form_valid(form)

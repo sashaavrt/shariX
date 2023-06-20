@@ -123,8 +123,13 @@ class ServiceInformationCreateForm(forms.ModelForm):
 
     class Meta:
         model = Service
-        fields = ["servicetype_id", "id_provider"]
-        exclude = ["resource_id"]
+        fields = "__all__"
+        exclude = ["id", 
+                   "is_global", 
+                   "is_visible", 
+                   "ticket_status",
+                   "id_metaservice",
+                   "resource_id"]
 
         widgets = {
             #'servicetype_id': forms.CharField(max_length=255)
@@ -145,7 +150,12 @@ class PartnerInformationUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Company
-        fields = ['legal_name', 'address', 'repr_id' ]
+        fields = "__all__"
+        exclude = ["id", "ticket_status",
+                   "is_global", 
+                   "is_visible", 
+                   "id_metaservice",
+                   ]
         widgets = {
             'description': forms.Select(attrs={'class': 'form-select'}),
             'repr_id': forms.Select(attrs={'class': 'form-select'}),
@@ -161,7 +171,12 @@ class PartnerInformationCreateForm(forms.ModelForm):
     # legal_name = forms.Fi()
     class Meta:
         model = Company
-        fields = ['legal_name', 'address', 'repr_id']
+        fields = "__all__"
+        exclude = ["id", "ticket_status",
+                   "is_global", 
+                   "is_visible", 
+                   "id_metaservice",
+                   ]
 
         widgets = {
             'description': forms.Select(attrs={'class': 'form-select'}),
