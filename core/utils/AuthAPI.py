@@ -13,7 +13,7 @@ class AuthAPI:
         self._login = login
         self._password = password
         self._token = None
-        self._headers =  {'Authorization': f'Token {self._token}'}
+        self._headers =  None
 
     def _create_token(self):
         try:
@@ -40,4 +40,5 @@ class AuthAPI:
     def headers(self):
         if self._token is None:
             self._create_token()
+            self._headers =  {'Authorization': f'Token {self._token}'}
         return self._headers
