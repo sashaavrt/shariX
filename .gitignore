@@ -6,6 +6,7 @@ webservice_running/
 design_template/
 tickets/
 metaservicesynced/
+sharix-open-config/
 openlocal/
 staticfiles/
 core/config.py
