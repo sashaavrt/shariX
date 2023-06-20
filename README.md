@@ -106,3 +106,51 @@ Optional configuration params, which can be added to your project settings:
 ```python
 
 ```
+
+## Utilities
+
+Utilities provides important functionality to web-application, so it is important to know and understand how they work. They are stored in *core/utils*.
+
+### AuthAPI
+
+That class provides the ability to authenticate an application account through the
+API and store these authentication tokens.
+
+Modules using the API should log in ShariX system using this class.
+
+#### Setting up
+
+```python
+# core/config.py
+
+# ...
+#API
+# The URL where it is possible to access the API.
+API_URL = 'http://127.0.0.1:8000'
+# ...
+```
+
+```python
+# <module>/apps.py
+
+# ...
+from core.utils.AuthAPI import AuthAPI
+api = AuthAPI("<module_login>", "<module_password>")
+# ...
+```
+
+#### Usage example
+
+```python
+# <module>/<file>.py
+
+import requests
+from <module>.apps import api
+from core.config import API_URL
+
+# You can use api.headers to get the corret authorization header in your requests.
+requests.get(f"{API_URL}/tickets/api/tickets/", headers=api.headers)
+
+# Or you can get just token.
+print(api.token)
+```
