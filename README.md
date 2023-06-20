@@ -17,7 +17,9 @@ DEBUG=True
 SECRET_KEY='secret-key(absolutely any character)'
 ALLOWED_HOSTS = ['127.0.0.1']
 CSRF_TRUSTED_ORIGINS = []
-
+API_URL = "127.0.0.1"
+#DRIVE=2;ASSIST=1
+SERVICE_ID = 1
 #DATABSE
 DB_NAME=None
 DB_USER=None
