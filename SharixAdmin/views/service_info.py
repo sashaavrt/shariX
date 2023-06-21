@@ -13,6 +13,8 @@ api = AuthAPI("89855703300", "12345")
 import requests
 from django.urls import reverse_lazy
 from datetime import timezone
+import xmpp
+from xmpp import cli
 
 class ServiceInformationCreate(UserPassesTestMixin, CreateView):
     model = Service
@@ -33,6 +35,7 @@ class ServiceInformationCreate(UserPassesTestMixin, CreateView):
         form.instance.ticket_status = Task.objects.get(pk=int(jso['id']))
         print(form.cleaned_data)
         responce = super().form_valid(form)
+        cli.send_message("open_tickets_backend@ej.sharix-app.org", "eb177b1c9f99a7a13798928318d7a72c", "open_strequest_new@ej.sharix-app.org", str(jso))
         return responce
 
 
