@@ -26,7 +26,10 @@
                     {% trans 'Please, enter the correct phone number and password.' %}
                 </div>
             {% endif %}
-            <button class="w-100 btn btn-primary btn-lg" type="submit">{% trans 'Login' %}</button>
+            <div>
+              <a class="w-100 btn btn-primary btn-lg mb-3" href="{% url 'webservice_running:registration' %}">Регистрация</a>
+              <button class=" w-100 btn btn-primary btn-lg" type="submit">{% trans 'Login' %}</button>
+            </div>
             <p class="mt-5 mb-3 text-muted">© 2022</p>
           </form>
     </div>
