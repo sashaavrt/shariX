@@ -84,6 +84,7 @@ TEMPLATES = [
                 "django.template.context_processors.media",
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
+                "design_template.context_processors.get_name_system",
             ],
             'libraries': {
                 'custom_tags':'tickets.template_tags.custom_tags'
