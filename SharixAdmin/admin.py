@@ -53,6 +53,8 @@ class SharixUserAdmin(adm.UserAdmin):
     list_display = (
         'username',
         'phone_number',
+        'first_name',
+        'last_name'
     )
     list_filter = (
         'last_login',
