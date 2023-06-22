@@ -14,6 +14,10 @@ from core.config import API_URL
 api = AuthAPI("89855703300", "12345")
 import requests
 from django.urls import reverse_lazy
+from django.contrib.auth.hashers import check_password
+
+import xmpp
+from xmpp import cli
 
 class PartnerInformationCreate(UserPassesTestMixin, CreateView):
     model = Company
@@ -30,15 +34,12 @@ class PartnerInformationCreate(UserPassesTestMixin, CreateView):
             "title": "service_create",
             "note": str(form.data),
         }
-        
         resp = requests.post(f"{API_URL}/tickets/api/tickets/", data=new_ticket, headers=api.headers)
         jso = resp.json()
-        print(resp.content)
-        print(resp.json())
-        print(resp)
         form.instance.ticket_status = Task.objects.get(pk=int(jso['id']))
         print(form.cleaned_data)
         responce = super().form_valid(form)
+        cli.send_message("open_tickets_backend@ej.sharix-app.org", "eb177b1c9f99a7a13798928318d7a72c", "open_strequest_new@ej.sharix-app.org", str(jso))
         return responce
 
     def get_context_data(self, **kwargs):
