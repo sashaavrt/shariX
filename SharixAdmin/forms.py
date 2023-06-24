@@ -155,6 +155,7 @@ class PartnerInformationUpdateForm(forms.ModelForm):
                    "is_global", 
                    "is_visible", 
                    "id_metaservice",
+                   "status"
                    ]
         widgets = {
             'description': forms.Select(attrs={'class': 'form-select'}),
@@ -176,6 +177,7 @@ class PartnerInformationCreateForm(forms.ModelForm):
                    "is_global", 
                    "is_visible", 
                    "id_metaservice",
+                   "status"
                    ]
 
         widgets = {

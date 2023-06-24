@@ -47,6 +47,7 @@ urlpatterns = [
     
     path('partner_information/add/', login_required(PartnerInformationCreate.as_view()), name='partner_information/add/'),
     path('partner_information/edit/<int:pk>', login_required(PartnerInformationUpdateView.as_view()), name='partner_information/edit/'),
+    path('partner_information/', login_required(PartnerInfoView.as_view()), name='partner_information/'),
     #path('v1/auth/', include('djoser.urls'), name='auth-reg'),
 
     path('user_information', login_required(UserListView.as_view()), name='user_information'),
@@ -62,5 +63,5 @@ urlpatterns = [
     
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
-#if DEBUG:
+# if DEBUG:
 #    urlpatterns += path('v1/auth/', include('djoser.urls')),

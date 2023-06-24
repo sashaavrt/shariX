@@ -24,7 +24,7 @@ menu = [
      'roles':['METASERVICE-ADMIN']},
     {'title':_('Information about the service'),    'link':'service_information/add/', 'sel':'hdd-network',
      'roles':['METASERVICE-ADMIN']},
-    {'title':_('Partner Information'),   'link':'partner_information/add/', 'sel':'person',
+    {'title':_('Partner Information'),   'link':'partner_information/', 'sel':'person',
      'roles':['PARTNER-ADMIN']},
     {'title':_('Rates'),                  'link':'service', 'sel':'tikets',
      'roles':['PARTNER-ADMIN']},
