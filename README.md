@@ -38,6 +38,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = '/static/'
 [BASE_DIR / "SharixAdmin/static/", BASE_DIR / "tickets/static/", BASE_DIR /"design_template/static"]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+#EJABBER
+EJ_PROTOCOL = "http"
+EJ_IP = "10.0.20.9"
+EJ_PORT = "5280"
+EJ_URL = EJ_PROTOCOL + "://" + EJ_IP + ":" + EJ_PORT + "/" + "api/"
+EJ_SERVICE = "chat.ej.sharix-app.org"
+EJ_HOST = "ej.sharix-app.org"
+
+WEBSERVICE_NAME = "open" # Service name that is used in generating ejabber rooms
+
 ```
 3) Run a **install_win.bat**
 4) The system will prompt you to create a superuser
@@ -83,6 +94,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "SharixAdmin/static/", BASE_DIR / "tickets/static/"]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+#EJABBER
+EJ_PROTOCOL = "http"
+EJ_IP = "10.0.20.9"
+EJ_PORT = "5280"
+EJ_URL = EJ_PROTOCOL + "://" + EJ_IP + ":" + EJ_PORT + "/" + "api/"
+EJ_SERVICE = "chat.ej.sharix-app.org"
+EJ_HOST = "ej.sharix-app.org"
+
+WEBSERVICE_NAME = "open" # Service name that is used in generating ejabber rooms
+
 ```
 3) Run a **install_linux.sh**
 4) The system will prompt you to create a superuser
