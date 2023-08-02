@@ -19,5 +19,9 @@ git clone https://git.sharix-app.org/ShariX_Open/sharix-open-webservice-running.
 cd webservice_running/
 git checkout unstable
 cd ..
+git clone https://git.sharix-app.org/ShariX_Open/sharix-open-landing.git landing
+cd landing/
+git checkout landing_module
+cd ..
 python -m venv env
 .\env\Scripts\activate && pip install -r requirements.txt && python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser && python manage.py runserver

@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'schema_graph',
     'drf_yasg',
     'django_spaghetti',
+    'ckeditor',
+    'captcha',
+    'landing.apps.LandingConfig',
 ]
 
 MIDDLEWARE = [
