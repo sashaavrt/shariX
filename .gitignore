@@ -1,15 +1,26 @@
 # Virtualenv
 env/
 venv/
-#module
+
+# VSCode
+.vscode
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Apps
 tickets/
 metaservicesynced/
-openlocal/
+conf/
 SharixAdmin/templates/SharixAdmin/
+
+# Django
+migrations/
 staticfiles/
-core/config.py
-SharixAdmin/migrations/
-!SharixAdmin/migrations/__init__.py
+media/
+
 # VSCode
 .vscode
 
@@ -20,7 +31,8 @@ __pycache__/
 
 # Other
 *.sqlite3
-.env
+*.*~
+*.*.swp
 
-# Vim
-*~
+# Project configuration
+core/config.py

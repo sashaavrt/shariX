@@ -1,108 +1,52 @@
-# ShariX Open Admin
+# ShariX Open Webapp Base
 
-Admin system implemented as a Django application.
+The base Django project of a service web application to which other modules are connected.
 
-## How install?
+## Installation
 
-1) Download or clone repository
-```bash
-git clone http://git.sharix-app.org/ShariX_Open/sharix-open-webapp-base.git name_project
-```
-1) Set up a configuration file
-```python
-#Create file config.py with this setting or rename this file to config.py
+Download or clone repository.
 
-#BASE
-DEBUG=True
-SECRET_KEY='secret-key(absolutely any character)'
-ALLOWED_HOSTS = ['127.0.0.1']
-CSRF_TRUSTED_ORIGINS = []
+For the initial configuration, run:
 
-#DATABSE
-DB_NAME=None
-DB_USER=None
-DB_PASSWORD=None
-DB_HOST=None
+- *bin/install.sh* - on Unix.
+- *bin/install.bat* - on Windows.
 
-#GUNICORN
-BIND = "127.0.0.1:8000"
-WORKERS = 2
-THREADS = 4
+## Configuration
 
-#STATIC
-from pathlib import Path
-import os
-BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "SharixAdmin/static/", BASE_DIR / "tickets/static/"]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-```
-3) Run a **install_win.bat**
-4) The system will prompt you to create a superuser
-```
-#Example
-7987654321
-admin
-pa$$w0rd
-pa$$w0rd
-```
-### Ready!
+After executing the installation script, the file *core/_config.py* will be copied to the *core/config.py* (only if *core/config.py* does not exist yet). It contains default settings of all modules and applications used in Django project in the form of classes, where each attribute represents one setting. These classes are then used to apply all the necessary settings inside their own configuration files using the setup() function. 
 
-## Server instalation
-1) Download or clone repository
-```bash
-git clone http://git.sharix-app.org/ShariX_Open/sharix-open-webapp-base.git name_project
-```
-2) Set up a configuration file ```nano core/config_template.py```
-```python
-#Create file config.py with this setting or rename this file to config.py
-
-#BASE
-DEBUG=True
-SECRET_KEY='secret-key(absolutely any character)'
-ALLOWED_HOSTS = ['127.0.0.1']
-CSRF_TRUSTED_ORIGINS = []
-
-#DATABSE
-DB_NAME=None
-DB_USER=None
-DB_PASSWORD=None
-DB_HOST=None
-
-#GUNICORN
-BIND = "127.0.0.1:8000"
-WORKERS = 2
-THREADS = 4
-
-#STATIC
-from pathlib import Path
-import os
-BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "SharixAdmin/static/", BASE_DIR / "tickets/static/"]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-```
-3) Run a **install_linux.sh**
-4) The system will prompt you to create a superuser
-```
-#Example
-7987654321
-admin
-pa$$w0rd
-pa$$w0rd
-```
-5) Set up the **bin/webuser.sh** file with valid paths
-```bash
-#!/bin/bash
-cd /path/to/project
-exec /path/to/project/env/bin/gunicorn core.wsgi:application -c core/conf_gunicorn.py
-```
-6) It remains to configure Nginx conf and start the daemon
-
-## Settings
-
-Optional configuration params, which can be added to your project settings:
+For example, this is how all the customizations for Gunicorn are defined in the *core/config.py* file:
 
 ```python
+# core/config.py
 
+class ConfigGunicorn:
+    bind = "127.0.0.1"
+    workers = 2
+    worker_class = "sync"
+    threads = 4
+    timeout = 30
+    max_requests = 1000
+    capture_output = True
 ```
+
+And this is how these settings are applied in the *core/gunicorn.py* configuration file used when starting Gunicorn:
+
+```python
+# core/gunicorn.py
+
+from core.utils import setup
+from core.config import ConfigGunicorn
+
+setup(locals(), ConfigGunicorn)
+```
+
+This approach provides more convenient project configuration and allows you to store settings for development and production use.
+
+To configure special settings, such as changing the database type or specifying domain names for deployment in production that do not match the default settings for the web application, make changes to the *core/config.py* file. If these changes later become necessary for the basic installation of the web application, they should also be made in *core/_config.py*.
+
+To apply your own classes with configurations, follow the usage example above.
+
+## Launch 
+
+To start the web application on Unix, run *bin/start.sh*.
