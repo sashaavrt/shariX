@@ -33,6 +33,7 @@ __pycache__/
 *.sqlite3
 *.*~
 *.*.swp
+.DS_Store
 
 # Project configuration
 core/config.py
