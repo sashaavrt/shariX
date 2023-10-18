@@ -1,0 +1,16 @@
+{% extends 'SharixAdmin/index.html' %}
+{% load render_table from django_tables2 %}
+{% load i18n %}
+
+{% block contenthome %}
+    <h1 >{{ title }}</h1>
+    <h3 >{% trans 'User: ' %}{{ request.user.username }}</h3>
+    <h3 >{% blocktrans %}Balance: {{ wallet.balance }} points{% endblocktrans %}</h3>
+    <form class="d-flex" method="post">
+        {% csrf_token %}
+        <input class="form-control me-2" name="search" type="search" placeholder="{% trans 'Search' %}" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">{% trans 'Search' %}</button>
+      </form>
+      {% comment %} {% render_table  table %} {% endcomment %}
+{% endblock contenthome %} 
+

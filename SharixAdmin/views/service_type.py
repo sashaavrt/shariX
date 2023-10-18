@@ -6,6 +6,7 @@ from SharixAdmin.forms import ServiceTypeCreateForm, ServiceTypeUpdateForm
 from metaservicesynced.models import ServiceType
 from django.urls import reverse
 from SharixAdmin.views.context import get_context
+from django.utils.translation import gettext as _
 
 class ServiceTypeCreate(UserPassesTestMixin, CreateView):
     model = ServiceType
@@ -15,7 +16,7 @@ class ServiceTypeCreate(UserPassesTestMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Услуги сервиса',
+            'title': _('Service services'),
             'object': self.object,
         }))
         return context
@@ -38,7 +39,7 @@ class ServiceTypeListView(UserPassesTestMixin, SingleTableView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Услуги сервиса',
+            'title': 'Service services',
             'object_list': context['object_list'],
         }))
         return context
@@ -57,7 +58,7 @@ class ServiceTypeUpdateView(UserPassesTestMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Услуги сервиса',
+            'title': 'Service services',
             'object_list': context['object_list'],
         }))
         return context
@@ -76,7 +77,7 @@ class ServiceTypeDelete(UserPassesTestMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Услуги сервиса',
+            'title': 'Service services',
             'object': self.object,
         }))
         return context

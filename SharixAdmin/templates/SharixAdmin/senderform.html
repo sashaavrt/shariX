@@ -1,0 +1,12 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+<form action="" method="post">{% csrf_token %}
+    {{ form }}
+    <p>{% trans 'The message will be sent to the following users:' %}</p>
+    <ul>{{ items|unordered_list }}</ul>
+    <input type="hidden" name="action" value="{% trans 'send_phone' %}" />
+    <input type="submit" name="apply" value="{% trans 'Submit' %}" />
+</form>
+{% endblock %}

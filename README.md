@@ -13,39 +13,51 @@ For the initial configuration, run:
 
 ## Configuration
 
-After executing the installation script, the file *core/_config.py* will be copied to the *core/config.py* (only if *core/config.py* does not exist yet). It contains default settings of all modules and applications used in Django project in the form of classes, where each attribute represents one setting. These classes are then used to apply all the necessary settings inside their own configuration files using the setup() function. 
+For basic project configuration when deploying, use the *core/settings_vars.py*. This file is automatically created during the installation script execution, in case this file has not been created yet. It is a copy of *core/_settings_vars.py* and contains some default settings that allow the project to run locally and is more suitable for development.
 
-For example, this is how all the customizations for Gunicorn are defined in the *core/config.py* file:
+Be careful when adding new settings during development and remember to add them to *core/_settings_vars.py*, as *core/settings_vars.py* is ignored by Git for security reasons.
 
-```python
-# core/config.py
+## Utilities
 
-class ConfigGunicorn:
-    bind = "127.0.0.1"
-    workers = 2
-    worker_class = "sync"
-    threads = 4
-    timeout = 30
-    max_requests = 1000
-    capture_output = True
-```
+Utilities provides important functionality to web-application, so it is important to know and understand how they work. They are stored in *core/utils*.
 
-And this is how these settings are applied in the *core/gunicorn.py* configuration file used when starting Gunicorn:
+### AuthAPI
+
+That class provides the ability to authenticate an application account through the
+API and store these authentication tokens.
+
+Modules using the API should log in ShariX system using this class.
+
+#### Setting up
 
 ```python
-# core/gunicorn.py
+# core/settings_vars.py
 
-from core.utils import setup
-from core.config import ConfigGunicorn
-
-setup(locals(), ConfigGunicorn)
+API_URL = 'http://127.0.0.1:8000'
 ```
 
-This approach provides more convenient project configuration and allows you to store settings for development and production use.
+```python
+# <module>/apps.py
 
-To configure special settings, such as changing the database type or specifying domain names for deployment in production that do not match the default settings for the web application, make changes to the *core/config.py* file. If these changes later become necessary for the basic installation of the web application, they should also be made in *core/_config.py*.
+from core.utils.AuthAPI import AuthAPI
+auth_api = AuthAPI("<module_login>", "<module_password>")
+```
 
-To apply your own classes with configurations, follow the usage example above.
+#### Usage example
+
+```python
+# <module>/<file>.py
+
+import requests
+from <module>.apps import auth_api 
+from core.settings import API_URL
+
+# You can use api.headers to get the corret authorization header in your requests.
+requests.get(f"{API_URL}/tickets/api/tickets/", headers=auth_api.headers)
+
+# Or you can get just token.
+print(auth_api.token)
+```
 
 ## Launch 
 

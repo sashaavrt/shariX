@@ -1,0 +1,26 @@
+{% extends 'SharixAdmin/index.html' %}
+{% load i18n %}
+
+{% block contenthome %}
+    <h1 >{{ title }}</h1>
+    <h3 >{% trans 'User: ' %}{{ request.user.username }}</h3>
+    <h3 >{% trans 'Balance: ' %}{{ wallet.balance }} р.</h3>
+    {% if balance_err %}
+    <div class="alert alert-danger" role="alert">
+        {{ balance_err }}
+    </div>
+    {% endif %}
+    <ul class="list-group">
+        <li class="list-group-item active">{{ model.name_operation }}</li>
+        <li class="list-group-item">{% trans 'Price: ' %}{{ model.price }}</li>
+        <li class="list-group-item">{% trans 'Owner: ' %}{{ model.wallet.user.username }}</li>
+        <li class="list-group-item">{% trans 'Date of service: ' %}{{ model.date_operation }}</li>
+        <li class="list-group-item">{% trans 'Conducted: ' %}{{ model.is_carried_out }}</li>
+    </ul>
+    {% if not model.is_carried_out %}
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-success my-3" type="submit">{% trans 'Spend' %}</button>
+    </form>
+    {% endif %}
+{% endblock contenthome %}

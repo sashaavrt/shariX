@@ -1,0 +1,37 @@
+{% extends 'SharixAdmin/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div class="text-center" style="margin-top: 150px;">
+    <div class="form-signin" style="width: 100%; max-width:330px; margin: auto; display:block;">
+        <form class="m-2 p-2" method="post">
+            <img class="mb-4" style="height: 100px;" src="{% static 'SharixAdmin/img/logo.png' %}" alt="" >
+            <h1 class="h3 mb-3 fw-normal">{% trans 'Log in' %} в {{ NameSystem }}</h1>
+            {% csrf_token %}
+            
+            {% for item in form %}
+                <div class="form-floating my-3">
+                    {{item}}
+                    <label for="{{ item.id_for_label }}">{{ item.label }}</label>
+                </div>
+                {% if item.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ item.errors }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% trans 'Please, enter the correct phone number and password.' %}
+                </div>
+            {% endif %}
+            <div>
+              <a class="w-100 btn btn-primary btn-lg mb-3" href="{% url 'webservice_running:registration' %}">Регистрация</a>
+              <button class=" w-100 btn btn-primary btn-lg" type="submit">{% trans 'Login' %}</button>
+            </div>
+            <p class="mt-5 mb-3 text-muted">© 2022</p>
+          </form>
+    </div>
+</div>
+{% endblock %}

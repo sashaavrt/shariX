@@ -1,0 +1,163 @@
+{% extends 'SharixAdmin/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<input type="checkbox" name="" style="display: none;" checked id="hideMenuCheckBox">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3" id="leftmainpage">
+            <div class="d-flex flex-column p-2" style="width: 100%; min-width: 80px; height: 800px;  border-radius: 15px; box-shadow: 4px 5px 40px #cfcfcf; margin-top: 50px;">
+                <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none" 
+                onclick="barMenuHide()" 
+                style="cursor: pointer;">
+                  <img src="{% static 'SharixAdmin/img/menu/arrow-right.svg' %}" 
+                  style="width: 30px; height: 30px; rotate: 180deg; color: #0081ff; transition-duration: 0.4s;" 
+                  class="mx-3 my-2" id="row-bar-menu" alt="">
+                  <span class="fs-4" id="sharix-menu-row">{% trans 'ShariX Menu' %}</span>
+                </a>
+                <hr>
+                <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                  <input name="next" type="hidden" value="{{ redirect_to }}">
+                  <select name="language">
+                      {% get_current_language as LANGUAGE_CODE %}
+                      {% get_available_languages as LANGUAGES %}
+                      {% get_language_info_list for LANGUAGES as languages %}
+                      {% for language in languages %}
+                          <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                              {{ language.name_local }} ({{ language.code }})
+                          </option>
+                      {% endfor %}
+                  </select>
+                  <input type="submit" value="{% trans 'Change' %}">
+              </form>
+              <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                  {% for item in menu %}
+                  {% if item.link == url_path %}
+                  <li class="nav-item">
+                    <a class="nav-link active" >
+                      {% with 'SharixAdmin/img/menu/'|add:item.sel|add:'_w.svg' as image_static %}
+                        <img  src="{% static image_static %}" alt="" style="width: 30px; height: 30px; "> 
+                      {% endwith %}
+                      
+                      <span class="hidemenu">{{ item.title }}</span>
+                    </a>
+                  </li>
+                  {% elif item.link == 'tickets' %}
+                  <li class="nav-item">
+                    <a href="{% url 'tickets:ticket_list_list' %}" class="nav-link" >
+                      {% with 'SharixAdmin/img/menu/'|add:item.sel|add:'.svg' as image_static %}
+                        <img  src="{% static image_static %}" alt="" style="width: 30px; height: 30px;"> 
+                      {% endwith %}
+                      <span class="hidemenu">{{ item.title }}</span>
+                    </a>
+                  </li>
+                  {% elif item.link == 'course' %}
+                  <li class="nav-item">
+                    <a href="http://study.reversea.net/" class="nav-link" >
+                      {% with 'SharixAdmin/img/menu/'|add:item.sel|add:'.svg' as image_static %}
+                        <img  src="{% static image_static %}" alt="" style="width: 30px; height: 30px;"> 
+                      {% endwith %}
+                      <span class="hidemenu">{{ item.title }}</span>
+                    </a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a href="{% url item.link %}" class="nav-link" >
+                      {% with 'SharixAdmin/img/menu/'|add:item.sel|add:'.svg' as image_static %}
+                        <img  src="{% static image_static %}" alt="" style="width: 30px; height: 30px; "> 
+                      {% endwith %}
+                      <span class="hidemenu">{{ item.title }}</span>
+                    </a>
+                  </li>
+                  {% endif%}
+                  {% endfor %}
+                </ul>
+                <hr>
+                <div class="dropdown">
+                  <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong id="user-name-exit">{{ request.user.username }}</strong>
+                  </a>
+                  <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="#">{% trans 'Contacts' %}Контакты</a></li>
+                    <li><a class="dropdown-item" href="#">{% trans 'Terms of use' %}</a></li>
+                    <li><a class="dropdown-item" href="#">{% trans 'Privacy policy' %}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="btn btn-danger mx-2" href="{% url 'logoutweb' %}">{% trans 'Log out' %}</a></li>
+                  </ul>
+                </div>
+              </div>      
+        </div>
+        <div class="col-9" id="rightmainpage">
+            <div class="d-flex flex-column p-4" 
+            style="
+            width: 100%; 
+            height: 800px; 
+            border-radius: 15px; 
+            background-color:white;
+            box-shadow: 4px 5px 40px #cfcfcf; 
+            margin-top: 50px;">
+            {% block contenthome %}
+            {% endblock contenthome%}
+        </div>
+            
+        </div>
+    </div>
+</div>
+
+<script>
+  hidemenu = document.getElementsByClassName('hidemenu')
+  shMenuRow = document.getElementById('sharix-menu-row')
+  usNameExit = document.getElementById('user-name-exit')
+  rightmainpage = document.getElementById('rightmainpage')
+  leftmainpage = document.getElementById('leftmainpage')
+  hideCheck = document.getElementById('hideMenuCheckBox')
+  rowBarMenu = document.getElementById('row-bar-menu')
+
+  function show(){
+    rowBarMenu.style.transform = 'rotate(0deg)';
+    shMenuRow.style.display = "inline"
+      usNameExit.style.display = "inline"
+      leftmainpage.style.maxWidth = "unset"
+      leftmainpage.classList.remove("col-1")
+      leftmainpage.classList.add("col-3")
+      rightmainpage.classList.remove("col-11")
+      rightmainpage.classList.add("col-9")
+      for(var i = 0; i < hidemenu.length; i++){
+       hidemenu[i].style.display = "inline"; // depending on what you're doing
+      }
+  }
+  function hide(){
+    rowBarMenu.style.transform = 'rotate(180deg)';
+    shMenuRow.style.display = "none"
+    usNameExit.style.display = "none"
+    leftmainpage.style.maxWidth = "100px"
+    leftmainpage.classList.remove("col-3")
+    leftmainpage.classList.add("col-1")
+    rightmainpage.classList.remove("col-9")
+    rightmainpage.classList.add("col-11")
+    for(var i = 0; i < hidemenu.length; i++){
+      hidemenu[i].style.display = "none"; // depending on what you're doing
+    }
+  }
+  function barMenuHide(){
+    if(hideCheck.checked == true){
+      hideCheck.checked = false
+      hide()
+    } else {
+      hideCheck.checked = true
+      show()
+    }
+  }
+  if(hideCheck.checked == true){
+      show()
+    } else {
+      hide()
+    }
+  
+  
+</script>
+
+{% endblock %}

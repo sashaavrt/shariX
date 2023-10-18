@@ -22,9 +22,10 @@ update_repository() {
 # Update repositories
 update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git" "tickets" "master"
 update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git" "metaservicesynced" "metasynced_module"
-update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-webadmin.git" "SharixAdmin/templates/SharixAdmin" "webinterface"
-update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-config.git" "conf" "master"
-
+update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-settings.git" "conf" "master"
+update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-webapp-design-template.git" "design_template" "unstable"
+update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-webservice-running.git" "webservice_running" "unstable"
+update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-landing.git" "landing" "landing_module"
 git pull
 
 # Create a Python virtual environment and activate it
@@ -35,16 +36,16 @@ source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Checking for core/config.py
-if [ -f core/config.py ]; then
-    echo "File config.py already created"
+# Checking for core/settings_vars.py
+if [ -f core/settings_vars.py ]; then
+    echo "File settings_vars.py already exists"
 else
-    cp core/_config.py core/config.py
-    echo "File config.py was successfully created"
+    cp core/_settings_vars.py core/settings_vars.py
+    echo "File settings_vars.py was successfully created"
 fi
 
 # Run Django migrations and other commands
-python manage.py makemigrations SharixAdmin metaservicesynced tickets
+python manage.py makemigrations SharixAdmin metaservicesynced tickets webservice_running landing
 python manage.py migrate
 python manage.py collectstatic -l --no-input
 

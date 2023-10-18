@@ -4,23 +4,53 @@ from django.views.generic.edit import CreateView, UpdateView
 from metaservicesynced.models import Service
 from SharixAdmin.views.context import get_context
 from django.urls import reverse
+from django.utils.translation import gettext as _
+
+from core.utils.AuthAPI import AuthAPI
+from tickets.models import Ticket
+from core.settings import API_URL
+api = AuthAPI("89855703300", "12345")
+import requests
+from django.urls import reverse_lazy
+from datetime import timezone
+import xmpp
+from xmpp import cli
 
 class ServiceInformationCreate(UserPassesTestMixin, CreateView):
     model = Service
     form_class = ServiceInformationCreateForm
     template_name = "SharixAdmin/service_information_form.html"
+    success_url = reverse_lazy("SharixAdmin:service_tariff")
+
+    def form_valid(self, form):
+        new_ticket = {
+            "ticket_list": 1,
+            "created_by": self.request.user.pk,
+            "type": 1,
+            "title": "service_create",
+            "note": str(form.data),
+        }
+        resp = requests.post(f"{API_URL}/tickets/api/tickets/", data=new_ticket, headers=api.headers)
+        jso = resp.json()
+        form.instance.ticket_status = Ticket.objects.get(pk=int(jso['id']))
+        print(form.cleaned_data)
+        responce = super().form_valid(form)
+        cli.send_message("open_tickets_backend@ej.sharix-app.org", "eb177b1c9f99a7a13798928318d7a72c", "open_strequest_new@ej.sharix-app.org", str(jso))
+        return responce
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Информация о сервисе',
+            'title': _('Information about the service'),
             'object': self.object,
             
         }))
         return context
     
     def get_success_url(self):
-        return reverse('test-page')
+        return reverse('service_tariff')
+    
     
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
@@ -36,7 +66,7 @@ class ServiceInformationUpdateView(UserPassesTestMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Информация о сервисе',
+            'title': 'Information about the service',
             'object': self.object,
         }))
         return context

@@ -14,7 +14,9 @@ __pycache__/
 tickets/
 metaservicesynced/
 conf/
-SharixAdmin/templates/SharixAdmin/
+design_template/
+webservice_running/
+landing/
 
 # Django
 migrations/
@@ -35,5 +37,5 @@ __pycache__/
 *.*.swp
 .DS_Store
 
-# Project configuration
-core/config.py
+# Project configuration variables
+core/settings_vars.py

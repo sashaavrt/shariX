@@ -6,6 +6,7 @@ from SharixAdmin.forms import ServiceTariffCreateForm, ServiceTariffUpdateForm
 from metaservicesynced.models import Service
 from django.urls import reverse
 from SharixAdmin.views.context import get_context
+from django.utils.translation import gettext as _
 
 class ServiceTariffCreate(UserPassesTestMixin, CreateView):
     model = Service
@@ -15,7 +16,7 @@ class ServiceTariffCreate(UserPassesTestMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Тарифы услуг',
+            'title': _('Service rates'),
             'object': self.object,
         }))
         return context
@@ -37,7 +38,7 @@ class ServiceTariffListView(UserPassesTestMixin, SingleTableView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Исполнители',
+            'title': _('Performers'),
             'object_list': context['object_list'],
         }))
         return context
@@ -57,7 +58,7 @@ class ServiceTariffUpdateView(UserPassesTestMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Тарифы услуг',
+            'title': _('Service rates'),
             'object': self.object,
         }))
         return context
