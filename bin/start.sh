@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#cd <path to project>
+cd /root/sharix-open-webapp-base 
 
 source venv/bin/activate
 

@@ -51,8 +51,8 @@ urlpatterns = [
 
     path('user_information', login_required(UserListView.as_view()), name='user_information'),
 
-    path('api/v1/auth/', include('djoser.urls.authtoken'), name="api-auth"),
-    path('api/v1/platform/', include(router.urls), name="api-platform"),
+    path('base/auth/', include('djoser.urls.authtoken'), name="api-auth"),
+    path('base/', include(router.urls), name="api-base"),
 
     path('senderphone/', PhoneSender.as_view()),
 
