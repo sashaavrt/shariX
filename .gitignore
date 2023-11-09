@@ -23,14 +23,6 @@ migrations/
 staticfiles/
 media/
 
-# VSCode
-.vscode
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-
 # Other
 *.sqlite3
 *.*~

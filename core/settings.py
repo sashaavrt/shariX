@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django_tables2',
     "django.contrib.sites",
     "django.contrib.flatpages",
-    "django.contrib.admindocs",
     "django_extensions",
     'rest_framework',
     'rest_framework.authtoken',
@@ -65,7 +64,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.admindocs.middleware.XViewMiddleware',        
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
@@ -118,7 +116,6 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-    
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
