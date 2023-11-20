@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    'schema_graph',
     'drf_yasg',
     'django_spaghetti',
     'debug_toolbar',
