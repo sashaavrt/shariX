@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'metaservicesynced.apps.MetaservicesyncedConfig',
     'webservice_running.apps.WebserviceRunningConfig',
     'django_tables2',
+    'schema_graph',
     "django.contrib.sites",
     "django.contrib.flatpages",
     "django_extensions",

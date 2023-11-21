@@ -4,12 +4,7 @@ The base Django project of a service web application to which other modules are 
 
 ## Installation
 
-Download or clone repository.
-
-For the initial configuration, run:
-
-- *bin/install.sh* - on Unix.
-- *bin/install.bat* - on Windows.
+Download or clone repository. For the initial configuration, run *bin/install.sh*.
 
 ## Configuration
 
@@ -61,4 +56,4 @@ print(auth_api.token)
 
 ## Launch 
 
-To start the web application on Unix, run *bin/start.sh*.
+To start the web application, run *bin/start.sh*.
