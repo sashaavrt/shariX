@@ -22,7 +22,7 @@ endlocal
 
 REM Update repositories
 call :update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git" "tickets" "master"
-call :update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git" "metaservicesynced" "metasynced_module"
+call :update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git" "dbsynce" "metasynced_module"
 call :update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-config.git" "conf" "master"
 call :update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-webapp-design-template.git" "design_template" "unstable"
 call :update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-webservice-running.git" "webservice_running" "unstable"
@@ -46,6 +46,6 @@ if exist core\settings_vars.py (
 )
 
 REM Run Django migrations and other commands
-python manage.py makemigrations SharixAdmin metaservicesynced tickets webservice_running landing
+python manage.py makemigrations SharixAdmin dbsynce tickets webservice_running landing
 python manage.py migrate
 python manage.py collectstatic --clear --no-input

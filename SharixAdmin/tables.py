@@ -1,8 +1,8 @@
 import django_tables2 as tables
-from metaservicesynced.models import *
+from dbsynce.models import *
 from .models import *
 from django.utils.html import format_html
-from metaservicesynced.models import *
+from dbsynce.models import *
 from django.utils.translation import gettext_lazy as _
 
 class TransactionsWalletTable(tables.Table):

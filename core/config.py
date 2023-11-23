@@ -28,7 +28,7 @@ class ConfigDjango:
         'django.contrib.staticfiles',
         'SharixAdmin.apps.SharixadminConfig',
         'tickets.apps.TicketsConfig',
-        'metaservicesynced.apps.MetaservicesyncedConfig',
+        'dbsynce.apps.MetaservicesyncedConfig',
         'django_tables2',
         "django.contrib.sites",
         "django.contrib.flatpages",
@@ -349,7 +349,7 @@ class ConfigAPI:
     SPAGHETTI_SAUCE = {
         'apps': ['auth', 'SharixAdmin', 
                 'tickets', 'admin', 
-                'flatpages', 'sessions', 'sites', 'metaservicesynced'],
+                'flatpages', 'sessions', 'sites', 'dbsynce'],
         'show_fields': False,
         'show_proxy':True,
     }

@@ -1,9 +1,9 @@
 from django.contrib.auth.forms import AuthenticationForm
 
-from metaservicesynced.models import *
+from dbsynce.models import *
 from .models import SharixUser
 from django import forms
-from metaservicesynced.models import ServiceType, Service
+from dbsynce.models import ServiceType, Service
 from .models import SharixUser
 from django import forms
 

@@ -1,7 +1,7 @@
 from SharixAdmin.forms import ServiceInformationCreateForm, ServiceInformationUpdateForm
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic.edit import CreateView, UpdateView
-from metaservicesynced.models import Service
+from dbsynce.models import Service
 from SharixAdmin.views.context import get_context
 from django.urls import reverse
 from django.utils.translation import gettext as _
