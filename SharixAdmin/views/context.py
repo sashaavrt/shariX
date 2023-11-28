@@ -2,33 +2,18 @@ from django.urls import resolve
 from django.utils.translation import gettext_lazy as _
 
 menu = [
-    {'title':_('Home/Balance'),          'link':'home', 'sel':'house'},
-    {'title':_('Payment information'),    'link':'test-page', 'sel':'credit-card'},
-    {'title':_('Payment history'),        'link':'trans','sel':'clock-history'},
-    {'title':_('Courses'),                   'link':'course', 'sel':'education'},
-    {'title':_('Personal information'),       'link':'test-page', 'sel':'person'},
-    {'title':_('Service management'),    'link':'test-page', 'sel':'hdd-network'},
-    {'title':_('My connections'),               'link':'test-page', 'sel':'people'},
-    {'title':_('Partnership'),          'link':'test-page', 'sel':'sotrud'},
-    {'title':_('Techsupport'),            'link':'test-page', 'sel':'gear'},
-    {'title':_('My tickets'),              'link':'tickets', 'sel':'tikets'},
-    {'title':_('Performers'),             'link':'provider', 'sel':'people', 
+    {'title':_('Главная'),          'link':'home', 'sel':'house'},
+    {'title':_('Заявки'),              'link':'tickets', 'sel':'tikets'},
+    {'title':_('Партнеры'),                'link':'partners', 'sel':'people',
      'roles':['METASERVICE-ADMIN']},
-    {'title':_('Service rates'),            'link':'service_tariff', 'sel':'person',
-     'roles':['PARTNER-ADMIN']},
-    {'title':_('Partners'),                'link':'partners', 'sel':'people',
+    {'title':_('Управление правами'),'link':'user_information', 'sel':'person'},
+    {'title':_('Услуги сервиса'),          'link':'service_type', 'sel':'hdd-network',
      'roles':['METASERVICE-ADMIN']},
-    {'title':_('Resources'),                 'link':'resource', 'sel':'sotrud',
-     'roles':['PARTNER-ADMIN']},
-    {'title':_('Service services'),          'link':'service_type', 'sel':'hdd-network',
+    {'title':_('История заказов'),        'link':'trans','sel':'clock-history'},
+    {'title':_('Информация о сервисе'),    'link':'service_information/add/', 'sel':'hdd-network',
      'roles':['METASERVICE-ADMIN']},
-    {'title':_('Information about the service'),    'link':'service_information/add/', 'sel':'hdd-network',
-     'roles':['METASERVICE-ADMIN']},
-    {'title':_('Partner Information'),   'link':'partner_information/', 'sel':'person',
-     'roles':['PARTNER-ADMIN']},
-    {'title':_('Rates'),                  'link':'service', 'sel':'tikets',
-     'roles':['PARTNER-ADMIN']},
-    {'title':_('User Management'),'link':'user_information', 'sel':'person'}
+    {'title':_('Оплата'),    'link':'test-page', 'sel':'credit-card'},
+
 ]
 
 def get_context(request, page_context) -> dict:
