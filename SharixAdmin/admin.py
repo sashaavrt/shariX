@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from SharixAdmin.models import *
+from django.contrib.auth import get_user_model
 from django import forms
 from xmpp import cli
 from django.contrib.auth.admin import UserAdmin
@@ -47,8 +47,8 @@ class PermissionsAdmin(admin.ModelAdmin):
         'codename',
     )
     
-@admin.register(SharixUser)
-class SharixUserAdmin(adm.UserAdmin):
+@admin.register(get_user_model())
+class ShariXUserAdmin(adm.UserAdmin):
     
     list_display = (
         'username',

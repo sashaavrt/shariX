@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user.apps.UserConfig',
     'SharixAdmin.apps.SharixadminConfig',
     'tickets.apps.TicketsConfig',
     'metaservicesynced.apps.MetaservicesyncedConfig',
@@ -169,7 +170,7 @@ MESSAGE_TAGS = {message_constants.ERROR: "danger"}
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'SharixAdmin.SharixUser'
+AUTH_USER_MODEL = 'user.ShariXUser'
 
 NAME_SYSTEM = sv.NAME_SYSTEM
 

@@ -1,6 +1,7 @@
 import django_tables2 as tables
+from django.contrib.auth import get_user_model
+
 from metaservicesynced.models import *
-from .models import *
 from django.utils.html import format_html
 from metaservicesynced.models import *
 from django.utils.translation import gettext_lazy as _
@@ -166,7 +167,7 @@ class UserInfoTable(tables.Table):
     id = tables.Column(verbose_name=_('ID'), attrs={"td":{"width":"5%"}})
 
     class Meta:
-        model = SharixUser
+        model = get_user_model()
         attrs = {"class": "table table-layout-fixed"}
         exclude = ('password', 'phone_number', 
                    'last_login','is_staff', 'is_superuser',

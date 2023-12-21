@@ -22,10 +22,11 @@ update_repository() {
 # Update repositories
 update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git" "tickets" "master"
 update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git" "metaservicesynced" "metasynced_module"
-update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-settings.git" "conf" "master"
+update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-config.git" "conf" "master"
 update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-webapp-design-template.git" "design_template" "unstable"
 update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-webservice-running.git" "webservice_running" "unstable"
 update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-landing.git" "landing" "landing_module"
+update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-user-model.git" "user" "master"
 git pull
 
 # Create a Python virtual environment and activate it
@@ -45,7 +46,7 @@ else
 fi
 
 # Run Django migrations and other commands
-python manage.py makemigrations SharixAdmin metaservicesynced tickets webservice_running landing
+python manage.py makemigrations metaservicesynced tickets webservice_running landing user
 python manage.py migrate
 python manage.py collectstatic -l --no-input
 

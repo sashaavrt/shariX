@@ -1,14 +1,14 @@
 from rest_framework import serializers
 #from rest_framework.exceptions import ValidationError
 #from django.contrib.auth.models import User
-from .models import *
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import *
 
 class UserSerializer(serializers.ModelSerializer):
     full_name = serializers.ReadOnlyField()
     group_name = serializers.ReadOnlyField(source="groups.name")
     class Meta:
-        model = SharixUser
+        model = get_user_model()
         exclude = ['password', 'id']
         read_only_fields = ['username', 'phone_number']
         extra_kwargs = {

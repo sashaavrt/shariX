@@ -3,7 +3,7 @@ from .serializer import *
 from rest_framework import viewsets, permissions, exceptions
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
-from SharixAdmin.models import *
+from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from xmpp import cli
@@ -25,7 +25,7 @@ schema_view = get_schema_view(
 )
 
 class SharixUserMVS(viewsets.ModelViewSet):
-    queryset = SharixUser.objects.all()
+    queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
     #permission_classes = [IsOwnerOrReadOnly]
     permission_classes = [permissions.IsAuthenticated]

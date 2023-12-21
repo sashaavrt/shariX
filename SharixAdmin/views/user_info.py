@@ -1,6 +1,7 @@
+from django.contrib.auth import get_user_model
+
 from django_tables2 import SingleTableView
 from SharixAdmin.tables import UserInfoTable
-from SharixAdmin.models import SharixUser
 from SharixAdmin.views.context import get_context
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.models import Group
@@ -8,7 +9,7 @@ from django.utils.translation import gettext as _
 
 class UserListView(UserPassesTestMixin, SingleTableView):
     table_class = UserInfoTable
-    queryset = SharixUser.objects.all()
+    queryset = get_user_model().objects.all()
     template_name = 'SharixAdmin/user_information.html'
 
     def get_context_data(self, **kwargs):

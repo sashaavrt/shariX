@@ -17,6 +17,7 @@ conf/
 design_template/
 webservice_running/
 landing/
+user/
 
 # Django
 migrations/

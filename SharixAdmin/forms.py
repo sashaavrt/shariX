@@ -1,10 +1,9 @@
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import get_user_model
 
 from metaservicesynced.models import *
-from .models import SharixUser
 from django import forms
 from metaservicesynced.models import ServiceType, Service
-from .models import SharixUser
 from django import forms
 
 class LoginUserForm(AuthenticationForm):
@@ -16,7 +15,7 @@ class LoginUserForm(AuthenticationForm):
         widget=forms.TextInput(attrs={'class':'form-control'}))
 
     class Meta:
-        model = SharixUser
+        model = get_user_model()
         fields = ['username', 'password']
 
 
