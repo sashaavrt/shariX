@@ -61,7 +61,7 @@ class ServiceTariffCreateForm(forms.ModelForm):
             'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
             'id_provider': forms.Select(attrs={'class': 'form-select'}),
             'resource_id': forms.Select(attrs={'class': 'form-select'}),
-            'ticket_status': forms.Select(attrs={'class': 'form-select'}),
+            'ticket_status': forms.TextInput(attrs={'readonly': True}),
         }
 
 class ServiceTypeUpdateForm(forms.ModelForm):
@@ -76,16 +76,31 @@ class ServiceTypeUpdateForm(forms.ModelForm):
             'status': forms.TextInput(attrs={'readonly': True}),
             'ticket_status': forms.TextInput(attrs={'readonly': True}),
         }
+        
 
+PRICE_CHOICES = [
+    ('one', 'text #1'),
+    ('two', 'text #2'),
+    ('three', 'text #3'),
+]
 class ServiceTypeCreateForm(forms.ModelForm):
+    codename = forms.CharField(label="Название услуги")
+    requirements = forms.CharField(label="Требования")
+    price_type = forms.ChoiceField(choices=PRICE_CHOICES, label="Ценообразование")
+    description = forms.CharField(label="Описание")
+    is_global = forms.BooleanField(label="Доступно во всех сервисах", required=False)
+    is_visible = forms.BooleanField(label="Доступно для планирования цепочек во всех сервисах", required=False)
+
     def __init__(self, *args, **kwargs):
         super(ServiceTypeCreateForm, self).__init__(*args, **kwargs)
     class Meta:
         model = ServiceType
-        fields = '__all__'
+        fields = ['codename','requirements', 'price_type',
+                  'description',
+                  'is_global','is_visible',]
 
         widgets = {
-            'ticket_status': forms.Select(attrs={'class': 'form-select'}),
+
         }
 
 class ServiceInformationUpdateForm(forms.ModelForm):

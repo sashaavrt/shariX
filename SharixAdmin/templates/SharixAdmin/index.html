@@ -3,12 +3,14 @@
 {% load static %}
 
 {% block content %}
+
+
 <input type="checkbox" name="" style="display: none;" checked id="hideMenuCheckBox">
 <div class="container-fluid">
     <div class="row">
         <div class="col-3" id="leftmainpage">
             <div class="d-flex flex-column p-2" style="width: 100%; min-width: 72px; max-width: 280px; height: 464px; position: sticky; top: 76px;
-            border-radius: 10px; border: 1px solid #D8D8D8; box-shadow: 4px 5px 40px 0px #E5E5E5; align-items: center;">
+            border-radius: 10px; border: 1px solid #D8D8D8; box-shadow: 4px 5px 40px 0px #E5E5E5;">
 
 
               <ul class="nav nav-pills flex-column mb-auto" style="margin-top: 12px;">
@@ -107,7 +109,7 @@ style="cursor: pointer; position: fixed; align-items: center;">
   hideCheck = document.getElementById('hideMenuCheckBox')
   rowBarMenu = document.getElementById('row-bar-menu')
 
-  function show(){
+  function showmenu(){
     rowBarMenu.style.transform = 'rotate(0deg)';
     shMenuRow.style.display = "inline"
       usNameExit.style.display = "inline"
@@ -139,16 +141,20 @@ style="cursor: pointer; position: fixed; align-items: center;">
       hide()
     } else {
       hideCheck.checked = true
-      show()
+      showmenu()
     }
   }
   if(hideCheck.checked == true){
-      show()
+      showmenu()
     } else {
       hide()
     }
   
   
 </script>
+
+
+
+
 
 {% endblock %}

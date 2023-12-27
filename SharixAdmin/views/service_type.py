@@ -8,6 +8,8 @@ from django.urls import reverse
 from SharixAdmin.views.context import get_context
 from django.utils.translation import gettext as _
 
+    
+    
 class ServiceTypeCreate(UserPassesTestMixin, CreateView):
     model = ServiceType
     form_class = ServiceTypeCreateForm
@@ -16,7 +18,7 @@ class ServiceTypeCreate(UserPassesTestMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': _('Service services'),
+            'title': _('Услуги сервиса'),
             'object': self.object,
         }))
         return context
@@ -29,6 +31,10 @@ class ServiceTypeCreate(UserPassesTestMixin, CreateView):
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
+    
+    
+    
+
     
 
 class ServiceTypeListView(UserPassesTestMixin, SingleTableView):
@@ -39,10 +45,14 @@ class ServiceTypeListView(UserPassesTestMixin, SingleTableView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Service services',
+            'title': 'Услуги сервиса',
             'object_list': context['object_list'],
         }))
         return context
+    
+    def testing(self, queryset, is_descending):
+        queryset = queryset.annotate.order_by("-" if is_descending else "")
+        return (queryset, True)
 
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
@@ -52,22 +62,26 @@ class ServiceTypeListView(UserPassesTestMixin, SingleTableView):
 
 class ServiceTypeUpdateView(UserPassesTestMixin, UpdateView):
     model = ServiceType
-    form_class = ServiceTypeUpdateForm
+    form_class = ServiceTypeCreateForm
     template_name = "SharixAdmin/service_type_form.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Service services',
-            'object_list': context['object_list'],
+            'title': _('Услуги сервиса'),
+            'object': self.object,
         }))
         return context
+    
     
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
+    
+    def get_success_url(self):
+        return reverse('service_type')
     
 
 class ServiceTypeDelete(UserPassesTestMixin, DeleteView):
@@ -77,7 +91,7 @@ class ServiceTypeDelete(UserPassesTestMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update(get_context(self.request, {
-            'title': 'Service services',
+            'title': 'Услуги сервиса',
             'object': self.object,
         }))
         return context
@@ -90,3 +104,4 @@ class ServiceTypeDelete(UserPassesTestMixin, DeleteView):
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
+    
