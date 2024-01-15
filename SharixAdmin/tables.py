@@ -115,25 +115,30 @@ class ServiceTariffTable(tables.Table):
 
 class ServiceTypeTable(tables.Table):
 
-    id = tables.Column(verbose_name=_('ID'), attrs={"td":{"width":"5%"}})
-    caption = tables.LinkColumn('service_type/edit/', verbose_name='Название услуги', text = lambda record: record.caption,
-        args=[tables.A('pk')], attrs={'th':{'scope':'col'}, "td":{"width":"100%"},})
-    deletee = tables.LinkColumn('service_type/delete/', verbose_name='', text = "Удалить",
-        args=[tables.A('pk')], attrs={'th':{'scope':'col'}, "td":{"width":"auto"},})
+    id = tables.Column( attrs={"td":{"width":"50px"}})
+    codename = tables.LinkColumn('service_type/edit/', verbose_name='Услуга', orderable=False, text = lambda record: record.codename,
+        args=[tables.A('pk')], attrs= {"a": {"style": "pointer-events: none;"}, 'th':{'scope':'col'}, "td":{"class":"name_col"}})
+    description = tables.LinkColumn('service_type/edit/', orderable=False, verbose_name='Описание', text = lambda record: record.description,
+        args=[tables.A('pk')], attrs= {"a": {"style": "pointer-events: none;"}, 'th':{'scope':'col'}, "td":{"class":"description_col"}})
+    edit = tables.LinkColumn('service_type/edit/', verbose_name='', orderable=False, text = "E",
+        args=[tables.A('pk')], attrs={'th':{'scope':'col'}, "td":{"class":"edit_col"}})
+    deletee = tables.LinkColumn('service_type/delete/', verbose_name='', orderable=False, text = "D",
+        args=[tables.A('pk')], attrs={'th':{'scope':'col'}, "td":{"class":"delete_col"}})
+    
     
     class Meta:
         model = ServiceType
         attrs = {"class": "table table-layout-fixed text-start"}
-        exclude = ('codename','description','requirements',
+        exclude = ('requirements',
                    'price_type','status','ticket_status', 
                    'id_metaservice', 'link_agreement',
-                   'is_global', 'is_visible',)
+                   'is_global', 'is_visible', 'caption')
 
-    def render_delete(self, value, record):
-        return format_html('<a href="/service_type/delete" class="btn btn-outline-danger">_(Delete)</a>')
+    # def render_delete(self, value, record):
+    #     return format_html('<a href="/service_type/delete" class="btn btn-outline-danger">_(Delete)</a>')
         
-    def render_name_operation(self, value, record):
-        return format_html("<a href='{}'>{}</a>", record.get_absolute_url(), value)
+    # def render_name_operation(self, value, record):
+    #     return format_html("<a href='{}'>{}</a>", record.get_absolute_url(), value)
    
 class ServiceTable(tables.Table):
 

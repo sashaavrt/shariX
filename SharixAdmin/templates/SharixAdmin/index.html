@@ -3,6 +3,8 @@
 {% load static %}
 
 {% block content %}
+
+
 <input type="checkbox" name="" style="display: none;" checked id="hideMenuCheckBox">
 <div class="container-fluid">
     <div class="row">
@@ -107,7 +109,7 @@ style="cursor: pointer; position: fixed; align-items: center;">
   hideCheck = document.getElementById('hideMenuCheckBox')
   rowBarMenu = document.getElementById('row-bar-menu')
 
-  function show(){
+  function showmenu(){
     rowBarMenu.style.transform = 'rotate(0deg)';
     shMenuRow.style.display = "inline"
       usNameExit.style.display = "inline"
@@ -139,16 +141,20 @@ style="cursor: pointer; position: fixed; align-items: center;">
       hide()
     } else {
       hideCheck.checked = true
-      show()
+      showmenu()
     }
   }
   if(hideCheck.checked == true){
-      show()
+      showmenu()
     } else {
       hide()
     }
   
   
 </script>
+
+
+
+
 
 {% endblock %}
