@@ -2,9 +2,60 @@
 {% load i18n %}
 
 {% block contenthome %}
-    <h1 >{{ title }}</h1>
-    <div class="container text-center" style="width: 100%; height: 650px; margin-top: 250px;">
-        <h3>{% trans 'These pages are under development' %}</h3> 
+<div class="container">
+    <h1 class="mainHeader">{{ title }}</h1>
+    <p class="description_service">Это система управления государством, источником власти в которой является сам народ. Именно народ решает, какие законы и нормы необходимы для гармоничного существования и развития государства. Таким образом, каждый человек в демократическом обществе 
+  Получает определенный набор свобод и обязательств сформированных с учетом интересов всего сообщества. Исходя из вышесказанного, можно заключить, что демократия – это возможность для каждого человека свободно участвовать в непосредственном управлении своим государством, обществом и личной судьбой в конечном счете.</p>
+
+<div class="row justify-content-start">
+    <div class="maintable" id="maintable">
+        <table class="table table-sm m-2">
+            <thead>
+                <tr>
+                  <th scope="col">Информация о компании</th>
+                  <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td>Тип компании</td>
+                  <td>ИП</td>
+                </tr>
+                <tr>
+                  <td>Юр. адрес</td>
+                  <td>54138 г. Челябинск, пр-кт Комсомольский, дом 36, кв. 160</td>
+                </tr>
+                <tr>
+                  <td>Является ли компания плательщиком НДС?</td>
+                  <td>Нет</td>
+                </tr>
+                <tr>
+                  <td>ИНН</td>
+                  <td>744811430253</td>
+                </tr>
+                <tr>
+                  <td>ОГРН/ОГРНИП</td>
+                  <td>317745600090980</td>
+                </tr>
+                <tr>
+                  <td>Расчетный счет</td>
+                  <td>40802810938000000117</td>
+                </tr>
+                <tr>
+                  <td>Корреспондентский счет</td>
+                  <td>30101810145250000411</td>
+                </tr>
+                <tr>
+                  <td>БИК</td>
+                  <td>044525411</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
     
+<div class="container text-end mt-2">
+    <a class="btn btn-primary" id="bord" href="...">Редактировать</a>
+</div>
+</div>    
 {% endblock contenthome %}

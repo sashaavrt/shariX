@@ -4,6 +4,6 @@ from django.utils.translation import gettext as _
 
 def testPage(request):
     context = get_context(request, {
-        'title':_('Page in development')
+        'title':_('Оплата')
         })
     return render(request, "SharixAdmin/test.html", context)
