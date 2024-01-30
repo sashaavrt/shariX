@@ -1,9 +1,9 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import get_user_model
 
-from metaservicesynced.models import *
+from dbsynce.models import *
 from django import forms
-from metaservicesynced.models import ServiceType, Service
+from dbsynce.models import ServiceType, Service
 from django import forms
 
 class LoginUserForm(AuthenticationForm):

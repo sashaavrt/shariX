@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from SharixAdmin.groups import group_required
 from SharixAdmin.tables import ResourceTable
 from django.contrib.auth.decorators import login_required
-from metaservicesynced.models import Resource
+from dbsynce.models import Resource
 from SharixAdmin.views.context import get_context
 from django.http import JsonResponse
 from django.utils.translation import gettext as _

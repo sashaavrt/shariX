@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from SharixAdmin.forms import PartnerInformationCreateForm, PartnerInformationUpdateForm
 from SharixAdmin.groups import group_required
-from metaservicesynced.models import Company
+from dbsynce.models import Company
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic.edit import UpdateView, CreateView
 from SharixAdmin.views.context import get_context

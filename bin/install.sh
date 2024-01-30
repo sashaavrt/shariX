@@ -21,7 +21,7 @@ update_repository() {
 
 # Update repositories
 update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git" "tickets" "master"
-update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git" "metaservicesynced" "metasynced_module"
+update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git" "dbsynce" "metasynced_module"
 update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-config.git" "conf" "master"
 update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-webapp-design-template.git" "design_template" "unstable"
 update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-webservice-running.git" "webservice_running" "unstable"
@@ -46,7 +46,7 @@ else
 fi
 
 # Run Django migrations and other commands
-python manage.py makemigrations metaservicesynced tickets webservice_running landing user
+python manage.py makemigrations dbsynce tickets webservice_running landing user
 python manage.py migrate
 python manage.py collectstatic -l --no-input
 
