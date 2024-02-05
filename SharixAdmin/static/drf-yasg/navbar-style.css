@@ -15,7 +15,18 @@ body {
     font-size: 16px;
     line-height: 24px;
 }
-
+.footer-item {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #3F3F3F;
+    font-weight: 400;
+}
+.footer-color{
+    color: #479FF8;
+}
+.footer-link a{
+    text-decoration: none;
+}
 .arrow {
     margin: auto;
     color: #479FF8;
