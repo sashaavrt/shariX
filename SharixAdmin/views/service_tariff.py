@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic.edit import UpdateView, CreateView
 from SharixAdmin.tables import ServiceTariffTable
 from SharixAdmin.forms import ServiceTariffCreateForm, ServiceTariffUpdateForm
-from metaservicesynced.models import Service
+from dbsynce.models import Service
 from django.urls import reverse
 from SharixAdmin.views.context import get_context
 from django.utils.translation import gettext as _

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'SharixAdmin.apps.SharixadminConfig',
     'tickets.apps.TicketsConfig',
-    'metaservicesynced.apps.MetaservicesyncedConfig',
+    'dbsynce.apps.DbsyncedConfig',
     'webservice_running.apps.WebserviceRunningConfig',
     'django_tables2',
     'schema_graph',
@@ -389,7 +389,7 @@ REST_FRAMEWORK = {
 SPAGHETTI_SAUCE = {
     'apps': ['auth', 'SharixAdmin', 
                 'tickets', 'admin', 
-                'flatpages', 'sessions', 'sites', 'metaservicesynced'],
+                'flatpages', 'sessions', 'sites', 'dbsynce'],
     'show_fields': False,
     'show_proxy':True,
 }
