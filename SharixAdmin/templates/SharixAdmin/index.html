@@ -85,40 +85,26 @@
             {% endblock contenthome%}
         </div>
             
-        </div>
+      </div>
     </div>
-    <div class="d-flex flex-row justify-content-between text-nowrap footer-item footer-link" id="footer"
-    style="
-    margin-top: 24px;
-    width: 100%;
-    height: 59px;
-    border-radius: 10px;
-    border: 1px solid #D8D8D8;
-    box-shadow: 4px 5px 40px 0px #E5E5E5;
-    align-items: center;">
-        <div class="col-md-auto ms-4">
-            <img class="rounded-circle"
-            style="width: 48px; height: 48px"
-            src="{% static 'SharixAdmin/img/user_avatar_1.png' %}"/>
-        </div>
-        <div class="col-md-auto">
-            <span class="mx-2 footer-color">{{ phone }}</span>
-        </div>
-        <div class="col-md">
-        </div>
-        <div class="col-md-auto justify-content-end">
-            <a class="mx-3" href="{% url 'contact' %}">{% trans 'Contacts' %}</a>
-            <a class="mx-3" href="https://wiki.sharix-app.org/doku.php/sharix/legal/soglashenie_s_servisom_na_ispolzovanie_platformy_sharix">{% trans 'Terms of use' %}</a>
-            <a class="ms-3 me-1" href="https://wiki.sharix-app.org/doku.php/sharix/legal/politika_konfidencialnosti_platformy_sharix">{% trans 'Privacy policy' %}</a>
-        </div>
-        <div class="col-md-auto me-4">
-            <svg class="footer-color" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#479FF8" xmlns="http://www.w3.org/2000/svg">
-                <text x="9" y="16">
-                    <a href="https://wiki.sharix-app.org/doku.php">?</a>
-                </text>
-                <circle cx="12" cy="12" r="11.5"/>
-            </svg>
-        </div>
+
+    <div class="d-flex justify-content-between mt-2 p-2 align-items-center" id="footer"
+          style="border: 1px solid #D8D8D8; box-shadow: 4px 5px 40px 0px #E5E5E5; border-radius: 10px;">
+      <div>
+          <img class="rounded-circle" style="height: 48px" src="{% static 'SharixAdmin/img/user_avatar_1.png' %}"/>
+          <span class="mx-2">{{ phone }}</span>
+      </div>
+      <div>
+          <a class="ms-4" href="{% url 'contact' %}">{% trans 'Contacts' %}</a>
+          <a class="ms-4" href="https://wiki.sharix-app.org/doku.php/sharix/legal/soglashenie_s_servisom_na_ispolzovanie_platformy_sharix">{% trans 'Terms of use' %}</a>
+          <a class="ms-4 me-1" href="https://wiki.sharix-app.org/doku.php/sharix/legal/politika_konfidencialnosti_platformy_sharix">{% trans 'Privacy policy' %}</a>
+          <svg width="24" viewBox="0 0 24 24" fill="none" stroke="#479FF8" xmlns="http://www.w3.org/2000/svg">
+            <text x="9" y="16">
+                <a href="https://wiki.sharix-app.org/doku.php">?</a>
+            </text>
+            <circle cx="12" cy="12" r="11.5"/>
+          </svg>
+      </div>
     </div>
 </div>
 
