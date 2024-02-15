@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source bin/config
+source config
 
 # Function to check if a repository exists and perform git pull or git clone
 update_repository() {
