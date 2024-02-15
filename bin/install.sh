@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source bin/config
+
 # Function to check if a repository exists and perform git pull or git clone
 update_repository() {
     local repo_url="$1"
@@ -20,13 +22,14 @@ update_repository() {
 }
 
 # Update repositories
-update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git" "tickets" "master"
-update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git" "dbsynce" "metasynced_module"
-update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-config.git" "conf" "master"
-update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-webapp-design-template.git" "design_template" "unstable"
-update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-webservice-running.git" "webservice_running" "unstable"
-update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-landing.git" "landing" "landing_module"
-update_repository "https://git.sharix-app.org/ShariX_Open/sharix-open-user-model.git" "user" "master"
+update_repository "$TICKETS" "tickets" "master"
+update_repository "$BACKEND" "dbsynce" "metasynced_module"
+update_repository "$CONFIG" "conf" "master"
+update_repository "$DESIGN_TEMPLATE" "design_template" "unstable"
+update_repository "$WEBSERVICE_RUNNING" "webservice_running" "unstable"
+update_repository "$LANDING" "landing" "new-version"
+update_repository "$USER_MODEL" "user" "master"
+update_repository "$WEBAPP_BASE" "design_template" "unstable"
 git pull
 
 # Create a Python virtual environment and activate it
