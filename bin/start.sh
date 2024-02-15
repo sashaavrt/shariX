@@ -2,7 +2,7 @@
 
 #cd <path to project>
 
-source venv/bin/activate
+source venv/Scripts/activate
 
 python manage.py makemigrations
 python manage.py migrate

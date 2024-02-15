@@ -1,4 +1,4 @@
-TICKETS="https://giticket-t.sharix-app.org/ShariX_Open/sharix-open-tickets.git"
+TICKETS="https://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git"
 BACKEND="https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git"
 CONFIG="https://git.sharix-app.org/ShariX_Open/sharix-open-config.git"
 DESIGN_TEMPLATE="https://git.sharix-app.org/ShariX_Open/sharix-open-webapp-design-template.git"
