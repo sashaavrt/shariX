@@ -12,6 +12,8 @@ For basic project configuration when deploying, use the *core/settings_vars.py*.
 
 Be careful when adding new settings during development and remember to add them to *core/_settings_vars.py*, as *core/settings_vars.py* is ignored by Git for security reasons.
 
+Also you need to make this things with _config file. This file includes basic links for ShariXOpen.
+
 ## Utilities
 
 Utilities provides important functionality to web-application, so it is important to know and understand how they work. They are stored in *core/utils*.
