@@ -32,3 +32,4 @@ media/
 
 # Project configuration variables
 core/settings_vars.py
+bin/install.sh
