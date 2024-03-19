@@ -4,7 +4,6 @@ from SharixAdmin.groups import group_required
 from SharixAdmin.tables import PartnersTable
 from django.contrib.auth.decorators import login_required
 from dbsynce.models import Company
-from SharixAdmin.views.context import get_context
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
 
@@ -16,10 +15,11 @@ class PartnersListView(UserPassesTestMixin, SingleTableView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
+        context.update({
             'title': _('Partners'),
             'object_list': context['object_list'],
-        }))
+            'current_page': "partners"
+        })
         return context
     
     def test_func(self) -> bool or None:
@@ -27,6 +27,7 @@ class PartnersListView(UserPassesTestMixin, SingleTableView):
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
+
 
 @login_required
 @group_required('METASERVICE-ADMIN')

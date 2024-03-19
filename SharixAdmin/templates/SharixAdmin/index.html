@@ -3,177 +3,190 @@
 {% load static %}
 
 {% block content %}
-
-
-<input type="checkbox" name="" style="display: none;" checked id="hideMenuCheckBox">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-3" id="leftmainpage">
-            <div class="d-flex flex-column p-2" style="width: 100%; min-width: 72px; max-width: 280px; height: 464px; position: sticky; top: 76px;
-            border-radius: 10px; border: 1px solid #D8D8D8; box-shadow: 4px 5px 40px 0px #E5E5E5;">
-
-
-              <ul class="nav nav-pills flex-column mb-auto" style="margin-top: 12px;">
-                {% for item in menu %}
-                {% if item.link == url_path %}
-                <li class="nav-item">
-                  <a class="nav-link active" style="color: #FFF; border-radius: 10px;" >
-                    {% with 'SharixAdmin/img/menu/'|add:item.sel|add:'_w.svg' as image_static %}
-                    <div class="link">
-                      <img  src="{% static image_static %}" alt="" style="width: 22px; height: 22px;"> 
-                      {% endwith %}
-                      
-                      <span class="hidemenu" style="color: #FFF;">{{ item.title }}</span>
-                    </div>
-                  </a>
-                </li>
-                {% elif item.link == 'tickets' %}
-                <li class="nav-item">
-                  <a href="{% url 'tickets:ticket_list_list' %}" class="nav-link" >
-                    {% with 'SharixAdmin/img/menu/'|add:item.sel|add:'.svg' as image_static %}
-                    <div class="link">
-                      <img  src="{% static image_static %}" alt="" style="width: 22px; height: 22px;"> 
-                      {% endwith %}
-                      <span class="hidemenu">{{ item.title }}</span>
-                    </div>
-                  </a>
-                </li>
-                {% elif item.link == 'course' %}
-                <li class="nav-item">
-                  <a href="http://study.reversea.net/" class="nav-link" >
-                    {% with 'SharixAdmin/img/menu/'|add:item.sel|add:'.svg' as image_static %}
-                    <div class="link">
-                      <img  src="{% static image_static %}" alt="" style="width: 22px; height: 22px;"> 
-                      {% endwith %}
-                      <span class="hidemenu">{{ item.title }}</span>
-                    </div>
-                  </a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                  <a href="{% url item.link %}" class="nav-link" >
-                    {% with 'SharixAdmin/img/menu/'|add:item.sel|add:'.svg' as image_static %}
-                    <div class="link">
-                      <img  src="{% static image_static %}" alt="" style="width: 22px; height: 22px; "> 
-                      {% endwith %}
-                      <span class="hidemenu">{{ item.title }}</span>
-                    </div>
-                  </a>
-                </li>
-                {% endif%}
-                {% endfor %}
-              </ul>
-                <hr>
-                <div class="dropdown">
-                  <a href="#" aria-expanded="false">
-                    <img alt="" width="1" height="1" class="rounded-circle me-2">
-                    <strong id="user-name-exit"></strong>
-                  </a>
-                </div>
-              </div>      
-        </div>
-        <div class="col-9" id="rightmainpage">
-            <div class="d-flex flex-column p-4" 
-            style="
-            width: 100%; 
-            height: 857px; 
-            border: 1px solid #D8D8D8;
-            border-radius: 10px;
-            box-shadow: 4px 5px 40px 0px #E5E5E5;
-            margin-top: 76px;">
-            {% block contenthome %}
-            {% endblock contenthome%}
-        </div>
-            
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-between mt-2 p-2 align-items-center" id="footer"
-          style="border: 1px solid #D8D8D8; box-shadow: 4px 5px 40px 0px #E5E5E5; border-radius: 10px;">
-      <div>
-          <img class="rounded-circle" style="height: 48px" src="{% static 'SharixAdmin/img/user_avatar_1.png' %}"/>
-          <span class="mx-2">{{ phone }}</span>
-      </div>
-      <div>
-          <a class="ms-4" href="{% url 'contact' %}">{% trans 'Contacts' %}</a>
-          <a class="ms-4" href="https://wiki.sharix-app.org/doku.php/sharix/legal/soglashenie_s_servisom_na_ispolzovanie_platformy_sharix">{% trans 'Terms of use' %}</a>
-          <a class="ms-4 me-1" href="https://wiki.sharix-app.org/doku.php/sharix/legal/politika_konfidencialnosti_platformy_sharix">{% trans 'Privacy policy' %}</a>
-          <svg width="24" viewBox="0 0 24 24" fill="none" stroke="#479FF8" xmlns="http://www.w3.org/2000/svg">
-            <text x="9" y="16">
-                <a href="https://wiki.sharix-app.org/doku.php">?</a>
-            </text>
-            <circle cx="12" cy="12" r="11.5"/>
-          </svg>
-      </div>
-    </div>
+<div id="loader-wrapper">
+  <div id="loader"></div>
 </div>
 
-<a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none" 
-onclick="barMenuHide()" 
-style="cursor: pointer; position: fixed; align-items: center;">
-  <div class="rectangle-arrow">
-    <img src="{% static 'SharixAdmin/img/menu/arrow-right.svg' %}" 
-    style="width: 24px; height: 24px; rotate: 180deg; color: #0081ff; transition-duration: 0.4s;" 
-    class="mx-3 my-2" id="row-bar-menu" alt="">
-    <span class="fs-4" id="sharix-menu-row"></span>
+<div class="content p-4 mx-auto d-flex flex-column justify-content-between">
+  <nav id="menu-bar">
+    <button class="bg-white border box-shadow rounded mb-2 px-4 py-1" onclick="menuBarSwitch()">
+        <img id="menu-bar-img-arrow" src="{% static 'SharixAdmin/img/menu/arrow-right.svg' %}">
+    </button>
+
+    <ul class="d-flex flex-column nav nav-pills rounded box-shadow border p-2 bg-white">
+      <li class="nav-item">
+        <a href="{% url "home" %}" class="nav-link {% if current_page == "index" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "index" %}
+                  {% static 'SharixAdmin/img/menu/house_w.svg' %}
+                {% else %}
+                  {% static 'SharixAdmin/img/menu/house.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Главная</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'tickets:ticket_list_list' %}" class="nav-link {% if current_page == "tickets" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "tickets" %}
+                  {% static 'SharixAdmin/img/menu/tickets_w.svg' %}
+                {% else %}
+                  {% static 'SharixAdmin/img/menu/tickets.svg' %}
+                {% endif %}"> 
+            <span class="menu-bar-label">Заявки</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="http://study.reversea.net/" class="nav-link {% if current_page == "education" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "education" %}
+                  {% static 'SharixAdmin/img/menu/education_w.svg' %}
+                {% else %}
+                  {% static 'SharixAdmin/img/menu/education.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Курсы</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'partners' %}" class="nav-link {% if current_page == "partners" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "partners" %}
+                  {% static 'SharixAdmin/img/menu/people_w.svg' %}
+                {% else %}
+                  {% static 'SharixAdmin/img/menu/people.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Партнеры</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'user_information' %}" class="nav-link {% if current_page == "none" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "none" %}
+                  {% static 'SharixAdmin/img/menu/hdd-network_w.svg' %}
+                {% else %}
+                  {% static 'SharixAdmin/img/menu/hdd-network.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Управление правами</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'service_type' %}" class="nav-link {% if current_page == "service_type" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "service_type" %}
+                  {% static 'SharixAdmin/img/menu/briefcase_w.svg' %}
+                {% else %}
+                  {% static 'SharixAdmin/img/menu/briefcase.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Услуги сервиса</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'trans' %}" class="nav-link {% if current_page == "transactions" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "transactions" %}
+                  {% static 'SharixAdmin/img/menu/clock-history_w.svg' %}
+                {% else %}
+                  {% static 'SharixAdmin/img/menu/clock-history.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">История заказов</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'service_information-add' %}" class="nav-link {% if current_page == "service_info" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "service_info" %}
+                  {% static 'SharixAdmin/img/menu/person_w.svg' %}
+                {% else %}
+                  {% static 'SharixAdmin/img/menu/person.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Информация о сервисе</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'payment' %}" class="nav-link {% if current_page == "payment" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "payment" %}
+                  {% static 'SharixAdmin/img/menu/credit-card_w.svg' %}
+                {% else %}
+                  {% static 'SharixAdmin/img/menu/credit-card.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Оплата</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="user-workspace" class="p-5 border rounded box-shadow">
+      {% block contenthome %}{% endblock contenthome%}
   </div>
-</a>
+
+  <footer class="d-flex justify-content-between mt-3 p-2 align-items-center border rounded box-shadow">
+    <div>
+        <img class="rounded-circle" style="height: 48px" src="{% static 'SharixAdmin/img/user_avatar_1.png' %}"/>
+        <span class="mx-2">{{ phone }}</span>
+    </div>
+    <div>
+        <a class="ms-4" href="{% url 'contact' %}">{% trans 'Contacts' %}</a>
+        <a class="ms-4" href="https://wiki.sharix-app.org/doku.php/sharix/legal/soglashenie_s_servisom_na_ispolzovanie_platformy_sharix">{% trans 'Terms of use' %}</a>
+        <a class="ms-4 me-1" href="https://wiki.sharix-app.org/doku.php/sharix/legal/politika_konfidencialnosti_platformy_sharix">{% trans 'Privacy policy' %}</a>
+        <svg width="24" viewBox="0 0 24 24" fill="none" stroke="#479FF8" xmlns="http://www.w3.org/2000/svg">
+          <text x="9" y="16">
+              <a href="https://wiki.sharix-app.org/doku.php">?</a>
+          </text>
+          <circle cx="12" cy="12" r="11.5"/>
+        </svg>
+    </div>
+  </footer>
+</div>
+
+<script src="{% static 'SharixAdmin/js/menu-bar.js' %}"></script>
 
 <script>
-  hidemenu = document.getElementsByClassName('hidemenu')
-  shMenuRow = document.getElementById('sharix-menu-row')
-  usNameExit = document.getElementById('user-name-exit')
-  rightmainpage = document.getElementById('rightmainpage')
-  leftmainpage = document.getElementById('leftmainpage')
-  hideCheck = document.getElementById('hideMenuCheckBox')
-  rowBarMenu = document.getElementById('row-bar-menu')
+  // Запуск некоторых функций после загрузки страницы
+  document.addEventListener('DOMContentLoaded', function() {
+    menuBarControll();
+  });
 
-  function showmenu(){
-    rowBarMenu.style.transform = 'rotate(0deg)';
-    shMenuRow.style.display = "inline"
-      usNameExit.style.display = "inline"
-      leftmainpage.style.maxWidth = "310px"
-      leftmainpage.classList.remove("col-1")
-      leftmainpage.classList.add("col-3")
-      rightmainpage.classList.remove("col-11")
-      rightmainpage.classList.add("col-9")
-      for(var i = 0; i < hidemenu.length; i++){
-       hidemenu[i].style.display = "inline"; // depending on what you're doing
-      }
-  }
-  function hide(){
-    rowBarMenu.style.transform = 'rotate(180deg)';
-    shMenuRow.style.display = "none"
-    usNameExit.style.display = "none"
-    leftmainpage.style.maxWidth = "100px"
-    leftmainpage.classList.remove("col-3")
-    leftmainpage.classList.add("col-1")
-    rightmainpage.classList.remove("col-9")
-    rightmainpage.classList.add("col-11")
-    for(var i = 0; i < hidemenu.length; i++){
-      hidemenu[i].style.display = "none"; // depending on what you're doing
-    }
-  }
-  function barMenuHide(){
-    if(hideCheck.checked == true){
-      hideCheck.checked = false
-      hide()
-    } else {
-      hideCheck.checked = true
-      showmenu()
-    }
-  }
-  if(hideCheck.checked == true){
-      showmenu()
-    } else {
-      hide()
-    }
-  
-  
+  // Функция для скрытия экрана загрузки
+  function hideLoader() { document.getElementById("loader-wrapper").style.display = "none"; }
+
+  // Скрыть экран загрузки через 4 секунды
+  setTimeout(hideLoader, 400);
 </script>
-
-
-
-
-
 {% endblock %}

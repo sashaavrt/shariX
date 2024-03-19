@@ -2,40 +2,38 @@
 {% load i18n %}
 
 {% block contenthome %}
-<div class="container">
-    <h1 class="mainHeader">{{ title }}</h1>
-    <p class="description_service">Это система управления государством, источником власти в которой является сам народ. Именно народ решает, какие законы и нормы необходимы для гармоничного существования и развития государства. Таким образом, каждый человек в демократическом обществе 
-        Получает определенный набор свобод и обязательств сформированных с учетом интересов всего сообщества. Исходя из вышесказанного, можно заключить, что демократия – это возможность для каждого человека свободно участвовать в непосредственном управлении своим государством, обществом и личной судьбой в конечном счете.</p>    
-    <div class="container" style="padding: 2px;">
-        <div class="row fs-6">
+<h1 class="mainHeader">{{ title }}</h1>
+<p class="description_service">Это система управления государством, источником власти в которой является сам народ. Именно народ решает, какие законы и нормы необходимы для гармоничного существования и развития государства. Таким образом, каждый человек в демократическом обществе 
+    Получает определенный набор свобод и обязательств сформированных с учетом интересов всего сообщества. Исходя из вышесказанного, можно заключить, что демократия – это возможность для каждого человека свободно участвовать в непосредственном управлении своим государством, обществом и личной судьбой в конечном счете.</p>    
+<div class="container" style="padding: 2px;">
+    <div class="row fs-6">
+        
+        <div class="col-6 ">
+            <ul class="list-group">
+                <li class="list-group-item light"><strong>{% trans 'Documentation' %}</strong> </li>
+                <li class="list-group-item"><a  href="https://wiki.sharix-app.org/doku.php/sharix/legal/politika_konfidencialnosti_platformy_sharix">{% trans 'Privacy policy' %}</a></li>
+                <li class="list-group-item"><a  href="https://wiki.sharix-app.org/doku.php/sharix/legal/pravila_okazanija_uslug">{% trans 'Rules for the provision of services' %}</a></li>
+                <li class="list-group-item"><a  href="https://wiki.sharix-app.org/doku.php/sharix/legal/porjadok_okazanija_uslug">{% trans 'Procedure for the provision of services' %}</a></li>
+                <li class="list-group-item"><a  href="https://wiki.sharix-app.org/doku.php/sharix/legal/perechen_uslug_platformy">{% trans 'List of services' %}</a></li>
+                <li class="list-group-item"><a  href="{% url 'schemav1' %}">{% trans 'Scheme 1' %}</a> / <a  href="{% url 'schemav2' %}">{% trans 'Scheme 2' %}</a> / <a  href="{% url 'schema' %}">{% trans 'Scheme 3' %}</a> / <a  href="{% url 'schema-redoc' %}">{% trans 'API Docs' %}</a></li>
             
-            <div class="col-6 ">
-                <ul class="list-group">
-                    <li class="list-group-item light"><strong>{% trans 'Documentation' %}</strong> </li>
-                    <li class="list-group-item"><a  href="https://wiki.sharix-app.org/doku.php/sharix/legal/politika_konfidencialnosti_platformy_sharix">{% trans 'Privacy policy' %}</a></li>
-                    <li class="list-group-item"><a  href="https://wiki.sharix-app.org/doku.php/sharix/legal/pravila_okazanija_uslug">{% trans 'Rules for the provision of services' %}</a></li>
-                    <li class="list-group-item"><a  href="https://wiki.sharix-app.org/doku.php/sharix/legal/porjadok_okazanija_uslug">{% trans 'Procedure for the provision of services' %}</a></li>
-                    <li class="list-group-item"><a  href="https://wiki.sharix-app.org/doku.php/sharix/legal/perechen_uslug_platformy">{% trans 'List of services' %}</a></li>
-                    <li class="list-group-item"><a  href="{% url 'schemav1' %}">{% trans 'Scheme 1' %}</a> / <a  href="{% url 'schemav2' %}">{% trans 'Scheme 2' %}</a> / <a  href="{% url 'schema' %}">{% trans 'Scheme 3' %}</a> / <a  href="{% url 'schema-redoc' %}">{% trans 'API Docs' %}</a></li>
-                
-                  </ul>
-            </div>
-            <div class="col-6 text-end">
-              {% blocktrans trimmed with request.user.username as user %}
-              <p>User: <b>{{ user }}</b></p>
-              {% endblocktrans %}
-              {% blocktrans trimmed %}
-              <p>Phone number: <b>{{ phone }}</b></p>
-              {% endblocktrans %}
-              {% blocktrans trimmed with request.user.date_joined as date %}
-              <p>Date of registration: <b>{{ date }}</b></p>
-              {% endblocktrans %}
-              {% blocktrans trimmed with wallet.balance as balance %}
-              <p>Balance: <b>{{ balance }} points</b></p>
-              {% endblocktrans %}
-                <a href="{% url 'balance' %}" class="btn btn-success">{% trans 'Buy points' %}</a>
-            </div>
+                </ul>
+        </div>
+        <div class="col-6 text-end">
+            {% blocktrans trimmed with request.user.username as user %}
+            <p>User: <b>{{ user }}</b></p>
+            {% endblocktrans %}
+            {% blocktrans trimmed %}
+            <p>Phone number: <b>{{ phone }}</b></p>
+            {% endblocktrans %}
+            {% blocktrans trimmed with request.user.date_joined as date %}
+            <p>Date of registration: <b>{{ date }}</b></p>
+            {% endblocktrans %}
+            {% blocktrans trimmed with wallet.balance as balance %}
+            <p>Balance: <b>{{ balance }} points</b></p>
+            {% endblocktrans %}
+            <a href="{% url 'balance' %}" class="btn btn-success">{% trans 'Buy points' %}</a>
         </div>
     </div>
-</div>    
-{% endblock contenthome %}
+</div>  
+{% endblock %}

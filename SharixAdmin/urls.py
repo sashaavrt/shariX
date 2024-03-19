@@ -19,7 +19,7 @@ urlpatterns = [
     path('transactions/<int:trans_id>/', trans_id, name='transid'),
     path('logout/', logout_view, name='logoutweb'),
     path('balance/', balance, name='balance'),
-    path('test/', testPage, name='test-page'),
+    path('payment/', login_required(paymentView), name='payment'),
    
     path('partners/', login_required(PartnersListView.as_view()), name='partners'),
     path('partners/change_status/', change_partners_status, name='partners/change_status'),
@@ -39,7 +39,7 @@ urlpatterns = [
     path('service_type/add/', login_required(ServiceTypeCreate.as_view()), name='service_type/add/'),
     path('service_type/delete/<int:pk>', login_required(ServiceTypeDelete.as_view()), name='service_type/delete/'),
 
-    path('service_information/add/', login_required(ServiceInformationCreate.as_view()), name='service_information/add/'),
+    path('service_information/add/', login_required(ServiceInformationCreate.as_view()), name='service_information-add'),
     path('service_information/edit/<int:pk>', login_required(ServiceInformationUpdateView.as_view()), name='service_information/edit/'),
     
     path('service/', ServiceListView.as_view(), name='service'),

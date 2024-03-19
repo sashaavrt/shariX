@@ -4,7 +4,6 @@ from SharixAdmin.groups import group_required
 from SharixAdmin.tables import ResourceTable
 from django.contrib.auth.decorators import login_required
 from dbsynce.models import Resource
-from SharixAdmin.views.context import get_context
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
 
@@ -15,10 +14,10 @@ class ResourceListView(UserPassesTestMixin, SingleTableView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
+        context.update({
             'title': _('Resources'),
             'object_list': context['object_list'],
-        }))
+        })
         return context
     
     def test_func(self) -> bool or None:

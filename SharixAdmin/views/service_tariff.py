@@ -5,7 +5,6 @@ from SharixAdmin.tables import ServiceTariffTable
 from SharixAdmin.forms import ServiceTariffCreateForm, ServiceTariffUpdateForm
 from dbsynce.models import Service
 from django.urls import reverse
-from SharixAdmin.views.context import get_context
 from django.utils.translation import gettext as _
 
 class ServiceTariffCreate(UserPassesTestMixin, CreateView):
@@ -15,10 +14,10 @@ class ServiceTariffCreate(UserPassesTestMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
+        context.update({
             'title': _('Service rates'),
             'object': self.object,
-        }))
+        })
         return context
     
     def get_success_url(self):

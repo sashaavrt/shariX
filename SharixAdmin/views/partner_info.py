@@ -4,7 +4,6 @@ from SharixAdmin.groups import group_required
 from dbsynce.models import Company
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic.edit import UpdateView, CreateView
-from SharixAdmin.views.context import get_context
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
@@ -44,10 +43,10 @@ class PartnerInformationCreate(UserPassesTestMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
+        context.update({
             'title': _('Partner Information'),
             'object': self.object,
-        }))
+        })
         return context
     
     def get_success_url(self):

@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from SharixAdmin.views.context import get_context
 from django.utils.translation import gettext as _
 
 @login_required

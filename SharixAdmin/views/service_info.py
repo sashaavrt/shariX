@@ -2,7 +2,6 @@ from SharixAdmin.forms import ServiceInformationCreateForm, ServiceInformationUp
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic.edit import CreateView, UpdateView
 from dbsynce.models import Service
-from SharixAdmin.views.context import get_context
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
@@ -15,6 +14,7 @@ from django.urls import reverse_lazy
 from datetime import timezone
 import xmpp
 from xmpp import cli
+
 
 class ServiceInformationCreate(UserPassesTestMixin, CreateView):
     model = Service
@@ -41,11 +41,11 @@ class ServiceInformationCreate(UserPassesTestMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
+        context.update({
             'title': _('Information about the service'),
             'object': self.object,
-            
-        }))
+            'current_page': 'service_info'
+        })
         return context
     
     def get_success_url(self):
@@ -57,7 +57,8 @@ class ServiceInformationCreate(UserPassesTestMixin, CreateView):
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
-    
+
+
 class ServiceInformationUpdateView(UserPassesTestMixin, UpdateView):
     model = Service
     form_class = ServiceInformationUpdateForm
@@ -65,10 +66,11 @@ class ServiceInformationUpdateView(UserPassesTestMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
+        context.update({
             'title': 'Information about the service',
             'object': self.object,
-        }))
+            'current_page': 'service_info'
+        })
         return context
     
     def get_success_url(self):

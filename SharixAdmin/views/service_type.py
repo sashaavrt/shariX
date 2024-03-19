@@ -5,7 +5,6 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from SharixAdmin.forms import ServiceTypeCreateForm, ServiceTypeUpdateForm
 from dbsynce.models import ServiceType
 from django.urls import reverse
-from SharixAdmin.views.context import get_context
 from django.utils.translation import gettext as _
 
     
@@ -17,10 +16,11 @@ class ServiceTypeCreate(UserPassesTestMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
+        context.update({
             'title': _('Услуги сервиса'),
             'object': self.object,
-        }))
+            "current_page": "service_type"
+        })
         return context
     
     def get_success_url(self):
@@ -44,10 +44,11 @@ class ServiceTypeListView(UserPassesTestMixin, SingleTableView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
+        context.update({
             'title': 'Услуги сервиса',
             'object_list': context['object_list'],
-        }))
+            "current_page": "service_type"
+        })
         return context
     
     def testing(self, queryset, is_descending):
@@ -67,10 +68,11 @@ class ServiceTypeUpdateView(UserPassesTestMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
+        context.update({
             'title': _('Услуги сервиса'),
             'object': self.object,
-        }))
+            "current_page": "service_type"
+        })
         return context
     
     
@@ -90,10 +92,11 @@ class ServiceTypeDelete(UserPassesTestMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(get_context(self.request, {
+        context.update({
             'title': 'Услуги сервиса',
             'object': self.object,
-        }))
+            "current_page": "service_type"
+        })
         return context
     
     def get_success_url(self):
