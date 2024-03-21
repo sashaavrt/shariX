@@ -27,7 +27,7 @@ update_repository "$BACKEND" "dbsynce" "metasynced_module"
 update_repository "$CONFIG" "conf" "master"
 update_repository "$DESIGN_TEMPLATE" "design_template" "unstable"
 update_repository "$WEBSERVICE_RUNNING" "webservice_running" "unstable"
-update_repository "$LANDING" "landing" "new_version"
+update_repository "$LANDING" "landing" "new-version"
 update_repository "$USER_MODEL" "user" "master"
 update_repository "$WEBAPP_BASE" "design_template" "unstable"
 git pull
