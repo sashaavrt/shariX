@@ -75,6 +75,21 @@
         </a>
       </li>
       <li class="nav-item">
+        <a href="{% url 'cooperate' %}" class="nav-link {% if current_page == "cooperate" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "cooperate" %}
+                  {% static 'SharixAdmin/img/menu/handshake_w.svg' %}
+                {% else %}
+                  {% static 'SharixAdmin/img/menu/handshake.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Сотрудничество</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
         <a href="{% url 'user_information' %}" class="nav-link {% if current_page == "none" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img

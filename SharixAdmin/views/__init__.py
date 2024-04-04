@@ -10,6 +10,7 @@ from .partners import *
 from .partner_info import *
 from .provider import *
 from .login import *
+from .cooperate import *
 from .payment import paymentView
 from .balance import balance
 from .trans_id import trans_id

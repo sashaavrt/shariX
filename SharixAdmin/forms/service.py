@@ -1,22 +1,5 @@
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import get_user_model
-
-from dbsynce.models import *
 from django import forms
-from dbsynce.models import ServiceType, Service
-from django import forms
-
-class LoginUserForm(AuthenticationForm):
-
-    password = forms.CharField(label="Пароль",
-        widget=forms.PasswordInput(attrs={'class':'form-control'}))
-
-    username = forms.CharField(label="Номер телефона",
-        widget=forms.TextInput(attrs={'class':'form-control'}))
-
-    class Meta:
-        model = get_user_model()
-        fields = ['username', 'password']
+from dbsynce.models import ServiceType, Service, Company
 
 
 class ServiceTariffUpdateForm(forms.ModelForm):
@@ -43,6 +26,7 @@ class ServiceTariffUpdateForm(forms.ModelForm):
             'resource_id': forms.Select(attrs={'class': 'form-select'}),
         }
 
+
 class ServiceTariffCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ServiceTariffCreateForm, self).__init__(*args, **kwargs)
@@ -62,6 +46,7 @@ class ServiceTariffCreateForm(forms.ModelForm):
             'resource_id': forms.Select(attrs={'class': 'form-select'}),
             'ticket_status': forms.TextInput(attrs={'readonly': True}),
         }
+
 
 class ServiceTypeUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -102,6 +87,7 @@ class ServiceTypeCreateForm(forms.ModelForm):
 
         }
 
+
 class ServiceInformationUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
@@ -125,6 +111,7 @@ class ServiceInformationUpdateForm(forms.ModelForm):
             # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
         }
         
+
 class ServiceInformationCreateForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
@@ -154,6 +141,7 @@ class ServiceInformationCreateForm(forms.ModelForm):
             # 'ticket_status': forms.Select(attrs={'class': 'form-select'}),
         }
 
+
 class PartnerInformationUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PartnerInformationUpdateForm, self).__init__(*args, **kwargs)
@@ -176,6 +164,7 @@ class PartnerInformationUpdateForm(forms.ModelForm):
             'repr_id': forms.Select(attrs={'class': 'form-select'}),
         }
         
+
 class PartnerInformationCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PartnerInformationCreateForm, self).__init__(*args, **kwargs)       

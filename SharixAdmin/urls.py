@@ -30,6 +30,8 @@ urlpatterns = [
     path('provider/', login_required(ProviderListView.as_view()), name='provider'),
     path('provider/change_status/', change_provider_status, name='provider/change_status'),
 
+    path('cooperate/', login_required(CooperateView.as_view()), name="cooperate"),
+
     path('service_tariff/', login_required(ServiceTariffListView.as_view()), name='service_tariff'),
     path('service_tariff/add/', login_required(ServiceTariffCreate.as_view()), name='service_tariff/add/'),
     path('service_tariff/edit/<int:pk>', login_required(ServiceTariffUpdateView.as_view()), name='service_tariff/edit/'),
