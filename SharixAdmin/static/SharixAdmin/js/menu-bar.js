@@ -17,15 +17,15 @@ function menuBarControll() {
     if (menuBarOpened === 'true') {
         // Ширина меню при закрытом состоянии
         menuBarWidth = 74; 
-        // Устанавливаем нулевую прозрачность для каждой метки в меню
-        menuBarLabelEls.forEach(function(el) { el.style.opacity = 0; });
+        // Устанавливаем класс активности для каждой надписи в меню
+        menuBarLabelEls.forEach(function(el) { el.classList.add("collapsed"); });
         // Поворачиваем стрелку на 0 градусов
         menuBarImgArrowEl.style.transform = 'rotate(0deg)';
     } else {
         // Ширина меню при октрытом состоянии
         menuBarWidth = 280;
-        // Устанавливаем полную прозрачность для каждой метки в меню
-        menuBarLabelEls.forEach(function(el) { el.style.opacity = 1; });
+        // Убираем класс активности для каждой надписи в меню
+        menuBarLabelEls.forEach(function(el) { el.classList.remove("collapsed"); });
         // Поворачиваем стрелку на 180 градусов
         menuBarImgArrowEl.style.transform = 'rotate(180deg)';
     }

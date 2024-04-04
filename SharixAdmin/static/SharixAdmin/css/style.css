@@ -88,6 +88,11 @@
     height: 22px;
 }
 
-.active .menu-bar-label {
+.active .menu-bar-label  {
     color: white;
+}
+
+.menu-bar-label.collapsed {
+    opacity: 0;
+    pointer-events: none;
 }
