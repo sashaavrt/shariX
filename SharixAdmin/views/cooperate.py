@@ -2,15 +2,20 @@ from datetime import datetime, timedelta
 
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 from SharixAdmin.forms import CompanyCreateForm
 from tickets.models import Ticket, TicketList
 
 
-class CooperateView(FormView):
+class CooperateView(UserPassesTestMixin, FormView):
     form_class = CompanyCreateForm
     template_name = "SharixAdmin/cooperate.html"
     success_url = reverse_lazy("cooperate")
+
+    # Проверяем не состояит ли текущий пользователь в группе PARTNER-ADMIN
+    def test_func(self):
+        return not self.request.user.groups.filter(name='PARTNER-ADMIN').exists()
 
     def form_valid(self, form):
         # Сохраняем форму, чтобы получить объект компании
@@ -32,6 +37,7 @@ class CooperateView(FormView):
             created_by=self.request.user,
             
             # FIXME: Возможно необходима автоматическая генерация содержимого в определенном формате
+            # FIXME: Возможно нужно автоматически создавать содержимое поля json
             note=f"""
             Пользователь {self.request.user} #{self.request.user.pk} отправил заявку на становление партнером сервиса:\n
             - Имя: {instance.legal_name}\n
@@ -48,6 +54,7 @@ class CooperateView(FormView):
         instance.save()
 
         # Создание тикета на утверждение прав пользователя
+        # FIXME: Возможно нужно автоматически создавать содержимое поля json
         Ticket.objects.create(
             title=f"Запрос прав на становление Партнером '{instance.legal_name}'",
             ticket_list=TicketList.objects.get(pk=2101),# METASERVICE-ADMIN: Активация партнеров (NEG_REQUEST)

@@ -11,7 +11,8 @@ def index(request):
     context = {
         'title':_('Home/Balance'),
         'phone':convert_ph_num,
-        'current_page': 'index'
+        'current_page': 'index',
+        "is_partner_admin": request.user.groups.filter(name='PARTNER-ADMIN').exists()
     }
     
     return render(request, 'SharixAdmin/main.html', context)

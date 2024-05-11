@@ -30,7 +30,11 @@ urlpatterns = [
     path('provider/', login_required(ProviderListView.as_view()), name='provider'),
     path('provider/change_status/', change_provider_status, name='provider/change_status'),
 
+    # Запрос на подключение к сервису
     path('cooperate/', login_required(CooperateView.as_view()), name="cooperate"),
+    
+    # Страница пользователя с группой PARTNER-ADMIN
+    
 
     path('service_tariff/', login_required(ServiceTariffListView.as_view()), name='service_tariff'),
     path('service_tariff/add/', login_required(ServiceTariffCreate.as_view()), name='service_tariff/add/'),
