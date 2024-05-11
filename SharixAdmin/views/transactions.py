@@ -1,13 +1,10 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.views.generic import TemplateView
 from django.utils.translation import gettext as _
 
-@login_required
-def transactions(request):
-    
-    context = {
-        'title':_('Payment history'),
-        'current_page': 'transactions'
-    }
-        
-    return render(request, 'SharixAdmin/transactions.html', context)
+from .base import BaseView
+
+
+class TransactionsView(BaseView, TemplateView):
+    page_title = _('Payment history')
+    page_name = 'transactions'
+    template_name = 'SharixAdmin/transactions.html'

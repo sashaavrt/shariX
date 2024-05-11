@@ -86,12 +86,12 @@
                   {% else %}
                     {% static 'SharixAdmin/img/menu/handshake.svg' %}
                   {% endif %}">
-              <span class="menu-bar-label">Сотрудничество {{ is_partner_admin }}</span>
+              <span class="menu-bar-label">Сотрудничество</span>
             </div>
           </a>
         </li>
       {% endif %}
-      <li class="nav-item">
+      {% comment %} <li class="nav-item">
         <a href="{% url 'user_information' %}" class="nav-link {% if current_page == "none" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
@@ -105,7 +105,7 @@
             <span class="menu-bar-label">Управление правами</span>
           </div>
         </a>
-      </li>
+      </li> {% endcomment %}
       <li class="nav-item">
         <a href="{% url 'service_type' %}" class="nav-link {% if current_page == "service_type" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
@@ -122,7 +122,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="{% url 'trans' %}" class="nav-link {% if current_page == "transactions" %}active rounded{% endif %}">
+        <a href="{% url 'transactions' %}" class="nav-link {% if current_page == "transactions" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
@@ -136,7 +136,24 @@
           </div>
         </a>
       </li>
-      <li class="nav-item">
+      {% if is_partner_admin %}
+        <li class="nav-item">
+          <a href="{% url 'partner' %}" class="nav-link {% if current_page == 'partner' %}active rounded{% endif %}">
+            <div class="link d-flex align-items-center">
+              <img
+                class="nav-img"
+                src="
+                  {% if current_page == 'partner' %}
+                    {% static 'SharixAdmin/img/menu/person_w.svg' %}
+                  {% else %}
+                    {% static 'SharixAdmin/img/menu/person.svg' %}
+                  {% endif %}">
+              <span class="menu-bar-label">О партнере</span>
+            </div>
+          </a>
+        </li>
+      {% endif %}
+      {% comment %} <li class="nav-item">
         <a href="{% url 'service_information-add' %}" class="nav-link {% if current_page == "service_info" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
@@ -150,7 +167,7 @@
             <span class="menu-bar-label">Информация о сервисе</span>
           </div>
         </a>
-      </li>
+      </li> {% endcomment %}
       <li class="nav-item">
         <a href="{% url 'payment' %}" class="nav-link {% if current_page == "payment" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
@@ -170,6 +187,7 @@
   </nav>
 
   <div id="user-workspace" class="p-5 border rounded box-shadow">
+      <h1 class="mainHeader">{{ title }}</h1>
       {% block contenthome %}{% endblock contenthome%}
   </div>
 

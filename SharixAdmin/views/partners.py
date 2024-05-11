@@ -7,8 +7,12 @@ from dbsynce.models import Company
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
 
+from .base import BaseView
 
-class PartnersListView(UserPassesTestMixin, SingleTableView):
+
+class PartnersListView(UserPassesTestMixin, BaseView, SingleTableView):
+    page_title = _('Partners')
+    page_name = 'partners'
     table_class = PartnersTable
     queryset = Company.objects.all()
     template_name = 'SharixAdmin/partners.html'
@@ -16,13 +20,11 @@ class PartnersListView(UserPassesTestMixin, SingleTableView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            'title': _('Partners'),
             'object_list': context['object_list'],
-            'current_page': "partners"
         })
         return context
     
-    def test_func(self) -> bool or None:
+    def test_func(self):
         group_names = ('METASERVICE-ADMIN')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True

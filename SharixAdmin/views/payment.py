@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 from django.utils.translation import gettext as _
 
-def paymentView(request):
-    context = {
-        'title':_('Оплата'),
-        'current_page': 'payment'
-    }
-    return render(request, "SharixAdmin/test.html", context)
+from .base import BaseView
+
+
+class PaymentView(BaseView, TemplateView):
+    page_title = _('Оплата')
+    page_name = 'payment'
+    template_name = 'SharixAdmin/payment.html'

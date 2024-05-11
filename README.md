@@ -14,48 +14,6 @@ Be careful when adding new settings during development and remember to add them 
 
 You can also change the settings in *bin/install.cfg*. This file contains the links to repositories required for the project to work.
 
-## Utilities
-
-Utilities provides important functionality to web-application, so it is important to know and understand how they work. They are stored in *core/utils*.
-
-### AuthAPI
-
-That class provides the ability to authenticate an application account through the
-API and store these authentication tokens.
-
-Modules using the API should log in ShariX system using this class.
-
-#### Setting up
-
-```python
-# core/settings_vars.py
-
-API_URL = 'http://127.0.0.1:8000'
-```
-
-```python
-# <module>/apps.py
-
-from core.utils.AuthAPI import AuthAPI
-auth_api = AuthAPI("<module_login>", "<module_password>")
-```
-
-#### Usage example
-
-```python
-# <module>/<file>.py
-
-import requests
-from <module>.apps import auth_api 
-from core.settings import API_URL
-
-# You can use api.headers to get the corret authorization header in your requests.
-requests.get(f"{API_URL}/tickets/api/tickets/", headers=auth_api.headers)
-
-# Or you can get just token.
-print(auth_api.token)
-```
-
 ## Launch 
 
 To start the web application, run *bin/start.sh*.

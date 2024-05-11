@@ -12,14 +12,19 @@ router.register(r'sharix-users', SharixUserMVS)
 router.register(r'group', GroupMVS)
 
 urlpatterns = [
-    #path('auth/', LoginSharix.as_view(), name='auth'),
+    path('', login_required(IndexView.as_view()), name='home'),
+    path('transactions/', login_required(TransactionsView.as_view()), name='transactions'),
+    path('payment/', login_required(PaymentView.as_view()), name='payment'),
+    # Страница "Сотрудничество" (запрос на подключение к сервису)
+    path('cooperate/', login_required(CooperateView.as_view()), name='cooperate'),
+    # Страница "О партнере"
+    path('partner/', login_required(PartnerView.as_view()), name='partner'),
+
+
     path('accounts/login/', LoginSharix.as_view(), name='authweb'),
-    path('', index, name='home'),
-    path('transactions/', transactions, name='trans'),
     path('transactions/<int:trans_id>/', trans_id, name='transid'),
     path('logout/', logout_view, name='logoutweb'),
     path('balance/', balance, name='balance'),
-    path('payment/', login_required(paymentView), name='payment'),
    
     path('partners/', login_required(PartnersListView.as_view()), name='partners'),
     path('partners/change_status/', change_partners_status, name='partners/change_status'),
@@ -29,12 +34,6 @@ urlpatterns = [
     
     path('provider/', login_required(ProviderListView.as_view()), name='provider'),
     path('provider/change_status/', change_provider_status, name='provider/change_status'),
-
-    # Запрос на подключение к сервису
-    path('cooperate/', login_required(CooperateView.as_view()), name="cooperate"),
-    
-    # Страница пользователя с группой PARTNER-ADMIN
-    
 
     path('service_tariff/', login_required(ServiceTariffListView.as_view()), name='service_tariff'),
     path('service_tariff/add/', login_required(ServiceTariffCreate.as_view()), name='service_tariff/add/'),
@@ -51,9 +50,9 @@ urlpatterns = [
     path('service/', ServiceListView.as_view(), name='service'),
     path('service/change_status/', change_service_status, name='service/change_status'),
 
-    path('partner_information/', login_required(PartnerInfoView.as_view()), name='partner_information/'),    
-    path('partner_information/add/', login_required(PartnerInformationCreate.as_view()), name='partner_information/add/'),
-    path('partner_information/edit/<int:pk>', login_required(PartnerInformationUpdateView.as_view()), name='partner_information/edit/'),
+    #path('partner_information/', login_required(PartnerInfoView.as_view()), name='partner_information/'),    
+    #path('partner_information/add/', login_required(PartnerInformationCreate.as_view()), name='partner_information/add/'),
+    #path('partner_information/edit/<int:pk>', login_required(PartnerInformationUpdateView.as_view()), name='partner_information/edit/'),
 
     path('user_information', login_required(UserListView.as_view()), name='user_information'),
 

@@ -7,9 +7,12 @@ from dbsynce.models import ServiceType
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
+from .base import BaseView
+
     
-    
-class ServiceTypeCreate(UserPassesTestMixin, CreateView):
+class ServiceTypeCreate(UserPassesTestMixin, BaseView, CreateView):
+    page_title = _('Услуги сервиса')
+    page_name = 'service_type'
     model = ServiceType
     form_class = ServiceTypeCreateForm
     template_name = "SharixAdmin/service_type_form.html"
@@ -17,9 +20,7 @@ class ServiceTypeCreate(UserPassesTestMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            'title': _('Услуги сервиса'),
             'object': self.object,
-            "current_page": "service_type"
         })
         return context
     
@@ -32,12 +33,10 @@ class ServiceTypeCreate(UserPassesTestMixin, CreateView):
             return True
         return False
     
-    
-    
 
-    
-
-class ServiceTypeListView(UserPassesTestMixin, SingleTableView):
+class ServiceTypeListView(UserPassesTestMixin, BaseView, SingleTableView):
+    page_title = _('Услуги сервиса')
+    page_name = 'service_type'
     table_class = ServiceTypeTable
     queryset = ServiceType.objects.all()
     template_name = 'SharixAdmin/service_type.html'
@@ -45,9 +44,7 @@ class ServiceTypeListView(UserPassesTestMixin, SingleTableView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            'title': 'Услуги сервиса',
             'object_list': context['object_list'],
-            "current_page": "service_type"
         })
         return context
     
@@ -60,6 +57,7 @@ class ServiceTypeListView(UserPassesTestMixin, SingleTableView):
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
+
 
 class ServiceTypeUpdateView(UserPassesTestMixin, UpdateView):
     model = ServiceType
