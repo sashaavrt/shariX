@@ -1,5 +1,5 @@
 from django_tables2 import SingleTableView
-from SharixAdmin.groups import group_required
+from SharixAdmin.utils import group_required
 from SharixAdmin.tables import ProviderTable
 from dbsynce.models import Provider
 from django.contrib.auth.decorators import login_required
