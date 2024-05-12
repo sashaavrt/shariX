@@ -3,9 +3,9 @@ from django import forms
 from dbsynce.models import Company
 
 
-class CompanyCreateForm(forms.ModelForm):
+class CompanyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(CompanyCreateForm, self).__init__(*args, **kwargs)
+        super(CompanyForm, self).__init__(*args, **kwargs)
         # Добавляем класс .form-control для всех полей формы
         for field in iter(self.fields):
             if 'class' not in self.fields[field].widget.attrs:

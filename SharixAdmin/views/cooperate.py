@@ -4,12 +4,12 @@ from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin
 
-from SharixAdmin.forms import CompanyCreateForm
+from SharixAdmin.forms import CompanyForm
 from tickets.models import Ticket, TicketList
 
 
 class CooperateView(UserPassesTestMixin, FormView):
-    form_class = CompanyCreateForm
+    form_class = CompanyForm
     template_name = "SharixAdmin/cooperate.html"
     success_url = reverse_lazy("cooperate")
 
