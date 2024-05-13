@@ -5,9 +5,11 @@ from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext as _
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib import messages
+from django.db import transaction
 
 from dbsynce.models import Company, Documents
 from SharixAdmin.forms import CompanyForm
+from SharixAdmin.utils import create_ticket_partner_activation
 
 from .base import BaseView
 
@@ -54,12 +56,17 @@ class PartnerEditView(UserPassesTestMixin, BaseView, FormView):
         return kwargs
 
     def form_valid(self, form):
-        # Сохраняем изменения
-        form.save()
+        with transaction.atomic():
+            # Сохраняем изменения
+            form.save()
 
-        # Получаем текущий объект компании и деактивируем ее
-        current_company = form.instance
-        current_company.deactivate()
+            # Получаем текущий объект компании и деактивируем ее
+            current_company = form.instance
+            current_company.deactivate()
+
+            # Выполняем пересоздание тикета на активацию партнера
+            current_company.ticket_status.archive()
+            create_ticket_partner_activation(self.request.user, current_company)
 
         # Отправляем пользователю уведомление на страницу о успехе операции
         messages.success(self.request, 'Данные успешно изменены и теперь проходят проверку!')
