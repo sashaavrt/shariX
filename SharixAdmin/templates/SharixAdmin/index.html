@@ -188,6 +188,11 @@
 
   <div id="user-workspace" class="p-5 border rounded box-shadow">
       <h1 class="mainHeader mb-3">{{ title }}</h1>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
       {% block contenthome %}{% endblock contenthome%}
   </div>
 

@@ -4,8 +4,9 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext as _
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib import messages
 
-from dbsynce.models import Company
+from dbsynce.models import Company, Documents
 from SharixAdmin.forms import CompanyForm
 
 from .base import BaseView
@@ -26,6 +27,14 @@ class PartnerDetailView(UserPassesTestMixin, BaseView, DetailView):
     def get_object(self, queryset=None):
         return get_object_or_404(Company, repr_id=self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            "company_documents": Documents.parse_requirements(self.object.requirements)
+        }) 
+        return context
+    
+
 
 class PartnerEditView(UserPassesTestMixin, BaseView, FormView):
     template_name = 'SharixAdmin/partner_edit.html'
@@ -45,5 +54,13 @@ class PartnerEditView(UserPassesTestMixin, BaseView, FormView):
         return kwargs
 
     def form_valid(self, form):
-        form.save()  # Сохраняем изменения
+        # Сохраняем изменения
+        form.save()
+
+        # Получаем текущий объект компании и деактивируем ее
+        current_company = form.instance
+        current_company.deactivate()
+
+        # Отправляем пользователю уведомление на страницу о успехе операции
+        messages.success(self.request, 'Данные успешно изменены и теперь проходят проверку!')
         return super().form_valid(form)

@@ -15,10 +15,15 @@
   --btn-danger-hover: #821e27;
 }
 
-.btn-primary, .btn-outline-primary{
+.btn-primary {
   background-color: var(--btn-bg-color);
   color: var(--btn-txt-color);
   border-color: var(--btn-bg-color);
+}
+
+.btn-outline-primary {
+  border-color: var(--btn-bg-color);
+  color: var(--btn-bg-color);
 }
 
 .btn-primary:hover, .btn-outline-primary:hover{

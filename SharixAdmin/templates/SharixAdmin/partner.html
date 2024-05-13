@@ -12,18 +12,18 @@
     <div class="card-body position-relative">
         <h5 class="card-title fw-bold mb-4">{{ company.legal_name }}</h5>
 
-        <ul class="list-style-none p-0 gap-2 m-0">
-            <li class="mb-3"><b>Представитель</b> {{ company.repr_id.get_full_name }}</li>
-            <li class="mb-3"><b>Юр. адрес</b> {{ company.address }}</li>
+        <ul class="list-style-none">
+            <li><b>Представитель</b> {{ company.repr_id.get_full_name }}</li>
+            <li><b>Юр. адрес</b> {{ company.address }}</li>
             
             <!-- FIXME: Не настроено -->
-            <li class="mb-3"><b>НДС</b> Не платит</li>
+            <li><b>НДС</b> Не платит</li>
             
-            <li class="mb-3"><b>ИНН</b> {{ company.inn }}</li>
-            <li class="mb-3"><b>ОГРН</b> {{ company.ogrn }}</li>
-            <li class="mb-3"><b>Р/c</b> {{ company.rs }}</li>
-            <li class="mb-3"><b>К/c</b> {{ company.ks }}</li>
-            <li class="mb-3"><b>БИК</b> {{ company.bik }}</li>
+            <li><b>ИНН</b> {{ company.inn }}</li>
+            <li><b>ОГРН</b> {{ company.ogrn }}</li>
+            <li><b>Р/c</b> {{ company.rs }}</li>
+            <li><b>К/c</b> {{ company.ks }}</li>
+            <li><b>БИК</b> {{ company.bik }}</li>
             <li><b>Банк</b> {{ company.bank_name }}</li>
         </ul>
     </div>
@@ -32,5 +32,16 @@
     </a>
 </div>
 
-<h6>Документы</h6>
+<h6 class="mb-4">Документы</h6>
+    <ul class="list-style-none">
+        {% for document in company_documents %}
+            <li class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img class="me-2" style="height: 32px;" src="{% static "SharixAdmin/img/file.svg" %}">
+                    {{ document }}
+                </div>
+                <button class="btn btn-sm btn-outline-primary">Загрузить</button>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock contenthome %}
