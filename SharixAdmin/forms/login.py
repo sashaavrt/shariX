@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 
 
 class LoginUserForm(AuthenticationForm):
-
     password = forms.CharField(label="Пароль",
         widget=forms.PasswordInput(attrs={'class':'form-control'}))
 

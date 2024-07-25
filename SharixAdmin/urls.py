@@ -15,11 +15,14 @@ urlpatterns = [
     path('', login_required(IndexView.as_view()), name='home'),
     path('transactions/', login_required(TransactionsView.as_view()), name='transactions'),
     path('payment/', login_required(PaymentView.as_view()), name='payment'),
+    
     # Страница "Сотрудничество" (запрос на подключение к сервису)
     path('cooperate/', login_required(CooperateView.as_view()), name='cooperate'),
+    
     # Страница "О партнере"
     path('partner/', login_required(PartnerDetailView.as_view()), name='partner_detail'),
     path('partner/edit/', login_required(PartnerEditView.as_view()), name='partner_edit'),
+    path('partner/doc/<str:doc_code>', login_required(PartnerDocDetailView.as_view()), name='partner_doc'),
 
 
     path('accounts/login/', LoginSharix.as_view(), name='authweb'),

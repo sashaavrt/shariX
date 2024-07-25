@@ -1,0 +1,24 @@
+{% extends 'SharixAdmin/index.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block contenthome %}
+<a class="display-block btn btn-sm btn-outline-secondary" href="{% url 'partner_detail' %}"><< Назад</a>
+
+<p class="description_service">
+    Это система управления государством, источником власти в которой является сам народ. Именно народ решает, какие законы и нормы необходимы для гармоничного существования и развития государства.
+</p>
+
+<form>
+    {% csrf_token %}
+    <label for="doc-expire-date" class="form-label">Дата окончания действия документа (при наличии)</label>
+    <input id="doc-expire-date" type="date" name="doc_expire_date" class="form-control">
+
+    <div class="drop-container mt-3">
+        <span class="drop-title">Перетащите файлы сюда</span>
+        или выберите их на своем устройстве
+        <input id="doc_file" type="file" multiple="multiple" name="doc_file" required>
+    </div>
+</form>
+{% endblock contenthome %}

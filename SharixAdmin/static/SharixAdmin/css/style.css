@@ -112,3 +112,58 @@
     top: 1em;
     right: 1em;
 }
+
+.no-user-select {
+    user-select: none;
+}
+
+
+/* Drop files input */
+.drop-container {
+    display: flex;
+    gap: 1em;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 256px;
+    padding: 2em;
+    border-radius: 10px;
+    border: 2px dashed #55555597;
+    color: #444;
+    cursor: pointer;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.drop-container:hover {
+    background: #f1f1f1;
+    border-color: #111;
+}
+  
+.drop-container:hover span{
+    color: #222;
+}
+  
+.drop-container span {
+    color: #444;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: color .2s ease-in-out;
+}
+
+.drop-container input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: var(--btn-bg-color);
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+  
+.drop-container  input[type=file]::file-selector-button:hover {
+    background: var(--btn-hover-color);
+}
+  
