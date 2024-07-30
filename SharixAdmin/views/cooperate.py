@@ -8,6 +8,7 @@ from django.db import transaction
 
 from SharixAdmin.forms import CompanyForm
 from SharixAdmin.utils import create_ticket_partner_activation
+from dbsynce.models import Documents
 from tickets.models import Ticket, TicketList
 
 
@@ -55,6 +56,17 @@ class CooperateView(UserPassesTestMixin, FormView):
 
             # Сохраняем новые изменения
             instance.save()
+
+            # Создаем необходимые объекты документов по requirements указанных в созданной company
+            # Используем bulk_create для создания всех объектов одновременно
+            doc_codes = Documents.parse_requirements(instance.requirements)
+            Documents.objects.bulk_create([
+                Documents(
+                    company_id=instance,
+                    user_id=self.request.user,
+                    doc_type=doc_code
+                ) for doc_code in doc_codes
+            ])
 
         # Отправляем пользователю уведомление на страницу о успехе операции
         messages.success(self.request, 'Ваша заявка на становление партнером успешно отправлена и теперь проходит проверку!')

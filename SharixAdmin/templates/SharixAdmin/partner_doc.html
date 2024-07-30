@@ -10,15 +10,56 @@
     Это система управления государством, источником власти в которой является сам народ. Именно народ решает, какие законы и нормы необходимы для гармоничного существования и развития государства.
 </p>
 
-<form>
+<form class="d-flex flex-column align-items-end" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
-    <label for="doc-expire-date" class="form-label">Дата окончания действия документа (при наличии)</label>
-    <input id="doc-expire-date" type="date" name="doc_expire_date" class="form-control">
+    <div class="w-100">
+        <label for="{{ form.doc_expire_date.id_for_label }}" class="form-label">{{ form.doc_expire_date.label }}</label>
+        {{ form.doc_expire_date }}
+        
+        {% if form.doc_expire_date.errors %}
+            <ul class="alert alert-danger list-style-none mt-2 p-2">
+                {% for error in form.doc_expire_date.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 
-    <div class="drop-container mt-3">
-        <span class="drop-title">Перетащите файлы сюда</span>
-        или выберите их на своем устройстве
-        <input id="doc_file" type="file" multiple="multiple" name="doc_file" required>
+    <div class="my-3 w-100">
+        <div class="drop-container">
+            <span class="drop-title">Перетащите файлы сюда</span>
+            или выберите их на своем устройстве (только PDF, PNG, JPG, JPEG)
+            {{ form.doc_file }}
+        </div>
+
+        {% if form.doc_file.errors %}
+            <ul class="alert alert-danger list-style-none mt-2 p-2">
+                {% for error in form.doc_file.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#partner-doc-modal">Отправить</button>
+
+    <!-- Окно подтверждения -->
+    <div id="partner-doc-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Подтверждение действия</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Внесение изменений приведет к деактивации партнера до момента проверки новой информации!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Отменить</button>
+              <button type="sumbit" class="btn btn-outline-primary">Подтвердить</button>
+            </div>
+          </div>
+        </div>
     </div>
 </form>
 {% endblock contenthome %}

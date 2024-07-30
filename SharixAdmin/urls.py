@@ -22,7 +22,7 @@ urlpatterns = [
     # Страница "О партнере"
     path('partner/', login_required(PartnerDetailView.as_view()), name='partner_detail'),
     path('partner/edit/', login_required(PartnerEditView.as_view()), name='partner_edit'),
-    path('partner/doc/<str:doc_code>', login_required(PartnerDocDetailView.as_view()), name='partner_doc'),
+    path('partner/doc/<str:doc_code>', login_required(PartnerDocEditView.as_view()), name='partner_doc_edit'),
 
 
     path('accounts/login/', LoginSharix.as_view(), name='authweb'),

@@ -128,6 +128,7 @@
     align-items: center;
     height: 256px;
     padding: 2em;
+    width: 100%;
     border-radius: 10px;
     border: 2px dashed #55555597;
     color: #444;

@@ -6,7 +6,7 @@
             <small class="form-text text-muted">{{ field.help_text }}</small>
         {% endif %}
         {% if field.errors %}
-            <ul class="errorlist">
+            <ul class="alert alert-danger list-style-none">
                 {% for error in field.errors %}
                     <li>{{ error }}</li>
                 {% endfor %}
