@@ -17,7 +17,7 @@
         {{ form.doc_expire_date }}
         
         {% if form.doc_expire_date.errors %}
-            <ul class="alert alert-danger list-style-none mt-2 p-2">
+            <ul class="alert alert-danger list-style-none mt-2 p-3">
                 {% for error in form.doc_expire_date.errors %}
                     <li>{{ error }}</li>
                 {% endfor %}
@@ -26,14 +26,14 @@
     </div>
 
     <div class="my-3 w-100">
-        <div class="drop-container">
+        <div class="drop-container" id="doc-drop-container">
             <span class="drop-title">Перетащите файлы сюда</span>
-            или выберите их на своем устройстве (только PDF, PNG, JPG, JPEG)
+            или выберите их на своем устройстве (только PDF, PNG, JPG или JPEG)
             {{ form.doc_file }}
         </div>
 
         {% if form.doc_file.errors %}
-            <ul class="alert alert-danger list-style-none mt-2 p-2">
+            <ul class="alert alert-danger list-style-none mt-2 p-3">
                 {% for error in form.doc_file.errors %}
                     <li>{{ error }}</li>
                 {% endfor %}
@@ -52,14 +52,38 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>Внесение изменений приведет к деактивации партнера до момента проверки новой информации!</p>
+              <p>Загрузка новых файлов документа полностью заменит все ранее загружаемые для него файлы, а также приведет к деактивации партнера до момента проверки новой информации!</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Отменить</button>
-              <button type="sumbit" class="btn btn-outline-primary">Подтвердить</button>
+              <button type="sumbit" class="btn btn-outline-primary" data-bs-dismiss="modal">Подтвердить</button>
             </div>
           </div>
         </div>
     </div>
 </form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Настройка работы поля для загрузки файлов #doc-file-input
+        const dropContainer = document.getElementById('doc-drop-container');
+        const fileInput = document.getElementById('doc-file-input');
+
+        // Открытие окна выбора файлов при клике на контейнер
+        dropContainer.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        // Отмена стандартного поведения при перетаскивании файлов
+        dropContainer.addEventListener('dragover', function(e) {
+            e.preventDefault();
+        });
+
+        // Обработка события перетаскивания файлов
+        dropContainer.addEventListener('drop', function(e) {
+            e.preventDefault();
+            fileInput.files = e.dataTransfer.files;
+        });
+    });
+</script>
 {% endblock contenthome %}

@@ -56,3 +56,4 @@ webencodings==0.5.1
 xmpppy==0.7.1
 django-ckeditor
 pillow
+fontawesomefree

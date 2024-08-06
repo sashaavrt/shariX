@@ -1,3 +1,4 @@
+from django.core.files.storage import default_storage
 from django.views.generic import DetailView
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
@@ -7,7 +8,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib import messages
 from django.db import transaction
 
-from dbsynce.models import Company, Documents
+from dbsynce.models import Company, Documents, DocumentFile
 from SharixAdmin.forms import CompanyForm, DocumentUploadForm
 from SharixAdmin.utils import *
 
@@ -73,27 +74,86 @@ class PartnerEditView(PartnerBaseView, FormView):
         return super().form_valid(form)
 
 
-class PartnerDocEditView(PartnerBaseView, FormView):       
-    template_name = 'SharixAdmin/partner_doc.html'
+class PartnerDocUploadView(PartnerBaseView, FormView):
+    # FIXME: Загрузка новых документов должна деактивировать текущего партнера (предварительно это работа обработчиков)
+    template_name = 'SharixAdmin/partner/doc_upload.html'
     form_class = DocumentUploadForm
     success_url = reverse_lazy('partner_detail')
 
     def dispatch(self, request, *args, **kwargs):
-        self.doc_code = kwargs.get("doc_code")
-        self.doc_name = Documents.DOC_TYPES_DICT[self.doc_code]
-        self.page_title = _("Изменение документа партнера: ") + self.doc_name
         self.company = get_object_or_404(Company, repr_id=self.request.user)
+        self.doc = Documents.objects.filter(
+            user_id=self.request.user,
+            company_id=self.company,
+            doc_type=kwargs.get('doc_code')
+        ).first()
+
+        self.doc_name = self.doc.get_doc_type_display()
+        self.page_title = _("Изменение документа партнера: ") + self.doc_name
+
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         with transaction.atomic():
+            # Удаляем существующие файлы и записи из базы данных
+            existing_files = DocumentFile.objects.filter(document=self.doc)
+            for existing_file in existing_files:
+                # Удаляем файл с сервера
+                if default_storage.exists(existing_file.file.path):
+                    default_storage.delete(existing_file.file.path)
+
+                # Удаляем запись о файле из базы данных
+                existing_file.delete()
+
+            # Загрузка новых файлов
             doc_file = self.request.FILES.getlist("doc_file")
-            
             for file in doc_file:
-                print(file)
+                DocumentFile.objects.create(
+                    document=self.doc,
+                    file=file
+                )
 
-            create_ticket_partner_docs_verification(self.request.user, self.company, self.doc_name, self.doc_code)
+            # Создание нового тикета и архивация старого
+            if self.doc.ticket_status:
+                self.doc.ticket_status.archive()
+            
+            self.doc.expire_date = self.request.POST.get('doc_expire_date')
+            self.doc.ticket_status = create_ticket_partner_docs_verification(self.request.user, self.company, self.doc)
+            
+            self.doc.save()
 
-        # Отправляем полAьзователю уведомление на страницу об успехе операции
+        # Отправляем пользователю уведомление на страницу об успехе операции
         messages.success(self.request, f'Файлы документа "{self.doc_name}" успешно загружены и теперь проходят проверку!')
         return super().form_valid(form)
+
+
+class PartnerDocView(PartnerBaseView, DetailView):
+    model = Documents
+    template_name = 'SharixAdmin/partner/doc.html'
+    context_object_name = 'doc'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.company = get_object_or_404(Company, repr_id=self.request.user)
+        
+        self.doc = Documents.objects.filter(
+            user_id=self.request.user,
+            company_id=self.company,
+            doc_type=kwargs.get('doc_code')
+        ).first()
+
+        if not self.doc:
+            return self.handle_no_permission()
+
+        self.doc_name = self.doc.get_doc_type_display()
+        self.page_title = _("Детали документа: ") + self.doc_name
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        return self.doc
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        doc_files = DocumentFile.objects.filter(document=self.doc)
+        context.update({ "doc_files": doc_files }) 
+        return context

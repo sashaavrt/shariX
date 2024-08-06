@@ -37,20 +37,21 @@
         {% for doc in docs %}
             <li class="d-flex justify-content-between">
                 <div class="d-flex align-items-center">
-                    <img class="me-2 no-user-select" style="height: 32px;" src="{% static "SharixAdmin/img/file.svg" %}">
-                    {{ doc.get_doc_type_display }}
-                    
-                    {% if doc.files.all %}
-                        <span class="me-3 text-secondary ms-1">
-                            (на проверке)
-                        </span>
+                    {% if doc.ticket_status and doc.status == "deactivated" %}
+                        <i class="fa-solid fa-clock-rotate-left me-2 no-user-select fs-4 text-warning"></i>
+                    {% elif doc.status == "activated" %}
+                        <i class="fa-solid fa-check me-2 no-user-select fs-4 text-success"></i>
+                    {% else %}
+                        <i class="fa-regular fa-file me-2 no-user-select fs-4 text-primary"></i>
                     {% endif %}
+
+                    {{ doc.get_doc_type_display }}
                 </div>
                 
-                {% if not doc.files.all %}
-                    <a class="btn btn-sm btn-primary" href="{% url "partner_doc_edit" doc.doc_type %}">Загрузить</a>
+                {% if doc.ticket_status %}
+                    <a class="btn btn-sm btn-outline-primary" href="{% url "partner_doc" doc.doc_type %}">Посмотреть</a>
                 {% else %}
-                    <a class="btn btn-sm btn-outline-primary" href="{% url "partner_doc_edit" doc.doc_type %}">Изменить</a>
+                    <a class="btn btn-sm btn-primary" href="{% url "partner_doc_upload" doc.doc_type %}">Загрузить</a>
                 {% endif %}
             </li>
         {% endfor %}

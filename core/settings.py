@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'ckeditor',
     'landing.apps.LandingConfig',
+    'fontawesomefree',
 ]
 
 MIDDLEWARE = [

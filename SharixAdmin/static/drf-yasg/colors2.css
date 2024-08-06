@@ -13,6 +13,11 @@
   --btn-danger: #821e27;
   --btn-danger-txt: #821e27;
   --btn-danger-hover: #821e27;
+  --primary: #479FF8;
+}
+
+.text-primary {
+  color: var(--primary) !important;
 }
 
 .btn-primary {

@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError
 
 
 class DocumentUploadForm(forms.Form):
+    MAX_FILES = 5  # Максимальное количество файлов для загрузки
+
     doc_expire_date = forms.DateField(
         required=False,
         widget=forms.DateInput(attrs={
@@ -14,7 +16,10 @@ class DocumentUploadForm(forms.Form):
         label='Дата окончания действия документа (при наличии)'
     )
     doc_file = forms.FileField(
-        widget=forms.ClearableFileInput(attrs={'multiple': True}),
+        widget=forms.ClearableFileInput(attrs={
+            'multiple': True,
+            'id': 'doc-file-input'
+        }),
         required=True,
     )
 
@@ -30,6 +35,10 @@ class DocumentUploadForm(forms.Form):
         files = self.files.getlist('doc_file')
         allowed_mime_types = ['image/jpeg', 'image/png', 'application/pdf']
         allowed_extensions = ['jpg', 'jpeg', 'png', 'pdf']
+
+        # Проверка на максимальное количество файлов
+        if len(files) > self.MAX_FILES:
+            raise ValidationError(f"Вы можете загрузить не более {self.MAX_FILES} файлов.")
         
         for file in files:
             # Проверяем расширение файла

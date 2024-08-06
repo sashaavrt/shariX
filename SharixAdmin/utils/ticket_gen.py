@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from tickets.models import Ticket, TicketList
+from dbsynce.models import DocumentFile
 
 
 def create_ticket_partner_activation(user, сompany):
@@ -31,22 +32,26 @@ def create_ticket_partner_activation(user, сompany):
     )
 
 
-def create_ticket_partner_docs_verification(user, company, doc_name, doc_code):
+def create_ticket_partner_docs_verification(user, company, doc):
     """
     Создание тикета на проверку документов партнера.
     
     Список: 2103, METASERVICE-ADMIN: Проверка документов (ST_REQUEST)
     Тип: 1, ST_REQUEST
     """
+    doc_name = doc.get_doc_type_display()
+    doc_files = DocumentFile.objects.filter(document=doc)
+
+    note=f"Пользователь {user} #{user.pk} добавил новые файлы документа <a href='{doc.get_admin_url()}'>{doc_name}</a> партнера <a href='{company.get_admin_url()}'>{company.legal_name}</a> требующие проверки:<ul>"
+    for file in doc_files:
+        note += f"<li><a href='{file.file.url}' target='_blank'>{file}</a></li>"
+    note += "</ul>"
+    
     return Ticket.objects.create(
         title=f"Проверка документа '{doc_name}' партнера '{company.legal_name}'",
         ticket_list=TicketList.objects.get(pk=2103),
         ticket_type=1,
         due_date=datetime.now().date() + timedelta(days=30),
         created_by=user,
-        
-        note=f"""
-            Пользователь {user} #{user.pk} добавил новые файлы документа '{doc_name}' партнера <a href="{company.get_admin_url()}">{company.legal_name}</a>
-            требующие проверки.
-        """
+        note=note
     )    
