@@ -117,7 +117,7 @@ class PartnerDocUploadView(PartnerBaseView, FormView):
             if self.doc.ticket_status:
                 self.doc.ticket_status.archive()
             
-            self.doc.expire_date = self.request.POST.get('doc_expire_date')
+            self.doc.expire_date = self.request.POST.get('doc_expire_date') if self.request.POST['doc_expire_date'] else None
             self.doc.ticket_status = create_ticket_partner_docs_verification(self.request.user, self.company, self.doc)
             
             self.doc.save()
