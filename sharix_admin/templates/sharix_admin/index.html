@@ -1,0 +1,232 @@
+{% extends 'sharix_admin/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<div id="loader-wrapper">
+  <div id="loader"></div>
+</div>
+
+<div class="content p-4 mx-auto d-flex flex-column justify-content-between">
+  <nav id="menu-bar">
+    <button class="bg-white border box-shadow rounded mb-2 px-4 py-1" onclick="menuBarSwitch()">
+        <img id="menu-bar-img-arrow" src="{% static 'sharix_admin/img/menu/arrow-right.svg' %}">
+    </button>
+
+    <ul class="d-flex flex-column nav nav-pills rounded box-shadow border p-2 bg-white">
+      <li class="nav-item">
+        <a href="{% url "home" %}" class="nav-link {% if current_page == "index" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "index" %}
+                  {% static 'sharix_admin/img/menu/house_w.svg' %}
+                {% else %}
+                  {% static 'sharix_admin/img/menu/house.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Главная</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'tickets:ticket_list_list' %}" class="nav-link {% if current_page == "tickets" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "tickets" %}
+                  {% static 'sharix_admin/img/menu/tickets_w.svg' %}
+                {% else %}
+                  {% static 'sharix_admin/img/menu/tickets.svg' %}
+                {% endif %}"> 
+            <span class="menu-bar-label">Заявки</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="http://study.reversea.net/" class="nav-link {% if current_page == "education" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "education" %}
+                  {% static 'sharix_admin/img/menu/education_w.svg' %}
+                {% else %}
+                  {% static 'sharix_admin/img/menu/education.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Курсы</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'partners' %}" class="nav-link {% if current_page == "partners" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "partners" %}
+                  {% static 'sharix_admin/img/menu/people_w.svg' %}
+                {% else %}
+                  {% static 'sharix_admin/img/menu/people.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Партнеры</span>
+          </div>
+        </a>
+      </li>
+      {% if not is_partner_admin %}
+        <li class="nav-item">
+          <a href="{% url 'cooperate' %}" class="nav-link {% if current_page == "cooperate" %}active rounded{% endif %}">
+            <div class="link d-flex align-items-center">
+              <img
+                class="nav-img"
+                src="
+                  {% if current_page == "cooperate" %}
+                    {% static 'sharix_admin/img/menu/handshake_w.svg' %}
+                  {% else %}
+                    {% static 'sharix_admin/img/menu/handshake.svg' %}
+                  {% endif %}">
+              <span class="menu-bar-label">Сотрудничество</span>
+            </div>
+          </a>
+        </li>
+      {% endif %}
+      {% comment %} <li class="nav-item">
+        <a href="{% url 'user_information' %}" class="nav-link {% if current_page == "none" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "none" %}
+                  {% static 'sharix_admin/img/menu/hdd-network_w.svg' %}
+                {% else %}
+                  {% static 'sharix_admin/img/menu/hdd-network.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Управление правами</span>
+          </div>
+        </a>
+      </li> {% endcomment %}
+      <li class="nav-item">
+        <a href="{% url 'service_type' %}" class="nav-link {% if current_page == "service_type" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "service_type" %}
+                  {% static 'sharix_admin/img/menu/briefcase_w.svg' %}
+                {% else %}
+                  {% static 'sharix_admin/img/menu/briefcase.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Услуги сервиса</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'transactions' %}" class="nav-link {% if current_page == "transactions" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "transactions" %}
+                  {% static 'sharix_admin/img/menu/clock-history_w.svg' %}
+                {% else %}
+                  {% static 'sharix_admin/img/menu/clock-history.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">История заказов</span>
+          </div>
+        </a>
+      </li>
+      {% if is_partner_admin %}
+        <li class="nav-item">
+          <a href="{% url 'partner_detail' %}" class="nav-link {% if current_page == 'partner' %}active rounded{% endif %}">
+            <div class="link d-flex align-items-center">
+              <img
+                class="nav-img"
+                src="
+                  {% if current_page == 'partner' %}
+                    {% static 'sharix_admin/img/menu/person_w.svg' %}
+                  {% else %}
+                    {% static 'sharix_admin/img/menu/person.svg' %}
+                  {% endif %}">
+              <span class="menu-bar-label">О партнере</span>
+            </div>
+          </a>
+        </li>
+      {% endif %}
+      {% comment %} <li class="nav-item">
+        <a href="{% url 'service_information-add' %}" class="nav-link {% if current_page == "service_info" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "service_info" %}
+                  {% static 'sharix_admin/img/menu/person_w.svg' %}
+                {% else %}
+                  {% static 'sharix_admin/img/menu/person.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Информация о сервисе</span>
+          </div>
+        </a>
+      </li> {% endcomment %}
+      <li class="nav-item">
+        <a href="{% url 'payment' %}" class="nav-link {% if current_page == "payment" %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == "payment" %}
+                  {% static 'sharix_admin/img/menu/credit-card_w.svg' %}
+                {% else %}
+                  {% static 'sharix_admin/img/menu/credit-card.svg' %}
+                {% endif %}">
+            <span class="menu-bar-label">Оплата</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="user-workspace" class="p-5 border rounded box-shadow">
+      <h1 class="mainHeader mb-3">{{ title }}</h1>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+      {% block contenthome %}{% endblock contenthome%}
+  </div>
+
+  <footer class="d-flex justify-content-between mt-3 p-2 align-items-center border rounded box-shadow">
+    <div>
+        <img class="rounded-circle" style="height: 48px" src="{% static 'sharix_admin/img/user_avatar_1.png' %}"/>
+        <span class="mx-2">{{ phone }}</span>
+    </div>
+    <div>
+        <a class="ms-4" href="{% url 'contact' %}">{% trans 'Contacts' %}</a>
+        <a class="ms-4" href="https://wiki.sharix-app.org/doku.php/sharix/legal/soglashenie_s_servisom_na_ispolzovanie_platformy_sharix">{% trans 'Terms of use' %}</a>
+        <a class="ms-4 me-1" href="https://wiki.sharix-app.org/doku.php/sharix/legal/politika_konfidencialnosti_platformy_sharix">{% trans 'Privacy policy' %}</a>
+        <svg width="24" viewBox="0 0 24 24" fill="none" stroke="#479FF8" xmlns="http://www.w3.org/2000/svg">
+          <text x="9" y="16">
+              <a href="https://wiki.sharix-app.org/doku.php">?</a>
+          </text>
+          <circle cx="12" cy="12" r="11.5"/>
+        </svg>
+    </div>
+  </footer>
+</div>
+
+<script src="{% static 'sharix_admin/js/menu-bar.js' %}"></script>
+
+<script>
+  // Запуск некоторых функций после загрузки страницы
+  document.addEventListener('DOMContentLoaded', function() {
+    menuBarControll();
+  });
+
+  // Функция для скрытия экрана загрузки
+  function hideLoader() { document.getElementById("loader-wrapper").style.display = "none"; }
+
+  // Скрыть экран загрузки через 4 секунды
+  setTimeout(hideLoader, 400);
+</script>
+{% endblock %}

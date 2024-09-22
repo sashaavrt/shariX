@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ] + i18n_patterns(
         path('i18n/', include('django.conf.urls.i18n')),
-        path('', include('SharixAdmin.urls')),
+        path('', include('sharix_admin.urls')),
         path('tickets/', include('tickets.urls', namespace='tickets'), name='tickets'),
         path('design/', include("design_template.urls"), name='design'),
         path('dbsynce/', include("dbsynce.urls"), name="dbsynce"),

@@ -1,0 +1,412 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-01 22:28+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\tables.py:11
+msgid "Owner"
+msgstr "Владелец"
+
+#: .\tables.py:12 .\views\trans_id.py:9
+msgid "Service"
+msgstr "Услуга"
+
+#: .\tables.py:13
+msgid "Points"
+msgstr "Баллы"
+
+#: .\tables.py:14
+msgid "Registration date"
+msgstr "Дата оформления"
+
+#: .\tables.py:15 .\tables.py:34 .\tables.py:56 .\tables.py:76
+msgid "Status"
+msgstr "Статус"
+
+#: .\tables.py:15
+msgid "Successful, not successful"
+msgstr "Успешно, не успешно"
+
+#: .\tables.py:30 .\tables.py:53 .\tables.py:73 .\tables.py:94 .\tables.py:117
+#: .\tables.py:139 .\tables.py:166
+msgid "ID"
+msgstr "ИД"
+
+#: .\tables.py:31
+msgid "Legal entity"
+msgstr "Юрлицо"
+
+#: .\tables.py:32 .\tables.py:55
+msgid "Responsible"
+msgstr "Ответственный"
+
+#: .\tables.py:74
+msgid "Full Name"
+msgstr "ФИО"
+
+#: .\tables.py:95
+msgid "Name of the tariff"
+msgstr "Название тарифа"
+
+#: .\tables.py:97
+msgid "Name of the service scheme"
+msgstr "Название схемы услуги"
+
+#: .\tables.py:98
+msgid "Activity"
+msgstr "Активность"
+
+#: .\tables.py:140
+msgid "Description of the service"
+msgstr "Описание услуги (сервиса)"
+
+#: .\tables.py:147
+msgid "Cost km."
+msgstr "Стоимость км."
+
+#: .\tables.py:148
+msgid "Cost min."
+msgstr "Стоимость мин."
+
+#: .\tables.py:149
+msgid "Cost of service"
+msgstr "Стоимость услуги"
+
+#: .\templates\sharix_admin\auth.html:10
+msgid "Log in"
+msgstr "Авторизуйтесь"
+
+#: .\templates\sharix_admin\auth.html:26
+msgid "Please, enter the correct phone number and password."
+msgstr "Пожалуйста, введите правильный номер телефона и пароль."
+
+#: .\templates\sharix_admin\auth.html:29
+msgid "Login"
+msgstr "Войти"
+
+#: .\templates\sharix_admin\balance.html:11
+msgid ""
+"Payment by card and bank details is available. When paying for an order with "
+"a bank card, <br> payment processing takes place on the page of the PAYMO "
+"payment provider."
+msgstr ""
+"Доступна оплата картой и банковскими реквизитами. При оплате заказа с "
+"помощью банковская карта, <br> обработка платежа происходит на странице "
+"PAYMO поставщик платежей."
+
+#: .\templates\sharix_admin\balance.html:14
+msgid ""
+"You will need to enter your bank card details: MIR; VISA International; <br> "
+"Mastercard Worldwide."
+msgstr ""
+"Вам нужно будет ввести данные вашей банковской карты: MIR; VISA "
+"International; <br> Mastercard Worldwide."
+
+#: .\templates\sharix_admin\balance.html:17
+msgid "3D-Secure maps only."
+msgstr "Только защищенные 3D-карты."
+
+#: .\templates\sharix_admin\balance.html:21
+#: .\templates\sharix_admin\balance.html:22
+msgid "Enter the required amount"
+msgstr "Введите требуемую сумму"
+
+#: .\templates\sharix_admin\balance.html:25
+msgid ""
+"After replenishment, the funds can be used to pay for the services of "
+"subsidiary services."
+msgstr ""
+"После пополнения средства могут быть использованы для оплаты услуг "
+"вспомогательных служб."
+
+#: .\templates\sharix_admin\balance.html:34
+msgid "Replenish"
+msgstr "Пополнить"
+
+#: .\templates\sharix_admin\balance.html:36
+msgid "Back"
+msgstr "Назад"
+
+#: .\templates\sharix_admin\balance.html:40
+msgid "Requisites"
+msgstr "Реквизиты"
+
+#: .\templates\sharix_admin\balance.html:42
+msgid ""
+"<p>Legal address:<b>199155, the city of St. Petersburg, Zheleznovodskaya "
+"street, house 32 letter d, room 22-n office 1-8</b></p> <p>Email: "
+"<b>info@sharix-app.org </b></p> <p>TIN: <b>7801685119</b></p> <p>Bank: "
+"<b>Moscow branch of AKB MKPB (JSC)</b></p> <p>Bic: <b>044525610</b></p> "
+"<p>Current account: <b>40702810800400000025</b></p> <p>Correspondent "
+"account: <b>30101810645250000610</b></p>"
+msgstr ""
+"<p>Юридический адрес:<b>199155, город Санкт-Петербург, Железноводская улица, "
+"дом 32, литера d, комната 22-n, офис 1-8</b></p> <p>Электронная почта: "
+"<b>info@sharix-app.org </b></p> <p>НОМЕР: <b>7801685119</b></p> <p>Банк: "
+"<b>Московский филиал АКБ МКПБ (АО)</b></p> <p>Бик: <b>044525610</b></p> "
+"<p>Текущий счет: <b>40702810800400000025</b></p> <p>Корреспондент учетная "
+"запись: <b>30101810645250000610</b></p>"
+
+#: .\templates\sharix_admin\index.html:17
+msgid "ShariX Menu"
+msgstr "Sharix Меню"
+
+#: .\templates\sharix_admin\index.html:32
+msgid "Change"
+msgstr ""
+
+#: .\templates\sharix_admin\index.html:84
+msgid "Contacts"
+msgstr "Контакты"
+
+#: .\templates\sharix_admin\index.html:85
+msgid "Terms of use"
+msgstr "Условия использования"
+
+#: .\templates\sharix_admin\index.html:86 .\templates\sharix_admin\main.html:12
+msgid "Privacy policy"
+msgstr "Политика конфиденциальности"
+
+#: .\templates\sharix_admin\index.html:88
+msgid "Log out"
+msgstr "Выйти"
+
+#: .\templates\sharix_admin\main.html:11
+msgid "Documentation"
+msgstr "Документация"
+
+#: .\templates\sharix_admin\main.html:13
+msgid "Rules for the provision of services"
+msgstr "Правила предоставления услуг"
+
+#: .\templates\sharix_admin\main.html:14
+msgid "Procedure for the provision of services"
+msgstr "Порядок предоставления услуг"
+
+#: .\templates\sharix_admin\main.html:15
+msgid "List of services"
+msgstr "Перечень предоставляемых услуг"
+
+#: .\templates\sharix_admin\main.html:16
+msgid "Scheme 1"
+msgstr "Схема 1"
+
+#: .\templates\sharix_admin\main.html:16
+msgid "Scheme 2"
+msgstr "Схема 2"
+
+#: .\templates\sharix_admin\main.html:16
+msgid "Scheme 3"
+msgstr "Схема 3"
+
+#: .\templates\sharix_admin\main.html:16
+msgid "API Docs"
+msgstr "Документация по API"
+
+#: .\templates\sharix_admin\main.html:21
+#, python-format
+msgid "<p>User: <b>%(user)s</b></p>"
+msgstr "<p>Пользователь: <b>%(user)s</b></p>"
+
+#: .\templates\sharix_admin\main.html:24
+#, python-format
+msgid "<p>Phone number: <b>%(phone)s</b></p>"
+msgstr "<p>Номер телефона: <b>%(phone)s</b></p>"
+
+#: .\templates\sharix_admin\main.html:27
+#, python-format
+msgid "<p>Date of registration: <b>%(date)s</b></p>"
+msgstr "<p>Дата регистрации: <b>%(date)s</b></p>"
+
+#: .\templates\sharix_admin\main.html:30
+#, python-format
+msgid "<p>Balance: <b>%(balance)s points</b></p>"
+msgstr "<p>Баланс: <b>%(balance)s баллов</b></p>"
+
+#: .\templates\sharix_admin\main.html:33
+msgid "Buy points"
+msgstr "Купить баллы"
+
+#: .\templates\sharix_admin\partner_information_form.html:19
+#: .\templates\sharix_admin\senderform.html:10
+#: .\templates\sharix_admin\service_information_form.html:23
+#: .\templates\sharix_admin\service_tariff_form.html:19
+#: .\templates\sharix_admin\service_type_form.html:19
+msgid "Submit"
+msgstr "Отправить"
+
+#: .\templates\sharix_admin\senderform.html:7
+msgid "The message will be sent to the following users:"
+msgstr "Сообщение будет отправлено следующим пользователям:"
+
+#: .\templates\sharix_admin\senderform.html:9
+msgid "send_phone"
+msgstr "Отправить телефон"
+
+#: .\templates\sharix_admin\service_tariff.html:48
+#: .\templates\sharix_admin\service_type.html:48
+msgid "Add"
+msgstr "Добавить"
+
+#: .\templates\sharix_admin\service_type_delete.html:9
+#, python-format
+msgid "Are you sure you want to delete \\\"%%(object.caption)s\\\"?"
+msgstr "Вы уверены, что хотите удалить \\\"%%(object.caption)s\\\"?"
+
+#: .\templates\sharix_admin\service_type_delete.html:12
+msgid "Delete"
+msgstr "Удалить"
+
+#: .\templates\sharix_admin\test.html:7
+msgid "These pages are under development"
+msgstr "Данные страницы находятся в разработке"
+
+#: .\templates\sharix_admin\trans_carried.html:6
+#: .\templates\sharix_admin\transactions.html:7
+msgid "User: "
+msgstr "Пользователь: "
+
+#: .\templates\sharix_admin\trans_carried.html:7
+msgid "Balance: "
+msgstr "Баланс: "
+
+#: .\templates\sharix_admin\trans_carried.html:15
+msgid "Price: "
+msgstr "Цена: "
+
+#: .\templates\sharix_admin\trans_carried.html:16
+msgid "Owner: "
+msgstr "Владелец: "
+
+#: .\templates\sharix_admin\trans_carried.html:17
+msgid "Date of service: "
+msgstr "Дата предоставления услуги: "
+
+#: .\templates\sharix_admin\trans_carried.html:18
+msgid "Conducted: "
+msgstr "Проведен: "
+
+#: .\templates\sharix_admin\trans_carried.html:23
+msgid "Spend"
+msgstr "Потратить"
+
+#: .\templates\sharix_admin\transactions.html:8
+#, python-format
+msgid "Balance: %(wallet.balance)s points"
+msgstr "Баланс: %(wallet.balance)s баллов"
+
+#: .\templates\sharix_admin\transactions.html:11
+#: .\templates\sharix_admin\transactions.html:12
+msgid "Search"
+msgstr "Поиск"
+
+#: .\views\balance.py:9 .\views\balance.py:14 .\views\balance.py:20
+msgid "Top up your balance"
+msgstr "Пополните свой баланс"
+
+#: .\views\balance.py:15
+msgid "The payment was successful ;)"
+msgstr "the payment was successful ;)"
+
+#: .\views\balance.py:21
+msgid "Payment failed ;("
+msgstr "Платеж не прошел ;("
+
+#: .\views\context.py:5 .\views\index.py:14
+msgid "Home/Balance"
+msgstr "Главная/Баланс"
+
+#: .\views\context.py:6
+msgid "Payment information"
+msgstr "Платежная информация"
+
+#: .\views\context.py:7 .\views\transactions.py:10
+msgid "Payment history"
+msgstr "История платежей"
+
+#: .\views\context.py:8
+msgid "Courses"
+msgstr "Курсы"
+
+#: .\views\context.py:9
+msgid "Personal information"
+msgstr "Личная информация"
+
+#: .\views\context.py:10
+msgid "Service management"
+msgstr "Управление сервисами"
+
+#: .\views\context.py:11
+msgid "My connections"
+msgstr "Мои связи"
+
+#: .\views\context.py:12
+msgid "Partnership"
+msgstr "Сотрудничество"
+
+#: .\views\context.py:13
+msgid "Techsupport"
+msgstr "Техподдержка"
+
+#: .\views\context.py:14
+msgid "My tickets"
+msgstr "Мои заявки"
+
+#: .\views\context.py:15 .\views\provider.py:19 .\views\service_tariff.py:41
+msgid "Performers"
+msgstr "Исполнители"
+
+#: .\views\context.py:17 .\views\service_tariff.py:19
+#: .\views\service_tariff.py:61
+msgid "Service rates"
+msgstr "Тарифы услуг"
+
+#: .\views\context.py:19 .\views\partners.py:20
+msgid "Partners"
+msgstr "Партнеры"
+
+#: .\views\context.py:21 .\views\resource.py:19
+msgid "Resources"
+msgstr "Ресурсы"
+
+#: .\views\context.py:23 .\views\service_type.py:19
+msgid "Service services"
+msgstr "Услуги сервиса"
+
+#: .\views\context.py:25 .\views\service_info.py:17
+msgid "Information about the service"
+msgstr "Информация о сервисе"
+
+#: .\views\context.py:27 .\views\partner_info.py:19 .\views\partner_info.py:41
+#: .\views\partner_info.py:57
+msgid "Partner Information"
+msgstr "Информация о партнере"
+
+#: .\views\context.py:29 .\views\service.py:18
+msgid "Rates"
+msgstr "Тарифы"
+
+#: .\views\context.py:31 .\views\user_info.py:17
+msgid "User Management"
+msgstr "Управление пользователями"
+
+#: .\views\test.py:7
+msgid "Page in development"
+msgstr "Страница в разработке"

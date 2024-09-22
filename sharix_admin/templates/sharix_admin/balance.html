@@ -1,0 +1,60 @@
+{% extends 'sharix_admin/index.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block contenthome %}
+<div class="container">
+    <h1 class="mainHeader">{{ title }}</h1>
+    <p class="description_service">Это система управления государством, источником власти в которой является сам народ. Именно народ решает, какие законы и нормы необходимы для гармоничного существования и развития государства. Таким образом, каждый человек в демократическом обществе 
+        Получает определенный набор свобод и обязательств сформированных с учетом интересов всего сообщества. Исходя из вышесказанного, можно заключить, что демократия – это возможность для каждого человека свободно участвовать в непосредственном управлении своим государством, обществом и личной судьбой в конечном счете.</p>
+    <div class="container" style="overflow: auto; width: 100%; height: 650px;">
+        <div class="row" >
+            <div class="col-12 text-center" >
+                <br>
+                <p>{% blocktrans trimmed %}Payment by card and bank details is available. When paying for an order with a bank card, 
+                    <br> payment processing takes place on the page of the PAYMO payment provider.{% endblocktrans %}</p>
+                <br>
+                <p>{% blocktrans trimmed %}You will need to enter your bank card details: MIR; VISA International; 
+                    <br> Mastercard Worldwide.{% endblocktrans %}</p>
+                <br>
+                <p>{% trans '3D-Secure maps only.' %}</p>
+                <form method="post" >
+                    {% csrf_token %}
+                    <div class="form-floating mb-3 w-50 m-auto">
+                        <input type="number" class="form-control" name="price" placeholder="{% trans 'Enter the required amount' %}" step="100">
+                        <label for="floatingInput">{% trans 'Enter the required amount' %}</label>
+                    </div>
+                    <br>
+                    <p>{% trans 'After replenishment, the funds can be used to pay for the services of subsidiary services.' %}</p>
+                    <br>
+                    <div>
+                        <img src="{% static 'sharix_admin/img/visa.png' %}" alt="">
+                        <img src="{% static 'sharix_admin/img/mc.png' %}" alt="">
+                        <img src="{% static 'sharix_admin/img/mir.png' %}" alt="">
+                        <br>
+                        <img src="{% static 'sharix_admin/img/paymo.png' %}" alt="">
+                    </div>
+                    <button class="btn btn-primary mt-5 mb-3">{% trans 'Replenish' %}</button>
+                    <br>
+                    <a href="" >{% trans 'Back' %}</a>
+                </form>
+            </div>
+            <div class="col-12 mt-5">
+                <h3>{% trans 'Requisites' %}</h3>
+                <div class="p-5" style="border-radius: 15px; border: solid 1px gray;">
+                  {% blocktrans trimmed %}
+                  <p>Legal address:<b>199155, the city of St. Petersburg, Zheleznovodskaya street, house 32 letter d, room 22-n office 1-8</b></p>
+                  <p>Email: <b>info@sharix-app.org </b></p>
+                  <p>TIN: <b>7801685119</b></p>
+                  <p>Bank: <b>Moscow branch of AKB MKPB (JSC)</b></p>
+                  <p>Bic: <b>044525610</b></p>
+                  <p>Current account: <b>40702810800400000025</b></p>
+                  <p>Correspondent account: <b>30101810645250000610</b></p>
+                  {% endblocktrans %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+    
+{% endblock contenthome %}

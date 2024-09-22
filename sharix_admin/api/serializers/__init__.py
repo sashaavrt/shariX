@@ -1,0 +1,1 @@
+from sharix_admin.api.serializers.custom_token import CustomTokenSerializer

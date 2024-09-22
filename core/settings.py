@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
-    'SharixAdmin.apps.SharixadminConfig',
+    'sharix_admin.apps.ShariXAdminConfig',
     'tickets.apps.TicketsConfig',
     'dbsynce.apps.DbsyncedConfig',
     'webservice_running.apps.WebserviceRunningConfig',
@@ -192,7 +192,7 @@ JAZZMIN_SETTINGS = {
     "site_brand": "ShariX Platform",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "SharixAdmin/img/logo.png",
+    "site_logo": "sharix_admin/img/logo.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": None,
@@ -214,7 +214,7 @@ JAZZMIN_SETTINGS = {
 
     # List of model admins to search from the search bar, search bar omitted if excluded
     # If you want to use a single search field you dont need to use a list, you can use a simple string 
-    "search_model": ["SharixAdmin.SharixUser"],
+    "search_model": ["sharix_admin.SharixUser"],
 
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
     "user_avatar": "",
@@ -233,7 +233,7 @@ JAZZMIN_SETTINGS = {
         #{"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
-        {"model": "SharixAdmin.SharixUser"},
+        {"model": "sharix_admin.SharixUser"},
 
         # App with dropdown menu to all its models pages (Permissions checked against models)
         {"app": "tickets"},
@@ -246,7 +246,7 @@ JAZZMIN_SETTINGS = {
     # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     # "usermenu_links": [
     #     {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
-    #     {"model": "SharixAdmin.SharixUser"}
+    #     {"model": "sharix_admin.SharixUser"}
     # ],
 
     # #############
@@ -284,8 +284,8 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
-        "SharixAdmin": "fas fa-users-cog",
-        "SharixAdmin.SharixUser": "fas fa-user",
+        "sharix_admin": "fas fa-users-cog",
+        "sharix_admin.SharixUser": "fas fa-user",
         "tickets.Task": "fas fa-check",
         "tickets.TaskList": "fas fa-list",
         "tickets.Comment": "fas fa-comment",
@@ -323,7 +323,7 @@ JAZZMIN_SETTINGS = {
     # - carousel
     #"changeform_format": "horizontal_tabs",
     # override change forms on a per modeladmin basis
-    #"changeform_format_overrides": {"SharixAdmin.SharixUser": "collapsible", "auth.group": "vertical_tabs"},
+    #"changeform_format_overrides": {"sharix_admin.SharixUser": "collapsible", "auth.group": "vertical_tabs"},
     # Add a language dropdown into the admin
     #"language_chooser": True,
 }
@@ -388,7 +388,7 @@ REST_FRAMEWORK = {
 }
 
 SPAGHETTI_SAUCE = {
-    'apps': ['auth', 'SharixAdmin', 
+    'apps': ['auth', 'sharix_admin', 
                 'tickets', 'admin', 
                 'flatpages', 'sessions', 'sites', 'dbsynce'],
     'show_fields': False,

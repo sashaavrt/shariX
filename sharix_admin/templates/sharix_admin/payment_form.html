@@ -1,0 +1,57 @@
+{% extends 'sharix_admin/index.html' %}
+{% load i18n %}
+
+{% block contenthome %}
+    <p class="description_service">Это система управления государством, источником власти в которой является сам народ. Именно народ решает, какие законы и нормы необходимы для гармоничного существования и развития государства. Таким образом, каждый человек в демократическом обществе 
+  Получает определенный набор свобод и обязательств сформированных с учетом интересов всего сообщества. Исходя из вышесказанного, можно заключить, что демократия – это возможность для каждого человека свободно участвовать в непосредственном управлении своим государством, обществом и личной судьбой в конечном счете.</p>
+
+<div class="row justify-content-start">
+    <div class="maintable" id="maintable">
+        <table class="table table-sm m-2">
+            <tbody>
+                <tr>
+                  <td scope="col" class="p-3"><b>Информация о компании</b></td>
+                  <td scope="col" class="p-3"> </td>
+                </tr>
+                <tr>
+                  <td class="p-3">Тип компании</td>
+                  <td class="p-3"><input type="email" class="form-control" id="exampleInputEmail1" value="ИП"></td>
+                </tr>
+                <tr>
+                  <td class="p-3">Юр. адрес</td>
+                  <td class="p-3"><input type="email" class="form-control" id="exampleInputEmail1" value="г. Челябинск, пр-кт Комсомольский, дом 36, кв. 160" ></td>
+                </tr>
+                <tr>
+                  <td class="p-3">Является ли компания плательщиком НДС?</td>
+                  <td class="p-3"><input type="email" class="form-control" id="exampleInputEmail1" value="Нет"></td>
+                </tr>
+                <tr>
+                  <td class="p-3">ИНН</td>
+                  <td class="p-3"><input type="email" class="form-control" id="exampleInputEmail1" value="744811430253"></td>
+                </tr>
+                <tr>
+                  <td class="p-3">ОГРН/ОГРНИП</td>
+                  <td class="p-3"><input type="email" class="form-control" id="exampleInputEmail1" value="317745600090980"></td>
+                </tr>
+                <tr>
+                  <td class="p-3">Расчетный счет</td>
+                  <td class="p-3"><input type="email" class="form-control" id="exampleInputEmail1" value="40802810938000000117"></td>
+                </tr>
+                <tr>
+                  <td class="p-3">Корреспондентский счет</td>
+                  <td class="p-3"><input type="email" class="form-control" id="exampleInputEmail1" value="30101810145250000411"></td>
+                </tr>
+                <tr>
+                  <td class="p-3">БИК</td>
+                  <td class="p-3"><input type="email" class="form-control" id="exampleInputEmail1" value="044525411"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    
+<div class="text-end mt-2">
+    <a class="btn btn-primary" id="bord" href="/test">Редактировать</a>
+</div>
+</div>    
+{% endblock contenthome %}

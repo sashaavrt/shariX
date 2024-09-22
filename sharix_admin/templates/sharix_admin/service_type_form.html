@@ -1,0 +1,24 @@
+{% extends 'sharix_admin/index.html' %}
+{% load i18n %}
+
+{% block contenthome %}
+<div class="container">
+<h1 class="mainHeader">{{ title }}</h1>
+<form method="post" style="overflow: auto">
+    {% csrf_token %}
+    <div class="container m-2">
+        {% for field in form %}
+        {{field.errors}}
+        <div class="row">
+            {{field.label_tag}}
+            {{field}}
+            <p class="fs-6 fst-italic">{{field.help_text|truncatewords:20}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-2 mb-5">
+        <input class="btn btn-primary center" type="Submit" name="submit" value="{% trans 'Submit' %}"/>
+    </div>
+</form>
+</div>
+{% endblock %}

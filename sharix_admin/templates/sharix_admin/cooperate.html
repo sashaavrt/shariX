@@ -1,0 +1,10 @@
+{% extends 'sharix_admin/index.html' %}
+
+{% block contenthome %}
+<p class="description_service">Товарищи! Консультация с широким активом требуют определения и уточнения существенных финансовых и административных условий. Идейные соображения высшего порядка, а также постоянный количественный рост и сфера нашей активности обеспечивает широкому кругу (специалистов) участие в формировании форм развития. </p>
+<form method="post" class="d-flex flex-column align-items-end">
+    {% csrf_token %}
+    {% include 'sharix_admin/include/form.html' %}
+    <button class="btn btn-primary" type="submit">Отправить</button>
+</form>
+{% endblock %}

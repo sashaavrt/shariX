@@ -1,0 +1,26 @@
+{% extends 'sharix_admin/index.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block contenthome %}
+<a class="display-block btn btn-sm btn-outline-secondary" href="{% url 'partner_detail' %}"><< Назад</a>
+
+<h5 class="my-3">Общая информация</h6>
+
+<ul>
+    <li><b>Статус:</b> {{ doc.status }}</li>
+    <li><b>Дата проверки:</b> {{ doc.check_date }}</li>
+    <li><b>Срок окончания действия документа:</b> {{ doc.expire_date }}</li>
+    <li><b>Компания:</b> {{ doc.company_id.legal_name }}</li>
+</ul>
+
+<h5 class="my-3">Файлы</h6>
+<ul>
+    {% for doc_file in doc_files %}
+        <li><a href='{{ doc_file.file.url }}' target='_blank'>{{ doc_file }}</a></li>
+    {% endfor %}
+</ul>  
+
+<a class="btn btn-primary" href="{% url "partner_doc_upload" doc.doc_type %}">Загрузить новые файлы</a>
+{% endblock contenthome %}

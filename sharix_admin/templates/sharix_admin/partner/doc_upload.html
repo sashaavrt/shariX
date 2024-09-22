@@ -1,0 +1,89 @@
+{% extends 'sharix_admin/index.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block contenthome %}
+<a class="display-block btn btn-sm btn-outline-secondary" href="{% url 'partner_detail' %}"><< Назад</a>
+
+<p class="description_service">
+    Это система управления государством, источником власти в которой является сам народ. Именно народ решает, какие законы и нормы необходимы для гармоничного существования и развития государства.
+</p>
+
+<form class="d-flex flex-column align-items-end" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <div class="w-100">
+        <label for="{{ form.doc_expire_date.id_for_label }}" class="form-label">{{ form.doc_expire_date.label }}</label>
+        {{ form.doc_expire_date }}
+        
+        {% if form.doc_expire_date.errors %}
+            <ul class="alert alert-danger list-style-none mt-2 p-3">
+                {% for error in form.doc_expire_date.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="my-3 w-100">
+        <div class="drop-container" id="doc-drop-container">
+            <span class="drop-title">Перетащите файлы сюда</span>
+            или выберите их на своем устройстве (только PDF, PNG, JPG или JPEG)
+            {{ form.doc_file }}
+        </div>
+
+        {% if form.doc_file.errors %}
+            <ul class="alert alert-danger list-style-none mt-2 p-3">
+                {% for error in form.doc_file.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    
+    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#partner-doc-modal">Отправить</button>
+
+    <!-- Окно подтверждения -->
+    <div id="partner-doc-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Подтверждение действия</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Загрузка новых файлов документа полностью заменит все ранее загружаемые для него файлы, а также приведет к деактивации партнера до момента проверки новой информации!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Отменить</button>
+              <button type="sumbit" class="btn btn-outline-primary" data-bs-dismiss="modal">Подтвердить</button>
+            </div>
+          </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Настройка работы поля для загрузки файлов #doc-file-input
+        const dropContainer = document.getElementById('doc-drop-container');
+        const fileInput = document.getElementById('doc-file-input');
+
+        // Открытие окна выбора файлов при клике на контейнер
+        dropContainer.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        // Отмена стандартного поведения при перетаскивании файлов
+        dropContainer.addEventListener('dragover', function(e) {
+            e.preventDefault();
+        });
+
+        // Обработка события перетаскивания файлов
+        dropContainer.addEventListener('drop', function(e) {
+            e.preventDefault();
+            fileInput.files = e.dataTransfer.files;
+        });
+    });
+</script>
+{% endblock contenthome %}

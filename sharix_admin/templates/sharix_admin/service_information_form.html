@@ -1,0 +1,30 @@
+{% extends 'sharix_admin/index.html' %}
+{% load i18n %}
+
+{% block contenthome %}
+<div class="container">
+<h1 class="mainHeader">{{ title }}</h1>
+<p class="description_service">Это система управления государством, источником власти в которой является сам народ. Именно народ решает, какие законы и нормы необходимы для гармоничного существования и развития государства. Таким образом, каждый человек в демократическом обществе 
+    Получает определенный набор свобод и обязательств сформированных с учетом интересов всего сообщества. Исходя из вышесказанного, можно заключить, что демократия – это возможность для каждого человека свободно участвовать в непосредственном управлении своим государством, обществом и личной судьбой в конечном счете.</p>
+{{object.servicetype_id.caption}}
+{{object.id_provider.company_id.address}}
+{{object.id_provider.company_id.repr_id}}
+{{object.servicetype_id.description}}
+<form method="post" style="overflow: auto">
+    {% csrf_token %}
+    <div class="container m-2">
+        {% for field in form %}
+        {{field.errors}}
+        <div class="row">
+            {{field.label_tag}}
+            {{field}}
+            <p class="fs-6 fst-italic">{{field.help_text|truncatewords:20}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-2 mb-5">
+        <input class="btn btn-primary center" type="submit" name="apply" value="{% trans 'Submit' %}" />
+    </div>
+</form>
+</div>
+{% endblock %}

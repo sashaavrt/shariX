@@ -1,0 +1,15 @@
+{% extends 'sharix_admin/index.html' %}
+{% load i18n %}
+
+{% block contenthome %}
+<h1 class="mainHeader">{{ title }}</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="container m-2">
+        <p>{% blocktrans %}Are you sure you want to delete \"%(object.caption)s\"?{% endblocktrans %}</p>
+    </div>
+    <div class="text-center mt-2 mb-5">
+        <input class="btn btn-primary center" type="submit" name="apply" value="{% trans 'Delete' %}"/>
+    </div>
+</form>
+{% endblock %}
