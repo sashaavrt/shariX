@@ -1,0 +1,27 @@
+{% extends 'sharix_admin/base.html' %}
+{% load static %}
+
+{% block title %}ShariX Open - Вход{% endblock %}
+
+{% block content %}
+<div class="d-flex vh-100">
+    <div class="m-auto w-100 p-3 d-flex flex-column justify-content-center align-items-center" style="min-width: 320px; max-width: 448px;">
+        <img style="height: 128px;" src="{% static 'sharix_admin/img/logo.png' %}" alt="Логотип">
+        <h1 class="fs-3">Вход в ShariX Open</h1>
+
+        <form class="my-4 w-100" method="post">
+            {% csrf_token %}
+            {% include "sharix_admin/include/form.html" %}
+            
+            <a href="{% url "sharix_admin:auth_reset_password" %}" class="d-block small text-muted text-end mt-2">Забыли пароль? Восстановить</a>
+
+            <div class="mt-4">
+                <button class="w-100 btn btn-primary mb-2" type="submit">Войти</button>
+                <a class="d-block w-100 text-center" href="{% url "sharix_admin:auth_signup" %}">Регистрация</a>
+            </div>
+        </form>
+
+        <small class="text-muted">&#169; ShariX Open {% now "Y" %}</small>
+    </div>
+</div>
+{% endblock %}

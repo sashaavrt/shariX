@@ -1,3 +1,5 @@
+from .auth import *
+
 from .index import *
 from .transactions import *
 from .service import *
@@ -9,7 +11,6 @@ from .resource import *
 from .partners import *
 from .partner_info import *
 from .provider import *
-from .login import *
 from .cooperate import *
 from .payment import *
 from .balance import *

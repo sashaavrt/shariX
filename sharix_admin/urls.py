@@ -1,17 +1,30 @@
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include, re_path
-from sharix_admin.views import *
-from .apiviews import *
-from rest_framework import routers
 from django_spaghetti.views import Plate
 from schema_graph.views import Schema
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
+from rest_framework import routers
+
+from sharix_admin.views import *
+from sharix_admin.apiviews import *
+
 
 router = routers.SimpleRouter()
 router.register(r'sharix-users', SharixUserMVS)
 router.register(r'group', GroupMVS)
 
+app_name = "sharix_admin"
+
 urlpatterns = [
+    # Регистрация / Вход / Выход
+    path('auth/signup/', ShariXSignUpView.as_view(), name="auth_signup"),
+    path('auth/login/', ShariXLoginView.as_view(), name='auth_login'),
+    path('auth/logout/', login_required(LogoutView.as_view()), name="auth_logout"),
+    path('auth/reset-password/', ShariXResetPasswordView.as_view(), name='auth_reset_password'),
+
+    # --- Ниже страницы, которые требуют ревью ---
+
+    # Главная
     path('', login_required(IndexView.as_view()), name='home'),
     path('transactions/', login_required(TransactionsView.as_view()), name='transactions'),
     path('payment/', login_required(PaymentView.as_view()), name='payment'),
@@ -25,10 +38,7 @@ urlpatterns = [
     path('partner/doc/<str:doc_code>/upload', login_required(PartnerDocUploadView.as_view()), name='partner_doc_upload'),
     path('partner/doc/<str:doc_code>', login_required(PartnerDocView.as_view()), name='partner_doc'),
 
-
-    path('accounts/login/', LoginSharix.as_view(), name='authweb'),
     path('transactions/<int:trans_id>/', trans_id, name='transid'),
-    path('logout/', logout_view, name='logoutweb'),
     path('balance/', balance, name='balance'),
    
     path('partners/', login_required(PartnersListView.as_view()), name='partners'),

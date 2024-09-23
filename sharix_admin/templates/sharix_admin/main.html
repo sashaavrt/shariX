@@ -14,9 +14,8 @@
                 <li class="list-group-item"><a  href="https://wiki.sharix-app.org/doku.php/sharix/legal/pravila_okazanija_uslug">{% trans 'Rules for the provision of services' %}</a></li>
                 <li class="list-group-item"><a  href="https://wiki.sharix-app.org/doku.php/sharix/legal/porjadok_okazanija_uslug">{% trans 'Procedure for the provision of services' %}</a></li>
                 <li class="list-group-item"><a  href="https://wiki.sharix-app.org/doku.php/sharix/legal/perechen_uslug_platformy">{% trans 'List of services' %}</a></li>
-                <li class="list-group-item"><a  href="{% url 'schemav1' %}">{% trans 'Scheme 1' %}</a> / <a  href="{% url 'schemav2' %}">{% trans 'Scheme 2' %}</a> / <a  href="{% url 'schema' %}">{% trans 'Scheme 3' %}</a> / <a  href="{% url 'schema-redoc' %}">{% trans 'API Docs' %}</a></li>
-            
-                </ul>
+                <li class="list-group-item"><a  href="{% url 'sharix_admin:schemav1' %}">{% trans 'Scheme 1' %}</a> / <a  href="{% url 'sharix_admin:schemav2' %}">{% trans 'Scheme 2' %}</a> / <a  href="{% url 'sharix_admin:schema' %}">{% trans 'Scheme 3' %}</a> / <a  href="{% url 'sharix_admin:schema-redoc' %}">{% trans 'API Docs' %}</a></li>
+            </ul>
         </div>
         <div class="col-6 text-end">
             {% blocktrans trimmed with request.user.username as user %}
@@ -31,7 +30,7 @@
             {% blocktrans trimmed with wallet.balance as balance %}
             <p>Balance: <b>{{ balance }} points</b></p>
             {% endblocktrans %}
-            <a href="{% url 'balance' %}" class="btn btn-success">{% trans 'Buy points' %}</a>
+            <a href="{% url 'sharix_admin:balance' %}" class="btn btn-success">{% trans 'Buy points' %}</a>
         </div>
     </div>
 </div>  

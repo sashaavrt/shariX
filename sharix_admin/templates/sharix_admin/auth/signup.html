@@ -1,0 +1,47 @@
+{% extends 'sharix_admin/base.html' %}
+{% load static %}
+
+{% block title %}ShariX Open - Регистрация{% endblock %}
+
+{% block content %}
+<div class="d-flex vh-100">
+    <div class="m-auto w-100 p-3 d-flex flex-column justify-content-center align-items-center" style="min-width: 320px; max-width: 448px;">
+        <img style="height: 128px;" src="{% static 'sharix_admin/img/logo.png' %}" alt="Логотип">
+        <h1 class="fs-3">Регистрация в ShariX Open</h1>
+
+        <form class="my-4 w-100" method="post">
+            {% csrf_token %}
+            {% include "sharix_admin/include/form.html" %}
+            
+            <div class="form-check text-muted">
+                <input type="checkbox" class="form-check-input" id="checkbox-user-agreement">
+                <label class="form-check-label" for="checkbox-user-agreement">
+                    Я соглашаюсь с <a class="link-secondary" href="https://wiki.sharix-app.org/doku.php/open/doc/usage" target="_blank">пользовательским соглашением</a>
+                </label>
+            </div>
+
+            <div class="mt-4">
+                <!-- По умолчанию кнопка "Зарегистрироваться" отключена -->
+                <button id="btn-submit-signup" class="w-100 btn btn-primary mb-2" type="submit" disabled>Зарегистрироваться</button>
+                <a class="d-block w-100 text-center" href="{% url "sharix_admin:auth_login" %}">Вход</a>
+            </div>
+        </form>
+
+        <small class="text-muted">&#169; ShariX Open {% now "Y" %}</small>
+    </div>
+</div>
+
+<script>
+    // Логика, запрещающая нажатие на кнопку "Зарегистрироваться", пока пользователь не согласится с "Пользовательским соглашением"
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxEl = document.getElementById('checkbox-user-agreement');
+        const submitBtnEl = document.getElementById('btn-submit-signup');
+
+        // Обработчик события изменения состояния чекбокса
+        checkboxEl.addEventListener('change', function() {
+            if (checkboxEl.checked) submitBtnEl.removeAttribute('disabled');
+            else submitBtnEl.setAttribute('disabled', 'disabled');
+        });
+    });
+</script>
+{% endblock %}

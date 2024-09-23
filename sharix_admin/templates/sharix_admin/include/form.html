@@ -1,22 +1,28 @@
 {% for field in form %}
-    <div class="w-100 mb-3">
-        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-        {{ field }}
-        {% if field.help_text %}
-            <small class="form-text text-muted">{{ field.help_text }}</small>
-        {% endif %}
+    <div class="w-100 mb-2 {% if field.errors %}field-has-errors{% endif %}">
+        <div class="form-floating">
+            {{ field }}
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        </div>
+
         {% if field.errors %}
-            <ul class="alert alert-danger list-style-none">
+            <div class="mt-1">
                 {% for error in field.errors %}
-                    <li>{{ error }}</li>
+                    <small class="d-block text-danger">* {{ error }}</small>
                 {% endfor %}
-            </ul>
+            </div>
         {% endif %}
+
+        {% comment %}
+            {% if field.help_text %}
+                <small class="form-text d-block text-muted mt-1">{{ field.help_text }}</small>
+            {% endif %}
+        {% endcomment %}
     </div>
 {% endfor %}
 
 {% if form.non_field_errors %}
-    <div class="alert alert-danger">
+    <div class="alert alert-danger mb-0 small">
         {% for error in form.non_field_errors %}
             {{ error }}
         {% endfor %}

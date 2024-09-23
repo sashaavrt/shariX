@@ -15,7 +15,7 @@
 
     <ul class="d-flex flex-column nav nav-pills rounded box-shadow border p-2 bg-white">
       <li class="nav-item">
-        <a href="{% url "home" %}" class="nav-link {% if current_page == "index" %}active rounded{% endif %}">
+        <a href="{% url "sharix_admin:home" %}" class="nav-link {% if current_page == "index" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
@@ -60,7 +60,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="{% url 'partners' %}" class="nav-link {% if current_page == "partners" %}active rounded{% endif %}">
+        <a href="{% url "sharix_admin:partners" %}" class="nav-link {% if current_page == "partners" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
@@ -76,7 +76,7 @@
       </li>
       {% if not is_partner_admin %}
         <li class="nav-item">
-          <a href="{% url 'cooperate' %}" class="nav-link {% if current_page == "cooperate" %}active rounded{% endif %}">
+          <a href="{% url "sharix_admin:cooperate" %}" class="nav-link {% if current_page == "cooperate" %}active rounded{% endif %}">
             <div class="link d-flex align-items-center">
               <img
                 class="nav-img"
@@ -92,7 +92,7 @@
         </li>
       {% endif %}
       {% comment %} <li class="nav-item">
-        <a href="{% url 'user_information' %}" class="nav-link {% if current_page == "none" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:user_information' %}" class="nav-link {% if current_page == "none" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
@@ -107,7 +107,7 @@
         </a>
       </li> {% endcomment %}
       <li class="nav-item">
-        <a href="{% url 'service_type' %}" class="nav-link {% if current_page == "service_type" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:service_type' %}" class="nav-link {% if current_page == "service_type" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
@@ -122,7 +122,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="{% url 'transactions' %}" class="nav-link {% if current_page == "transactions" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:transactions' %}" class="nav-link {% if current_page == "transactions" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
@@ -138,7 +138,7 @@
       </li>
       {% if is_partner_admin %}
         <li class="nav-item">
-          <a href="{% url 'partner_detail' %}" class="nav-link {% if current_page == 'partner' %}active rounded{% endif %}">
+          <a href="{% url 'sharix_admin:partner_detail' %}" class="nav-link {% if current_page == 'partner' %}active rounded{% endif %}">
             <div class="link d-flex align-items-center">
               <img
                 class="nav-img"
@@ -154,7 +154,7 @@
         </li>
       {% endif %}
       {% comment %} <li class="nav-item">
-        <a href="{% url 'service_information-add' %}" class="nav-link {% if current_page == "service_info" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:service_information-add' %}" class="nav-link {% if current_page == "service_info" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
@@ -169,7 +169,7 @@
         </a>
       </li> {% endcomment %}
       <li class="nav-item">
-        <a href="{% url 'payment' %}" class="nav-link {% if current_page == "payment" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:payment' %}" class="nav-link {% if current_page == "payment" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
@@ -197,20 +197,26 @@
   </div>
 
   <footer class="d-flex justify-content-between mt-3 p-2 align-items-center border rounded box-shadow">
-    <div>
-        <img class="rounded-circle" style="height: 48px" src="{% static 'sharix_admin/img/user_avatar_1.png' %}"/>
-        <span class="mx-2">{{ phone }}</span>
+    <div class="d-flex align-items-center">
+        <div class="d-flex justify-content-center align-items-center rounded-circle bg-secondary-subtle p-3">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <span class="mx-2 text-nowrap">{{ phone }}</span>
+        
+        <form method="post" action="{% url "sharix_admin:auth_logout" %}">
+          {% csrf_token %}
+          <button class="btn btn-sm btn-outline-secondary" type="submit">
+            Выйти
+            <i class="fa-solid fa-right-from-bracket ms-1"></i>
+          </button>
+        </form>
     </div>
-    <div>
-        <a class="ms-4" href="{% url 'contact' %}">{% trans 'Contacts' %}</a>
-        <a class="ms-4" href="https://wiki.sharix-app.org/doku.php/sharix/legal/soglashenie_s_servisom_na_ispolzovanie_platformy_sharix">{% trans 'Terms of use' %}</a>
-        <a class="ms-4 me-1" href="https://wiki.sharix-app.org/doku.php/sharix/legal/politika_konfidencialnosti_platformy_sharix">{% trans 'Privacy policy' %}</a>
-        <svg width="24" viewBox="0 0 24 24" fill="none" stroke="#479FF8" xmlns="http://www.w3.org/2000/svg">
-          <text x="9" y="16">
-              <a href="https://wiki.sharix-app.org/doku.php">?</a>
-          </text>
-          <circle cx="12" cy="12" r="11.5"/>
-        </svg>
+
+    <div class="d-flex gap-3">
+        <a href="{% url 'contact' %}">{% trans 'Contacts' %}</a>
+        <a href="https://wiki.sharix-app.org/doku.php/sharix/legal/soglashenie_s_servisom_na_ispolzovanie_platformy_sharix">{% trans 'Terms of use' %}</a>
+        <a href="https://wiki.sharix-app.org/doku.php/sharix/legal/politika_konfidencialnosti_platformy_sharix">{% trans 'Privacy policy' %}</a>
+        <a href="https://wiki.sharix-app.org/doku.php">Помощь</a>
     </div>
   </footer>
 </div>

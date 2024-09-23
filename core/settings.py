@@ -70,6 +70,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "core.urls"
+LOGIN_URL = "sharix_admin:auth_login"
+LOGIN_REDIRECT_URL = "sharix_admin:home"
+LOGOUT_REDIRECT_URL = "sharix_admin:auth_login"
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_SECURITY_WARN_AFTER = 5
