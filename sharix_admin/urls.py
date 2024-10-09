@@ -22,10 +22,11 @@ urlpatterns = [
     path('auth/logout/', login_required(LogoutView.as_view()), name="auth_logout"),
     path('auth/reset-password/', ShariXResetPasswordView.as_view(), name='auth_reset_password'),
 
-    # --- Ниже страницы, которые требуют ревью ---
-
     # Главная
-    path('', login_required(IndexView.as_view()), name='home'),
+    path('', login_required(MainView.as_view()), name='main'),
+    
+    # --- Ниже страницы, требующие ревью ---
+
     path('transactions/', login_required(TransactionsView.as_view()), name='transactions'),
     path('payment/', login_required(PaymentView.as_view()), name='payment'),
     

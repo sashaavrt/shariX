@@ -1,5 +1,4 @@
 from django_tables2 import SingleTableView
-from django.contrib.auth.mixins import UserPassesTestMixin
 from sharix_admin.utils import group_required
 from sharix_admin.tables import PartnersTable
 from django.contrib.auth.decorators import login_required
@@ -10,7 +9,7 @@ from django.utils.translation import gettext as _
 from .base import BaseView
 
 
-class PartnersListView(UserPassesTestMixin, BaseView, SingleTableView):
+class PartnersListView(BaseView, SingleTableView):
     page_title = _('Partners')
     page_name = 'partners'
     table_class = PartnersTable

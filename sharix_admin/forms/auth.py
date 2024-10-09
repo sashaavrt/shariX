@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 
 from sharix_admin.forms import BaseForm
 
@@ -14,6 +15,7 @@ class ShariXSignUpForm(BaseForm, UserCreationForm):
         user.username = self.cleaned_data['phone_number'] # FIXME: Имя пользователя = номер телефона
         if commit:
             user.save()
+            user.groups.add(Group.objects.get(id=51)) # Добавляем всех пользователей по умолчанию в группу CLIENT
         return user
 
     class Meta:

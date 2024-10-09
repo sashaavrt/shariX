@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib import messages
 from django.db import transaction
 
@@ -11,15 +10,19 @@ from sharix_admin.utils import create_ticket_partner_activation
 from dbsynce.models import Documents
 from tickets.models import Ticket, TicketList
 
+from .base import BaseView
 
-class CooperateView(UserPassesTestMixin, FormView):
+
+class CooperateView(BaseView, FormView):
     form_class = CompanyForm
     template_name = "sharix_admin/cooperate.html"
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("sharix_admin:main")
+    page_title = 'Сотрудничество'
+    page_name = 'cooperate'
 
     # Проверяем не состояит ли текущий пользователь в группе PARTNER-ADMIN
     def test_func(self):
-        return not self.request.user.groups.filter(name='PARTNER-ADMIN').exists()
+        return not "PARTNER-ADMIN" in self.user_groups
 
     def form_valid(self, form):
         with transaction.atomic():
@@ -72,12 +75,4 @@ class CooperateView(UserPassesTestMixin, FormView):
         messages.success(self.request, 'Ваша заявка на становление партнером успешно отправлена и теперь проходит проверку!')
 
         return super().form_valid(form) # Возвращаем успешный ответ
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update({
-            "title": "Сотрудничество",
-            "current_page": "cooperate"
-        }) 
-        return context
     

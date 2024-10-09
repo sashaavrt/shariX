@@ -1,6 +1,6 @@
 from .auth import *
+from .main import *
 
-from .index import *
 from .transactions import *
 from .service import *
 from .partner import *

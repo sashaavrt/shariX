@@ -1,10 +1,8 @@
-{% extends 'sharix_admin/index.html' %}
-{% load i18n %}
+{% extends 'sharix_admin/base_admin.html' %}
 {% load static %}
 
-
-{% block contenthome %}
-<a class="display-block btn btn-sm btn-outline-secondary" href="{% url 'partner_detail' %}"><< Назад</a>
+{% block view %}
+<a class="display-block btn btn-sm btn-outline-secondary" href="{% url 'sharix_admin:partner_detail' %}"><< Назад</a>
 
 <h5 class="my-3">Общая информация</h6>
 
@@ -22,5 +20,5 @@
     {% endfor %}
 </ul>  
 
-<a class="btn btn-primary" href="{% url "partner_doc_upload" doc.doc_type %}">Загрузить новые файлы</a>
-{% endblock contenthome %}
+<a class="btn btn-primary" href="{% url "sharix_admin:partner_doc_upload" doc.doc_type %}">Загрузить новые файлы</a>
+{% endblock %}

@@ -15,12 +15,12 @@
 
     <ul class="d-flex flex-column nav nav-pills rounded box-shadow border p-2 bg-white">
       <li class="nav-item">
-        <a href="{% url "sharix_admin:home" %}" class="nav-link {% if current_page == "index" %}active rounded{% endif %}">
+        <a href="{% url "sharix_admin:main" %}" class="nav-link {% if current_page == "main" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
               src="
-                {% if current_page == "index" %}
+                {% if current_page == "main" %}
                   {% static 'sharix_admin/img/menu/house_w.svg' %}
                 {% else %}
                   {% static 'sharix_admin/img/menu/house.svg' %}
@@ -59,7 +59,7 @@
           </div>
         </a>
       </li>
-      <li class="nav-item">
+      {% comment %} <li class="nav-item">
         <a href="{% url "sharix_admin:partners" %}" class="nav-link {% if current_page == "partners" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
@@ -73,8 +73,8 @@
             <span class="menu-bar-label">Партнеры</span>
           </div>
         </a>
-      </li>
-      {% if not is_partner_admin %}
+      </li> {% endcomment %}
+      {% if not "PARTNER-ADMIN" in user_groups %}
         <li class="nav-item">
           <a href="{% url "sharix_admin:cooperate" %}" class="nav-link {% if current_page == "cooperate" %}active rounded{% endif %}">
             <div class="link d-flex align-items-center">
@@ -106,7 +106,7 @@
           </div>
         </a>
       </li> {% endcomment %}
-      <li class="nav-item">
+      {% comment %} <li class="nav-item">
         <a href="{% url 'sharix_admin:service_type' %}" class="nav-link {% if current_page == "service_type" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
@@ -120,8 +120,8 @@
             <span class="menu-bar-label">Услуги сервиса</span>
           </div>
         </a>
-      </li>
-      <li class="nav-item">
+      </li> {% endcomment %}
+      {% comment %} <li class="nav-item">
         <a href="{% url 'sharix_admin:transactions' %}" class="nav-link {% if current_page == "transactions" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
@@ -135,8 +135,8 @@
             <span class="menu-bar-label">История заказов</span>
           </div>
         </a>
-      </li>
-      {% if is_partner_admin %}
+      </li> {% endcomment %}
+      {% if "PARTNER-ADMIN" in user_groups %}
         <li class="nav-item">
           <a href="{% url 'sharix_admin:partner_detail' %}" class="nav-link {% if current_page == 'partner' %}active rounded{% endif %}">
             <div class="link d-flex align-items-center">
@@ -168,7 +168,7 @@
           </div>
         </a>
       </li> {% endcomment %}
-      <li class="nav-item">
+      {% comment %} <li class="nav-item">
         <a href="{% url 'sharix_admin:payment' %}" class="nav-link {% if current_page == "payment" %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
@@ -179,21 +179,22 @@
                 {% else %}
                   {% static 'sharix_admin/img/menu/credit-card.svg' %}
                 {% endif %}">
-            <span class="menu-bar-label">Оплата</span>
+            <span class="menu-bar-label">Реквизиты</span>
           </div>
         </a>
-      </li>
+      </li> {% endcomment %}
     </ul>
   </nav>
 
   <div id="user-workspace" class="p-5 border rounded box-shadow">
-      <h1 class="mainHeader mb-3">{{ title }}</h1>
+      <h1>{{ title }}</h1>
       {% if messages %}
         {% for message in messages %}
           <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
         {% endfor %}
       {% endif %}
-      {% block contenthome %}{% endblock contenthome%}
+      
+      {% block view %}{% endblock view %}
   </div>
 
   <footer class="d-flex justify-content-between mt-3 p-2 align-items-center border rounded box-shadow">
@@ -201,23 +202,23 @@
         <div class="d-flex justify-content-center align-items-center rounded-circle bg-secondary-subtle p-3">
           <i class="fa-solid fa-user"></i>
         </div>
-        <span class="mx-2 text-nowrap">{{ phone }}</span>
-        
-        <form method="post" action="{% url "sharix_admin:auth_logout" %}">
-          {% csrf_token %}
-          <button class="btn btn-sm btn-outline-secondary" type="submit">
-            Выйти
-            <i class="fa-solid fa-right-from-bracket ms-1"></i>
-          </button>
-        </form>
+        <span class="mx-2 text-nowrap text-muted">{{ user }}</span>
     </div>
 
-    <div class="d-flex gap-3">
+    <div class="d-flex gap-3 mx-2">
         <a href="{% url 'contact' %}">{% trans 'Contacts' %}</a>
         <a href="https://wiki.sharix-app.org/doku.php/sharix/legal/soglashenie_s_servisom_na_ispolzovanie_platformy_sharix">{% trans 'Terms of use' %}</a>
         <a href="https://wiki.sharix-app.org/doku.php/sharix/legal/politika_konfidencialnosti_platformy_sharix">{% trans 'Privacy policy' %}</a>
         <a href="https://wiki.sharix-app.org/doku.php">Помощь</a>
     </div>
+
+    <form method="post" action="{% url "sharix_admin:auth_logout" %}">
+      {% csrf_token %}
+      <button class="btn btn-sm btn-outline-secondary text-nowrap" type="submit">
+        Выйти
+        <i class="fa-solid fa-right-from-bracket ms-1"></i>
+      </button>
+    </form>
   </footer>
 </div>
 

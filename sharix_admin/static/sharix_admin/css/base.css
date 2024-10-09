@@ -1,10 +1,98 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
+:root{
+    --btn-bg-color: #479FF8;
+    --btn-txt-color: #ffffff;
+    --btn-hover-color: #0a58ca;
+    --pills-bg-color: #479FF8;
+    --pills-txt-color: None;
+    --links-txt-color: #479FF8;
+    --links-hover-color: #88b9ea;
+    --btn-success: #821e27;
+    --btn-success-txt: #821e27;
+    --btn-success-hover: #821e27;
+    --btn-danger: #821e27;
+    --btn-danger-txt: #821e27;
+    --btn-danger-hover: #821e27;
+    --primary: #479FF8;
+}
+
 * {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+p {
+    color: var(--bs-secondary-color);
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.btn-primary {
+    background-color: var(--btn-bg-color);
+    color: var(--btn-txt-color);
+    border-color: var(--btn-bg-color);
+}
+
+.btn-outline-primary {
+    border-color: var(--btn-bg-color);
+    color: var(--btn-bg-color);
+}
+
+.btn-primary:hover, .btn-outline-primary:hover {
+    background-color: var(--btn-hover-color);
+    border-color: var(--btn-hover-color);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: var(--pills-bg-color);
+    color: var(--pills-txt-color);
+}
+
+a {
+    color: var(--links-txt-color); 
+}
+
+.link img {
+    color: var(--links-txt-color); 
+}
+
+a:hover {
+    color:var(--links-hover-color);
+}
+
+.nav-link{
+    color: var(--links-txt-color);
+}
+
+.nav-link:hover{
+    color:var(--links-hover-color);
+}
+
+.btn-success, .btn-outline-success{
+    color: var(--btn-txt-color);
+    background-color: var(--btn-success);
+    border-color: var(--btn-success);
+}
+
+.btn-success:hover, .btn-outline-success:hover{
+    background-color: var(--btn-success-hover);
+    border-color: var(--btn-success-hover);
+}
+
+.btn-danger, .btn-outline-danger{
+    color: var(--btn-danger-txt);
+    background-color: var(--btn-danger);
+    border-color: var(--btn-danger);
+}
+
+.btn-danger:hover, .btn-outline-danger:hover{
+    background-color: var(--btn-danger-hover);
+    border-color: var(--btn-danger-hover);
 }
 
 .content {
@@ -179,4 +267,3 @@
 .drop-container  input[type=file]::file-selector-button:hover {
     background: var(--btn-hover-color);
 }
-  

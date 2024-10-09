@@ -1,7 +1,6 @@
 from django_tables2 import SingleTableView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from sharix_admin.tables import ServiceTypeTable
-from django.contrib.auth.mixins import UserPassesTestMixin
 from sharix_admin.forms import ServiceTypeCreateForm, ServiceTypeUpdateForm
 from dbsynce.models import ServiceType
 from django.urls import reverse
@@ -10,7 +9,7 @@ from django.utils.translation import gettext as _
 from .base import BaseView
 
     
-class ServiceTypeCreate(UserPassesTestMixin, BaseView, CreateView):
+class ServiceTypeCreate(BaseView, CreateView):
     page_title = _('Услуги сервиса')
     page_name = 'service_type'
     model = ServiceType
@@ -34,7 +33,7 @@ class ServiceTypeCreate(UserPassesTestMixin, BaseView, CreateView):
         return False
     
 
-class ServiceTypeListView(UserPassesTestMixin, BaseView, SingleTableView):
+class ServiceTypeListView(BaseView, SingleTableView):
     page_title = _('Услуги сервиса')
     page_name = 'service_type'
     table_class = ServiceTypeTable
@@ -59,7 +58,7 @@ class ServiceTypeListView(UserPassesTestMixin, BaseView, SingleTableView):
         return False
 
 
-class ServiceTypeUpdateView(UserPassesTestMixin, UpdateView):
+class ServiceTypeUpdateView(BaseView, UpdateView):
     model = ServiceType
     form_class = ServiceTypeCreateForm
     template_name = "sharix_admin/service_type_form.html"
@@ -84,7 +83,7 @@ class ServiceTypeUpdateView(UserPassesTestMixin, UpdateView):
         return reverse('service_type')
     
 
-class ServiceTypeDelete(UserPassesTestMixin, DeleteView):
+class ServiceTypeDelete(BaseView, DeleteView):
     model = ServiceType
     template_name = "sharix_admin/service_type_delete.html"
 

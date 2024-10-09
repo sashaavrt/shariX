@@ -1,10 +1,9 @@
-{% extends 'sharix_admin/index.html' %}
-{% load i18n %}
+{% extends 'sharix_admin/base_admin.html' %}
 {% load static %}
 
 
-{% block contenthome %}
-<a class="display-block btn btn-sm btn-outline-secondary" href="{% url 'partner_detail' %}"><< Назад</a>
+{% block view %}
+<a class="display-block btn btn-sm btn-outline-secondary" href="{% url 'sharix_admin:partner_detail' %}"><< Назад</a>
 
 <p class="description_service">
     Это система управления государством, источником власти в которой является сам народ. Именно народ решает, какие законы и нормы необходимы для гармоничного существования и развития государства.
@@ -86,4 +85,4 @@
         });
     });
 </script>
-{% endblock contenthome %}
+{% endblock %}
