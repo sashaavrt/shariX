@@ -28,6 +28,10 @@ p {
     color: var(--bs-secondary-color);
 }
 
+ul {
+    color: var(--bs-secondary-color);
+}
+
 .text-primary {
     color: var(--primary) !important;
 }

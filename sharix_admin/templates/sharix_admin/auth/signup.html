@@ -37,22 +37,14 @@
         <small class="text-muted">&#169; ShariX Open {% now "Y" %}</small>
     </div>
 </div>
+{% endblock %}
 
+{% block extra_js %}
 <script>
-    // Логика, запрещающая нажатие на кнопку "Зарегистрироваться", пока пользователь не согласится с "Пользовательским соглашением"
-    document.addEventListener('DOMContentLoaded', function() {
-        const checkboxEls = [
-            document.getElementById('checkbox-fourteen-years'),
-            document.getElementById('checkbox-user-agreement')
-        ];
-        const submitBtnEl = document.getElementById('btn-submit-signup');
-
-        checkboxEls.forEach(checkboxEl => {
-            checkboxEl.addEventListener('change', function() {
-                if (checkboxEls.every(el => el.checked)) submitBtnEl.removeAttribute('disabled');
-                else submitBtnEl.setAttribute('disabled', 'disabled');
-            });
-        });
-    });
+    makeCheckboxesMandatory(
+        document.getElementById('btn-submit-signup'),
+        document.getElementById('checkbox-fourteen-years'),
+        document.getElementById('checkbox-user-agreement')
+    );
 </script>
 {% endblock %}

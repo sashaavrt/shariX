@@ -26,6 +26,19 @@ DB_PORT = 5432
 
 ########
 #
+# Email
+#
+########
+
+EMAIL_HOST = None
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = None
+EMAIL_HOST_PASSWORD = None
+DEFAULT_FROM_EMAIL = None
+
+########
+#
 # Gunicorn
 #
 ########

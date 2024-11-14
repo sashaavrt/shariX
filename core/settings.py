@@ -402,3 +402,12 @@ GRAPH_MODELS = {
     'all_applications': True,
     'group_models': True,
 }
+
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = sv.EMAIL_HOST
+EMAIL_PORT = sv.EMAIL_PORT
+EMAIL_USE_TLS = sv.EMAIL_USE_TLS
+EMAIL_HOST_USER = sv.EMAIL_HOST_USER 
+EMAIL_HOST_PASSWORD = sv.EMAIL_HOST_PASSWORD
+DEFAULT_FROM_EMAIL = sv.DEFAULT_FROM_EMAIL
