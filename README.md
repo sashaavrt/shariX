@@ -2,9 +2,15 @@
 
 The base Django project of a service web application to which other modules are connected.
 
-## Installation
+## Installation / Upgrade
 
 Download or clone repository. For the initial configuration, run *bin/install.sh*.
+
+During the installation, you can pass the `--test-users` parameter to automatically create test users. These users will be assigned to the **TEST** group. Additionally, if the `DEBUG` setting is enabled (`DEBUG=True` in *core/settings_vars.py*), these test users will be marked as active and can log in. If `DEBUG` is disabled (`DEBUG=False`), the users will be inactive and unable to log in.
+
+```bash
+./bin/install.sh --test-users
+```
 
 ## Configuration
 

@@ -2,6 +2,19 @@
 
 source bin/install.cfg
 
+# Command line argument handler
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --test-users) 
+            export TEST_USERS=true
+            echo "Test users flag set"
+            shift ;;
+        *) 
+            echo "Unknown parameter: $1"
+            shift ;;
+    esac
+done
+
 # Function to check if a repository exists and perform git pull or git clone
 update_repository() {
     local repo_url="$1"
