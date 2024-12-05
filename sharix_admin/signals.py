@@ -6,6 +6,7 @@ from django.db.models.signals import post_migrate
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.conf import settings
+from django.db import models
 
 from tickets.models import TicketList
 
@@ -127,9 +128,12 @@ def create_initial_ticket_lists(sender, **kwargs):
 
 
 # Откючаем тестовых пользователей (если такие есть), если DEBUG=False и наоброт
-if Group.objects.filter(name="TEST").exists():
-    test_group = Group.objects.get(name="TEST")
-    users_in_test_group = User.objects.filter(groups=test_group)
+try:
+    if Group.objects.filter(name="TEST").exists():
+        test_group = Group.objects.get(name="TEST")
+        users_in_test_group = User.objects.filter(groups=test_group)
 
-    if users_in_test_group:
-        users_in_test_group.update(is_active=settings.DEBUG)
+        if users_in_test_group:
+            users_in_test_group.update(is_active=settings.DEBUG)
+except:
+    print("Test user validation is not available. Models have not been created yet")

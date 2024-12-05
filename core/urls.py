@@ -14,7 +14,7 @@ urlpatterns = [
         path('design/', include("design_template.urls"), name='design'),
         path('dbsynce/', include("dbsynce.urls"), name="dbsynce"),
         path('webservice/', include("webservice_running.urls"), name='webservice_running'),
-        path('landing/', include("landing.urls"), name="landing"),
+        #path('landing/', include("landing.urls"), name="landing"),
         prefix_default_language=False,
     )
     
