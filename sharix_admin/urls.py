@@ -74,6 +74,7 @@ urlpatterns = [
 
     path('api/v1/auth/', include('djoser.urls.authtoken'), name="api-auth"),
     path('api/v1/platform/', include(router.urls), name="api-platform"),
+    path('by_phone/<phone_number>/', get_user_by_phone_number, name='get_user_by_phone_number'),
 
     path('senderphone/', PhoneSender.as_view()),
 
