@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'ckeditor',
     'fontawesomefree',
+    'landing',
+    'captcha',
 ]
 
 MIDDLEWARE = [
