@@ -1,19 +1,33 @@
 #!/bin/bash
 
-source bin/install.cfg
+if [ -f bin/install.cfg ]; then
+    echo "File install.cfg already exists"
+else
+    attempts=0
+    max_attempts=3
 
-# Command line argument handler
-while [[ "$#" -gt 0 ]]; do
-    case $1 in
-        --test-users) 
-            export TEST_USERS=true
-            echo "Test users flag set"
-            shift ;;
-        *) 
-            echo "Unknown parameter: $1"
-            shift ;;
-    esac
-done
+    while [ $attempts -lt $max_attempts ]; do
+        read -p "File install.cfg does not exist. Do you want to create it? (y/n) [default: y]: " answer
+
+        if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
+            cp bin/install.cfg.example bin/install.cfg
+            echo "File install.cfg was successfully created"
+            exit 0
+        elif [[ "$answer" == "n" || "$answer" == "N" ]]; then
+            echo "Error: You need to create the file manually and then continue."
+            echo "cp /bin/install.cfg.example to /bin/install.cfg with your settings."
+            exit 1
+        else
+            attempts=$((attempts + 1))
+            echo "Invalid input. Please enter 'y' or 'n'. Attempt $attempts of $max_attempts."
+        fi
+    done
+
+    echo "Exceeded maximum attempts. Exiting."
+    exit 1
+fi
+
+source bin/install.cfg
 
 # Function to check if a repository exists and perform git pull or git clone
 update_repository() {
@@ -35,14 +49,13 @@ update_repository() {
 }
 
 # Update repositories
-update_repository "$TICKETS" "tickets" "master"
-update_repository "$BACKEND" "dbsynce" "metasynced_module"
-update_repository "$CONFIG" "conf" "master"
-update_repository "$DESIGN_TEMPLATE" "design_template" "unstable"
-update_repository "$WEBSERVICE_RUNNING" "webservice_running" "unstable"
-update_repository "$LANDING" "landing" "landing_module"
-update_repository "$USER_MODEL" "user" "master"
-update_repository "$WEBAPP_BASE" "design_template" "unstable"
+update_repository "$TICKETS"            "tickets"            "$TICKETS_BRANCH"
+update_repository "$BACKEND"            "dbsynce"            "$BACKEND_BRANCH"
+update_repository "$CONFIG"             "conf"               "$CONFIG_BRANCH"
+update_repository "$DESIGN_TEMPLATE"    "design_template"    "$DESIGN_TEMPLATE_BRANCH"
+update_repository "$WEBSERVICE_RUNNING" "webservice_running" "$WEBSERVICE_RUNNING_BRANCH"
+update_repository "$LANDING"            "landing"            "$LANDING_BRANCH"
+update_repository "$USER_MODEL"         "user"               "$USER_MODEL_BRANCH"
 git pull
 
 # Create a Python virtual environment and activate it
@@ -59,6 +72,8 @@ if [ -f core/settings_vars.py ]; then
 else
     cp core/_settings_vars.py core/settings_vars.py
     echo "File settings_vars.py was successfully created"
+    echo "Write the connection settings for the PostgreSQL database."
+    exit
 fi
 
 # Run Django migrations and other commands
