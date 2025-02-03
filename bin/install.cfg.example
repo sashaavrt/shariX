@@ -1,7 +1,12 @@
+#better to leave tickets, backend and config the same
 TICKETS="https://git.sharix-app.org/ShariX_Open/sharix-open-tickets.git"
 BACKEND="https://git.sharix-app.org/ShariX_Open/sharix-open-backend.git"
 CONFIG="https://git.sharix-app.org/ShariX_Open/sharix-open-config.git"
+#design-template should be forked if you need to change design in web interface
 DESIGN_TEMPLATE="https://git.sharix-app.org/ShariX_Open/sharix-open-webapp-design-template.git"
+#most likely webservice-running should be forked from Open
 WEBSERVICE_RUNNING="https://git.sharix-app.org/ShariX_Open/sharix-open-webservice-running.git"
+#landing should be forked or re-made for any new service
 LANDING="https://git.sharix-app.org/ShariX_Open/sharix-open-landing.git"
+#use sharix open user model for integration with sharix platform
 USER_MODEL="https://git.sharix-app.org/ShariX_Open/sharix-open-user-model.git"

@@ -2,6 +2,9 @@
 env/
 venv/
 
+#config for concrete service
+bin/install.cfg
+
 # VSCode
 .vscode
 
