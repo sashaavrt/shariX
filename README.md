@@ -4,7 +4,9 @@ The base Django project of a service web application to which other modules are 
 
 ## Installation / Upgrade
 
-Download or clone repository. For the initial/update project configuration, run *bin/install.sh*.
+1. Download or clone repository.
+2. Make a copy of configuration file (cp bin/install.cfg.example bin/install.cfg) and modify it for your service (check paths).
+3. For the initial/update project configuration, run *bin/install.sh*.
 
 ### Test Users
 
