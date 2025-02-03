@@ -10,7 +10,12 @@ The base Django project of a service web application to which other modules are 
 
 ### Test Users
 
-During the installation/upgrade, you can pass the `--test-users` parameter to automatically create test users. These users will be assigned to the **TEST** group. Additionally, if the `DEBUG` setting is enabled (`DEBUG=True` in *core/settings_vars.py*), these test users will be marked as active and can log in. If `DEBUG` is disabled (`DEBUG=False`), the users will be inactive and unable to log in.
+During the installation/upgrade, you can pass the `TEST_USERS=true` is set
+in the `install.cfg` file to automatically create test users. These users
+will be assigned to the **TEST** group. Additionally, if the `DEBUG`
+setting is enabled (`DEBUG=True` in *core/settings_vars.py*), these test
+users will be marked as active and can log in. If `DEBUG` is disabled
+(`DEBUG=False`), the users will be inactive and unable to log in.
 
 #### Properties
 
@@ -19,7 +24,7 @@ During the installation/upgrade, you can pass the `--test-users` parameter to au
 - **Password:** All test users share the same password: `sharix-open-test`.
 
 ```bash
-./bin/install.sh --test-users
+TEST_USERS=true
 ```
 
 ## Configuration
