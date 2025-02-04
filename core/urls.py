@@ -6,15 +6,15 @@ from django.conf.urls.i18n import i18n_patterns
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('testwords/admin/', admin.site.urls),
 ] + i18n_patterns(
         path('i18n/', include('django.conf.urls.i18n')),
-        path('', include('sharix_admin.urls')),
+        path('', include("landing.urls")),
         path('tickets/', include('tickets.urls', namespace='tickets'), name='tickets'),
         path('design/', include("design_template.urls"), name='design'),
         path('dbsynce/', include("dbsynce.urls"), name="dbsynce"),
         path('webservice/', include("webservice_running.urls"), name='webservice_running'),
-        path('landing/', include("landing.urls"), name="landing"),
+        path('my/', include('sharix_admin.urls'), name="Admin"), # FIXME: Check where using Admin name and replace this to admin (name="Admin" -> name="admin")
         prefix_default_language=False,
     )
     

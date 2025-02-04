@@ -53,8 +53,9 @@ INSTALLED_APPS = [
     'django_spaghetti',
     'debug_toolbar',
     'ckeditor',
-    'landing.apps.LandingConfig',
     'fontawesomefree',
+    'landing',
+    'captcha',
 ]
 
 MIDDLEWARE = [
