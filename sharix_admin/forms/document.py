@@ -17,7 +17,7 @@ class DocumentUploadForm(forms.Form):
     )
     doc_file = forms.FileField(
         widget=forms.ClearableFileInput(attrs={
-            'multiple': True,
+            'allow_multiple_selected': True,
             'id': 'doc-file-input'
         }),
         required=True,

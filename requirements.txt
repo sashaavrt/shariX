@@ -57,3 +57,4 @@ xmpppy==0.7.1
 django-ckeditor
 pillow
 fontawesomefree
+django-simple-captcha
