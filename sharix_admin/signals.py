@@ -16,21 +16,26 @@ User = get_user_model()
 
 @receiver(post_migrate)
 def create_initial_groups(sender, **kwargs):
-    Group.objects.get_or_create(pk=21, name='METASERVICE-ADMIN')
-    Group.objects.get_or_create(pk=22, name='METASERVICE-SUPERVISOR')
-    Group.objects.get_or_create(pk=23, name='METASERVICE-SUPPORT')
-    Group.objects.get_or_create(pk=24, name='METASERVICE-TECHSUPPORT')
+    groups = [
+        ('METASERVICE-ADMIN', 21),
+        ('METASERVICE-SUPERVISOR', 22),
+        ('METASERVICE-SUPPORT', 23),
+        ('METASERVICE-TECHSUPPORT', 24),
+        ('PARTNER-ADMIN', 31),
+        ('PARTNER-SUPERVISOR', 32),
+        ('PARTNER-SUPPORT', 33),
+        ('PARTNER-TECHSUPPORT', 34),
+        ('PROVIDER', 41),
+        ('CLIENT', 51),
+        ('GUEST', 61),
+        ('TEST', 99)
+    ]
 
-    Group.objects.get_or_create(pk=31, name='PARTNER-ADMIN')
-    Group.objects.get_or_create(pk=32, name='PARTNER-SUPERVISOR')
-    Group.objects.get_or_create(pk=33, name='PARTNER-SUPPORT')
-    Group.objects.get_or_create(pk=34, name='PARTNER-TECHSUPPORT')
+    for name, pk in groups:
+        group, created = Group.objects.get_or_create(name=name, defaults={'pk': pk})
+        if not created:
+            print(f"Group {name} already exists.")
 
-    Group.objects.get_or_create(pk=41, name='PROVIDER')
-    Group.objects.get_or_create(pk=51, name='CLIENT')
-    Group.objects.get_or_create(pk=61, name='GUEST')
-
-    Group.objects.get_or_create(pk=99, name='TEST')
 
 
 @receiver(post_migrate)
@@ -88,43 +93,40 @@ def create_test_users(sender, **kwargs):
 @receiver(post_migrate)
 def create_initial_ticket_lists(sender, **kwargs):
     if sender.name == 'tickets':
-        # METASERVICE
-        ## ADMIN
-        TicketList.objects.get_or_create(pk=2101, name='Активация партнеров (NEG_REQUEST)', group=Group.objects.get(name='METASERVICE-ADMIN'))
-        TicketList.objects.get_or_create(pk=2102, name='Права в сервисе (ACCESS_REQUEST)', group=Group.objects.get(name='METASERVICE-ADMIN'))
-        TicketList.objects.get_or_create(pk=2103, name='Проверка документов (ST_REQUEST)', group=Group.objects.get(name='METASERVICE-ADMIN'))
-
-        ## SUPERVISOR
-        TicketList.objects.get_or_create(pk=2201, name='Активность пользователей (ST_REQUEST)', group=Group.objects.get(name='METASERVICE-SUPERVISOR'))
-        TicketList.objects.get_or_create(pk=2202, name='Оперативный доступ (ST_REQUEST)', group=Group.objects.get(name='METASERVICE-SUPERVISOR'))
-        TicketList.objects.get_or_create(pk=2203, name='Оперативный доступ экстра (ACCESS_REQUEST)', group=Group.objects.get(name='METASERVICE-SUPERVISOR'))
-        TicketList.objects.get_or_create(pk=2204, name='Права сервиса (ST_REQUEST)', group=Group.objects.get(name='METASERVICE-SUPERVISOR'))
-        TicketList.objects.get_or_create(pk=2205, name='Проверка документов (ST_REQUEST)', group=Group.objects.get(name='METASERVICE-SUPERVISOR'))
-
-        ## SUPPORT
-        TicketList.objects.get_or_create(pk=2301, name='Входящие обычные заявки (ST_REQUEST)', group=Group.objects.get(name='METASERVICE-SUPPORT'))
-        TicketList.objects.get_or_create(pk=2302, name='Заявки на услуги сервиса (SERVICE_REQUEST)', group=Group.objects.get(name='METASERVICE-SUPPORT'))
-
-        ## TECHSUPPORT
-        TicketList.objects.get_or_create(pk=2401, name='Входящие технические заявки (ST_REQUEST)', group=Group.objects.get(name='METASERVICE-TECHSUPPORT'))
-
-        # PARTNER
-        ## ADMIN
-        TicketList.objects.get_or_create(pk=3101, name='Документы исполнителей (ST_REQUEST)', group=Group.objects.get(name='PARTNER-ADMIN'))
-        TicketList.objects.get_or_create(pk=3102, name='Документы ресурсов (ST_REQUEST)', group=Group.objects.get(name='PARTNER-ADMIN'))
-        TicketList.objects.get_or_create(pk=3103, name='Права в партнерке (ACCESS_REQUEST)', group=Group.objects.get(name='PARTNER-ADMIN'))
+        ticket_data = [
+            # METASERVICE
+            (2101, 'Активация партнеров (NEG_REQUEST)', 'METASERVICE-ADMIN'),
+            (2102, 'Права в сервисе (ACCESS_REQUEST)', 'METASERVICE-ADMIN'),
+            (2103, 'Проверка документов (ST_REQUEST)', 'METASERVICE-ADMIN'),
+            (2201, 'Активность пользователей (ST_REQUEST)', 'METASERVICE-SUPERVISOR'),
+            (2202, 'Оперативный доступ (ST_REQUEST)', 'METASERVICE-SUPERVISOR'),
+            (2203, 'Оперативный доступ экстра (ACCESS_REQUEST)', 'METASERVICE-SUPERVISOR'),
+            (2204, 'Права сервиса (ST_REQUEST)', 'METASERVICE-SUPERVISOR'),
+            (2205, 'Проверка документов (ST_REQUEST)', 'METASERVICE-SUPERVISOR'),
+            (2301, 'Входящие обычные заявки (ST_REQUEST)', 'METASERVICE-SUPPORT'),
+            (2302, 'Заявки на услуги сервиса (SERVICE_REQUEST)', 'METASERVICE-SUPPORT'),
+            (2401, 'Входящие технические заявки (ST_REQUEST)', 'METASERVICE-TECHSUPPORT'),
+            # PARTNER
+            (3101, 'Документы исполнителей (ST_REQUEST)', 'PARTNER-ADMIN'),
+            (3102, 'Документы ресурсов (ST_REQUEST)', 'PARTNER-ADMIN'),
+            (3103, 'Права в партнерке (ACCESS_REQUEST)', 'PARTNER-ADMIN'),
+            (3201, 'Активность внутри партнера (ST_REQUEST)', 'PARTNER-SUPERVISOR'),
+            (3202, 'Документы исполнителей (ST_REQUEST)', 'PARTNER-SUPERVISOR'),
+            (3203, 'Документы ресурсов (ST_REQUEST)', 'PARTNER-SUPERVISOR'),
+            (3204, 'Доступ внутри партнера (ST_REQUEST)', 'PARTNER-SUPERVISOR'),
+            (3205, 'Оперативный доступ (ST_REQUEST)', 'PARTNER-SUPERVISOR'),
+            (3206, 'Оперативный доступ экстра (ST_REQUEST)', 'PARTNER-SUPERVISOR'),
+            (3207, 'Ручное подтверждение заявок (ACCESS-REQUEST)', 'PARTNER-SUPERVISOR'),
+            (3401, 'Входящие технические заявки (ST_REQUEST)', 'PARTNER-TECHSUPPORT'),
+        ]
         
-        ## SUPERVISOR
-        TicketList.objects.get_or_create(pk=3201, name='Активность внутри партнера (ST_REQUEST)', group=Group.objects.get(name='PARTNER-SUPERVISOR'))
-        TicketList.objects.get_or_create(pk=3202, name='Документы исполнителей (ST_REQUEST)', group=Group.objects.get(name='PARTNER-SUPERVISOR'))
-        TicketList.objects.get_or_create(pk=3203, name='Документы ресурсов (ST_REQUEST)', group=Group.objects.get(name='PARTNER-SUPERVISOR'))
-        TicketList.objects.get_or_create(pk=3204, name='Доступ внутри партнера (ST_REQUEST)', group=Group.objects.get(name='PARTNER-SUPERVISOR'))
-        TicketList.objects.get_or_create(pk=3205, name='Оперативный доступ (ST_REQUEST)', group=Group.objects.get(name='PARTNER-SUPERVISOR'))
-        TicketList.objects.get_or_create(pk=3206, name='Оперативный доступ экстра (ST_REQUEST)', group=Group.objects.get(name='PARTNER-SUPERVISOR'))
-        TicketList.objects.get_or_create(pk=3207, name='Ручное подтверждение заявок (ACCESS-REQUEST)', group=Group.objects.get(name='PARTNER-SUPERVISOR'))
-        
-        ## TECHSUPPORT
-        TicketList.objects.get_or_create(pk=3401, name='Входящие технические заявки (ST_REQUEST)', group=Group.objects.get(name='PARTNER-TECHSUPPORT'))
+        for pk, name, group_name in ticket_data:
+            group = Group.objects.get(name=group_name)
+            # Проверяем существование тикета с таким же name и group
+            ticket_exists = TicketList.objects.filter(group=group, name=name).exists()
+            
+            if not ticket_exists:
+                TicketList.objects.create(pk=pk, name=name, group=group)
 
 
 # Откючаем тестовых пользователей (если такие есть), если DEBUG=False и наоброт
