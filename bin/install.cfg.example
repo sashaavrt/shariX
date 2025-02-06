@@ -27,7 +27,7 @@ WEBSERVICE_RUNNING_BRANCH="unstable"
 
 DESIGN_TEMPLATE_BRANCH="unstable"
 
-LANDING_BRANCH="landing_module"
+LANDING_BRANCH="module-figma"
 
 
 #Create test users
