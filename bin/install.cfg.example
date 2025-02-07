@@ -18,7 +18,7 @@ LANDING="https://git.sharix-app.org/ShariX_Open/sharix-open-landing.git"
 
 #Branches for repos
 TICKETS_BRANCH="master"
-BACKEND_BRANCH="metasynced_module"
+BACKEND_BRANCH="unstable"
 CONFIG_BRANCH="master"
 
 USER_MODEL_BRANCH="master"
