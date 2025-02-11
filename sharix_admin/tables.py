@@ -60,8 +60,14 @@ class ResourceTable(tables.Table):
     class Meta:
         model = Resource
         attrs = {"class": "table table-layout-fixed"}
-        exclude = ('type_id','requirements','ticket_status', 'id_metaservice', 
-                   'is_global', 'is_visible')
+        exclude = (
+            'id_metaservice',
+            'resoure_type',
+            'requirements',
+            'is_global',
+            'is_visible',
+            'ticket_status'
+        )
 
     def render_check(self, value, record):
         if record.status == 'active':
