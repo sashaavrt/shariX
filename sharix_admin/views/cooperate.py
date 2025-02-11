@@ -10,6 +10,8 @@ from sharix_admin.utils import create_ticket_partner_activation
 from dbsynce.models import Documents
 from tickets.models import Ticket, TicketList
 
+from dbsynce.lib.core import parse_requirements
+
 from .base import BaseView
 
 
@@ -62,7 +64,7 @@ class CooperateView(BaseView, FormView):
 
             # Создаем необходимые объекты документов по requirements указанных в созданной company
             # Используем bulk_create для создания всех объектов одновременно
-            doc_codes = Documents.parse_requirements(instance.requirements)
+            doc_codes = parse_requirements(instance.requirements)
             Documents.objects.bulk_create([
                 Documents(
                     company_id=instance,
