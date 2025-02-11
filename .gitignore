@@ -6,8 +6,9 @@ venv/
 #config for concrete service
 bin/install.cfg
 
-# VSCode
+# Editors
 .vscode
+.idea
 
 # Python
 __pycache__/
