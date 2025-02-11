@@ -79,7 +79,7 @@ class PartnerInformationUpdateView(UserPassesTestMixin, UpdateView):
         if (self.object.inn != form.initial['inn'] or
             self.object.ogrn != form.initial['ogrn'] or
             self.object.kpp != form.initial['kpp'] or
-            self.object.repr_id != form.initial['repr_id'] or
+            self.object.repr != form.initial['repr_id'] or
             self.object.legal_name != form.initial['legal_name']):
             new_ticket = {
             "ticket_list": 1,
