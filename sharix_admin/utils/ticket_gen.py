@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 from tickets.models import Ticket, TicketList
 from dbsynce.models import DocumentFile
+from dbsynce.lib.core import get_admin_url
 
 
 def create_ticket_partner_activation(user, сompany):
@@ -24,7 +25,7 @@ def create_ticket_partner_activation(user, сompany):
             - Имя: {сompany.legal_name}\n
             - ИНН: {сompany.inn}\n
             - Юридический адрес: {сompany.address}\n
-            <a href="{сompany.get_admin_url()}">Полная информация</a>\n
+            <a href="{get_admin_url(сompany)}">Полная информация</a>\n
             \n
             Проверьте всю информацию и для активации партнера измените статус заявки на ACCEPTED.
             Это будет означать, что договорные отношения между сервисом и партнером, вступают в силу.
@@ -42,7 +43,7 @@ def create_ticket_partner_docs_verification(user, company, doc):
     doc_name = doc.get_doc_type_display()
     doc_files = DocumentFile.objects.filter(document=doc)
 
-    note=f"Пользователь {user} #{user.pk} добавил новые файлы документа <a href='{doc.get_admin_url()}'>{doc_name}</a> партнера <a href='{company.get_admin_url()}'>{company.legal_name}</a> требующие проверки:<ul>"
+    note=f"Пользователь {user} #{user.pk} добавил новые файлы документа <a href='{get_admin_url(doc)}'>{doc_name}</a> партнера <a href='{get_admin_url(company)}'>{company.legal_name}</a> требующие проверки:<ul>"
     for file in doc_files:
         note += f"<li><a href='{file.file.url}' target='_blank'>{file}</a></li>"
     note += "</ul>"

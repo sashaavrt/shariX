@@ -10,7 +10,7 @@ from sharix_admin.utils import create_ticket_partner_activation
 from dbsynce.models import Documents
 from tickets.models import Ticket, TicketList
 
-from dbsynce.lib.core import parse_requirements
+from dbsynce.lib.core import parse_requirements, get_admin_url
 
 from .base import BaseView
 
@@ -53,7 +53,7 @@ class CooperateView(BaseView, FormView):
                 note=f"""
                     Пользователь {self.request.user} #{self.request.user.pk} отправил заявку на права партнера сервиса.\n
                     \n
-                    <a href="{instance.get_admin_url()}">Полная информация о компании партнера</a>\n
+                    <a href="{get_admin_url(instance)}">Полная информация о компании партнера</a>\n
                     \n
                     После принятия изменений указанное лицо будет партнером сервиса при совершении юридически значимых действий.
                 """
