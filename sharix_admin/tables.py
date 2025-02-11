@@ -108,10 +108,19 @@ class ServiceTariffTable(tables.Table):
     class Meta:
         model = Service
         attrs = {"class": "table table-layout-fixed"}
-        exclude = ('resource_id','id_provider','price_alg',
-                   'price_min','price_amount','id_metaservice', 
-                   'requirements', 'service_status', 'price_km',
-                   'is_global', 'is_visible','status')
+        exclude = (
+            'resource_id',
+            'price_alg',
+            'price_min',
+            'price_amount',
+            'id_metaservice',
+            'requirements',
+            'service_status',
+            'price_km',
+            'is_global',
+            'is_visible',
+            'status'
+        )
 
     def render_check(self, value, record):
         if record.status == 'active':
@@ -163,9 +172,16 @@ class ServiceTable(tables.Table):
     class Meta:
         model = Service
         attrs = {"class": "table table-layout-fixed"}
-        exclude = ('resource_id', 'requirements', 'id_provider',
-                   'id_metaservice', 'price_alg', 'service_status', 'ticket_status',
-                    'is_global', 'is_visible')
+        exclude = (
+            'resource_id',
+            'requirements',
+            'id_metaservice',
+            'price_alg',
+            'service_status',
+            'ticket_status',
+            'is_global',
+            'is_visible'
+        )
 
     def render_check(self, value, record):
         if record.status == 'active':

@@ -14,15 +14,25 @@ class ServiceTariffUpdateForm(forms.ModelForm):
     class Meta:
 
         model = Service
-        fields = ['status','ticket_status','servicetype_id','id_provider',
-                  'resource_id','requirements','price_alg','price_km','price_min','price_amount','service_status',
-                  'is_global','is_visible']
+        fields = [
+            'status',
+            'ticket_status',
+            'servicetype_id',
+            'resource_id',
+            'requirements',
+            'price_alg',
+            'price_km',
+            'price_min',
+            'price_amount',
+            'service_status',
+            'is_global',
+            'is_visible'
+        ]
         widgets = {
             'status': forms.TextInput(attrs={'readonly': True}, ),
             'ticket_status': forms.TextInput(attrs={'readonly': True}),
             
             'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
-            'id_provider': forms.Select(attrs={'class': 'form-select'}),
             'resource_id': forms.Select(attrs={'class': 'form-select'}),
         }
 
@@ -42,7 +52,6 @@ class ServiceTariffCreateForm(forms.ModelForm):
 
         widgets = {
             'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
-            'id_provider': forms.Select(attrs={'class': 'form-select'}),
             'resource_id': forms.Select(attrs={'class': 'form-select'}),
             'ticket_status': forms.TextInput(attrs={'readonly': True}),
         }
@@ -100,7 +109,9 @@ class ServiceInformationUpdateForm(forms.ModelForm):
     
     class Meta:
         model = Service
-        fields = ['servicetype_id', 'id_provider']
+        fields = [
+            'servicetype_id'
+        ]
 
         widgets = {
             # 'status': forms.TextInput(attrs={'readonly': True}),
