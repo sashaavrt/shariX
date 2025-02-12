@@ -15,12 +15,12 @@ class AuthAPI:
         self._login = login
         self._password = password
         self._token = None
-        self._headers =  None
+        self._headers = None
 
     def _create_token(self):
         try:
             response = requests.post(
-                f"{API_URL}/auth/token/login/", 
+                f"{API_URL}/auth/token/login/",
                 {
                     "phone_number": self._login,
                     "password": self._password
@@ -31,7 +31,7 @@ class AuthAPI:
             print("\033[31m" + f"{self.__class__.__name__}: Can't connect to the API." + "\033[0m")
         except KeyError:
             print("\033[31m" + f"{self.__class__.__name__}: Incorrect login data." + "\033[0m")
-    
+
     @property
     def token(self):
         if self._token is None:
@@ -42,5 +42,5 @@ class AuthAPI:
     def headers(self):
         if self._token is None:
             self._create_token()
-            self._headers =  {'Authorization': f'Token {self._token}'}
+            self._headers = {'Authorization': f'Token {self._token}'}
         return self._headers

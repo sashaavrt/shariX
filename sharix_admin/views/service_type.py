@@ -1,14 +1,14 @@
-from django_tables2 import SingleTableView
-from django.views.generic.edit import UpdateView, CreateView, DeleteView
-from sharix_admin.tables import ServiceTypeTable
-from sharix_admin.forms import ServiceTypeCreateForm, ServiceTypeUpdateForm
 from dbsynce.models import ServiceType
 from django.urls import reverse
 from django.utils.translation import gettext as _
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
+from django_tables2 import SingleTableView
 
+from sharix_admin.forms import ServiceTypeCreateForm, ServiceTypeUpdateForm
+from sharix_admin.tables import ServiceTypeTable
 from .base import BaseView
 
-    
+
 class ServiceTypeCreate(BaseView, CreateView):
     page_title = _('Услуги сервиса')
     page_name = 'service_type'
@@ -22,16 +22,16 @@ class ServiceTypeCreate(BaseView, CreateView):
             'object': self.object,
         })
         return context
-    
+
     def get_success_url(self):
         return reverse('service_type')
-    
+
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
-    
+
 
 class ServiceTypeListView(BaseView, SingleTableView):
     page_title = _('Услуги сервиса')
@@ -46,7 +46,7 @@ class ServiceTypeListView(BaseView, SingleTableView):
             'object_list': context['object_list'],
         })
         return context
-    
+
     def testing(self, queryset, is_descending):
         queryset = queryset.annotate.order_by("-" if is_descending else "")
         return (queryset, True)
@@ -71,17 +71,16 @@ class ServiceTypeUpdateView(BaseView, UpdateView):
             "current_page": "service_type"
         })
         return context
-    
-    
+
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
-    
+
     def get_success_url(self):
         return reverse('service_type')
-    
+
 
 class ServiceTypeDelete(BaseView, DeleteView):
     model = ServiceType
@@ -95,13 +94,12 @@ class ServiceTypeDelete(BaseView, DeleteView):
             "current_page": "service_type"
         })
         return context
-    
+
     def get_success_url(self):
         return reverse('service_type')
-    
+
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
-    

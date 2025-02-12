@@ -1,6 +1,5 @@
 import core.settings_vars as sv
 
-
 bind = sv.BIND
 workers = 2
 worker_class = "sync"

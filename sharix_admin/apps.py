@@ -7,4 +7,4 @@ class ShariXAdminConfig(AppConfig):
     verbose_name = "ShariX Open"
 
     def ready(self):
-       import sharix_admin.signals
+        import sharix_admin.signals

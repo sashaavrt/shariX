@@ -1,6 +1,5 @@
-from django import forms
-
 from dbsynce.models import Company
+from django import forms
 
 
 class CompanyForm(forms.ModelForm):

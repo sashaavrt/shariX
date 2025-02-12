@@ -1,11 +1,13 @@
-from django_tables2 import SingleTableView
-from django.contrib.auth.mixins import UserPassesTestMixin
-from django.views.generic.edit import UpdateView, CreateView
-from sharix_admin.tables import ServiceTariffTable
-from sharix_admin.forms import ServiceTariffCreateForm, ServiceTariffUpdateForm
 from dbsynce.models import Service
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse
 from django.utils.translation import gettext as _
+from django.views.generic.edit import UpdateView, CreateView
+from django_tables2 import SingleTableView
+
+from sharix_admin.forms import ServiceTariffCreateForm, ServiceTariffUpdateForm
+from sharix_admin.tables import ServiceTariffTable
+
 
 class ServiceTariffCreate(UserPassesTestMixin, CreateView):
     model = Service
@@ -19,15 +21,16 @@ class ServiceTariffCreate(UserPassesTestMixin, CreateView):
             'object': self.object,
         })
         return context
-    
+
     def get_success_url(self):
         return reverse('service_tariff')
-    
+
     def test_func(self) -> bool or None:
         group_names = ('PARTNER-ADMIN')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
+
 
 class ServiceTariffListView(UserPassesTestMixin, SingleTableView):
     table_class = ServiceTariffTable
@@ -41,7 +44,7 @@ class ServiceTariffListView(UserPassesTestMixin, SingleTableView):
             'object_list': context['object_list'],
         }))
         return context
-    
+
     def test_func(self) -> bool or None:
         group_names = ('PARTNER-ADMIN')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
@@ -61,13 +64,12 @@ class ServiceTariffUpdateView(UserPassesTestMixin, UpdateView):
             'object': self.object,
         }))
         return context
-    
+
     def get_success_url(self):
         return reverse('service_tariff')
-    
+
     def test_func(self) -> bool or None:
         group_names = ('PARTNER-ADMIN')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
         return False
-

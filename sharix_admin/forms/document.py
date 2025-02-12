@@ -39,15 +39,17 @@ class DocumentUploadForm(forms.Form):
         # Проверка на максимальное количество файлов
         if len(files) > self.MAX_FILES:
             raise ValidationError(f"Вы можете загрузить не более {self.MAX_FILES} файлов.")
-        
+
         for file in files:
             # Проверяем расширение файла
             extension = file.name.split('.')[-1].lower()
             if extension not in allowed_extensions:
-                raise ValidationError(f"Файл {file.name} имеет недопустимое расширение. Допустимые расширения: {', '.join(allowed_extensions)}.")
+                raise ValidationError(
+                    f"Файл {file.name} имеет недопустимое расширение. Допустимые расширения: {', '.join(allowed_extensions)}.")
 
             # Проверяем MIME тип файла
             if file.content_type not in allowed_mime_types:
-                raise ValidationError(f"Файл {file.name} имеет недопустимый формат. Допустимые форматы: {', '.join(allowed_mime_types)}.")
-        
+                raise ValidationError(
+                    f"Файл {file.name} имеет недопустимый формат. Допустимые форматы: {', '.join(allowed_mime_types)}.")
+
         return files

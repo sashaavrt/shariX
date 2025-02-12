@@ -1,13 +1,14 @@
-from sharix_admin.forms import ServiceInformationCreateForm, ServiceInformationUpdateForm
-from django.contrib.auth.mixins import UserPassesTestMixin
-from django.views.generic.edit import CreateView, UpdateView
 from dbsynce.models import Service
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse
 from django.utils.translation import gettext as _
-
-from core.utils.AuthAPI import AuthAPI
+from django.views.generic.edit import CreateView, UpdateView
 from tickets.models import Ticket
+
 from core.settings import API_URL
+from core.utils.AuthAPI import AuthAPI
+from sharix_admin.forms import ServiceInformationCreateForm, ServiceInformationUpdateForm
+
 api = AuthAPI("89855703300", "12345")
 import requests
 from django.urls import reverse_lazy
@@ -35,9 +36,9 @@ class ServiceInformationCreate(UserPassesTestMixin, CreateView):
         form.instance.ticket_status = Ticket.objects.get(pk=int(jso['id']))
         print(form.cleaned_data)
         responce = super().form_valid(form)
-        cli.send_message("open_tickets_backend@ej.sharix-app.org", "eb177b1c9f99a7a13798928318d7a72c", "open_strequest_new@ej.sharix-app.org", str(jso))
+        cli.send_message("open_tickets_backend@ej.sharix-app.org", "eb177b1c9f99a7a13798928318d7a72c",
+                         "open_strequest_new@ej.sharix-app.org", str(jso))
         return responce
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -47,11 +48,10 @@ class ServiceInformationCreate(UserPassesTestMixin, CreateView):
             'current_page': 'service_info'
         })
         return context
-    
+
     def get_success_url(self):
         return reverse('service_tariff')
-    
-    
+
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
@@ -72,10 +72,10 @@ class ServiceInformationUpdateView(UserPassesTestMixin, UpdateView):
             'current_page': 'service_info'
         })
         return context
-    
+
     def get_success_url(self):
         return reverse('test-page')
-    
+
     def test_func(self) -> bool or None:
         group_names = ('METASERVICE-ADMIN')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
