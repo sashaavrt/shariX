@@ -59,4 +59,4 @@ EJ_SERVICE = "chat.ej.sharix-app.org"
 EJ_HOST = "ej.sharix-app.org"
 
 # Service name that is used in generating ejabber rooms
-WEBSERVICE_NAME = "open" 
+WEBSERVICE_NAME = "open"

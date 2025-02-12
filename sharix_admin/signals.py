@@ -1,15 +1,12 @@
 import os
-
-from django.contrib.auth.models import Group
-from django.dispatch import receiver
-from django.db.models.signals import post_migrate
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
-from django.conf import settings
+from django.contrib.auth.models import Group
 from django.db import models
-
+from django.db.models.signals import post_migrate
+from django.dispatch import receiver
 from tickets.models import TicketList
-
 
 User = get_user_model()
 
@@ -35,7 +32,6 @@ def create_initial_groups(sender, **kwargs):
         group, created = Group.objects.get_or_create(name=name, defaults={'pk': pk})
         if not created:
             print(f"Group {name} already exists.")
-
 
 
 @receiver(post_migrate)
@@ -66,7 +62,7 @@ def create_test_users(sender, **kwargs):
         ]
 
         for test_user in test_users:
-            group_name = test_user[0]        
+            group_name = test_user[0]
             group = Group.objects.get(name=group_name)
 
             for i in range(1, test_user[1] + 1):
@@ -119,12 +115,12 @@ def create_initial_ticket_lists(sender, **kwargs):
             (3207, 'Ручное подтверждение заявок (ACCESS-REQUEST)', 'PARTNER-SUPERVISOR'),
             (3401, 'Входящие технические заявки (ST_REQUEST)', 'PARTNER-TECHSUPPORT'),
         ]
-        
+
         for pk, name, group_name in ticket_data:
             group = Group.objects.get(name=group_name)
             # Проверяем существование тикета с таким же name и group
             ticket_exists = TicketList.objects.filter(group=group, name=name).exists()
-            
+
             if not ticket_exists:
                 TicketList.objects.create(pk=pk, name=name, group=group)
 

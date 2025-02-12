@@ -1,5 +1,5 @@
-from django import forms
 from dbsynce.models import ServiceType, Service, Company
+from django import forms
 
 
 class ServiceTariffUpdateForm(forms.ModelForm):
@@ -9,7 +9,7 @@ class ServiceTariffUpdateForm(forms.ModelForm):
         # Добавляет стиль бутстрапа form-control всем полям таблицы если у них нет своих стилей
         for field in iter(self.fields):
             if 'class' not in self.fields[field].widget.attrs:
-                self.fields[field].widget.attrs.update({'class':'form-control'})
+                self.fields[field].widget.attrs.update({'class': 'form-control'})
 
     class Meta:
 
@@ -31,7 +31,7 @@ class ServiceTariffUpdateForm(forms.ModelForm):
         widgets = {
             'status': forms.TextInput(attrs={'readonly': True}, ),
             'ticket_status': forms.TextInput(attrs={'readonly': True}),
-            
+
             'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
             'resource_id': forms.Select(attrs={'class': 'form-select'}),
         }
@@ -43,8 +43,8 @@ class ServiceTariffCreateForm(forms.ModelForm):
         # Добавляет стиль бутстрапа form-control всем полям таблицы если у них нет своих стилей
         for field in iter(self.fields):
             if 'class' not in self.fields[field].widget.attrs:
-                self.fields[field].widget.attrs.update({'class':'form-control'})
-    
+                self.fields[field].widget.attrs.update({'class': 'form-control'})
+
     class Meta:
 
         model = Service
@@ -60,22 +60,25 @@ class ServiceTariffCreateForm(forms.ModelForm):
 class ServiceTypeUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ServiceTypeUpdateForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = ServiceType
-        fields = ['status','ticket_status','id_metaservice','codename',
-                  'description','requirements','price_type','link_agreement',
-                  'is_global','is_visible']
+        fields = ['status', 'ticket_status', 'id_metaservice', 'codename',
+                  'description', 'requirements', 'price_type', 'link_agreement',
+                  'is_global', 'is_visible']
         widgets = {
             'status': forms.TextInput(attrs={'readonly': True}),
             'ticket_status': forms.TextInput(attrs={'readonly': True}),
         }
-        
+
 
 PRICE_CHOICES = [
     ('one', 'text #1'),
     ('two', 'text #2'),
     ('three', 'text #3'),
 ]
+
+
 class ServiceTypeCreateForm(forms.ModelForm):
     codename = forms.CharField(label="Название услуги")
     requirements = forms.CharField(label="Требования")
@@ -86,11 +89,12 @@ class ServiceTypeCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ServiceTypeCreateForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = ServiceType
-        fields = ['codename','requirements', 'price_type',
+        fields = ['codename', 'requirements', 'price_type',
                   'description',
-                  'is_global','is_visible',]
+                  'is_global', 'is_visible', ]
 
         widgets = {
 
@@ -104,9 +108,8 @@ class ServiceInformationUpdateForm(forms.ModelForm):
         # Добавляет стиль бутстрапа form-control всем полям таблицы если у них нет своих стилей
         for field in iter(self.fields):
             if 'class' not in self.fields[field].widget.attrs:
-                self.fields[field].widget.attrs.update({'class':'form-control'})
-        
-    
+                self.fields[field].widget.attrs.update({'class': 'form-control'})
+
     class Meta:
         model = Service
         fields = [
@@ -116,38 +119,37 @@ class ServiceInformationUpdateForm(forms.ModelForm):
         widgets = {
             # 'status': forms.TextInput(attrs={'readonly': True}),
             # 'ticket_status': forms.TextInput(attrs={'readonly': True}),
-            
-             'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
-            #'repr_id': forms.Select(attrs={'class': 'form-select'}),
+
+            'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
+            # 'repr_id': forms.Select(attrs={'class': 'form-select'}),
             # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
         }
-        
+
 
 class ServiceInformationCreateForm(forms.ModelForm):
-    
+
     def __init__(self, *args, **kwargs):
         super(ServiceInformationCreateForm, self).__init__(*args, **kwargs)
         # Добавляет стиль бутстрапа form-control всем полям таблицы если у них нет своих стилей
         for field in iter(self.fields):
             if 'class' not in self.fields[field].widget.attrs:
-                self.fields[field].widget.attrs.update({'class':'form-control'})
-
+                self.fields[field].widget.attrs.update({'class': 'form-control'})
 
     class Meta:
         model = Service
         fields = "__all__"
-        exclude = ["id", 
-                   "is_global", 
-                   "is_visible", 
+        exclude = ["id",
+                   "is_global",
+                   "is_visible",
                    "ticket_status",
                    "id_metaservice",
                    "resource_id"]
 
         widgets = {
-            #'servicetype_id': forms.CharField(max_length=255)
+            # 'servicetype_id': forms.CharField(max_length=255)
             # 'legal_name': forms.TextInput(label = 'Название')
             # 'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
-            #'repr_id': forms.Select(attrs={'class': 'form-select'}),
+            # 'repr_id': forms.Select(attrs={'class': 'form-select'}),
             # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
             # 'ticket_status': forms.Select(attrs={'class': 'form-select'}),
         }
@@ -159,14 +161,14 @@ class PartnerInformationUpdateForm(forms.ModelForm):
         # Добавляет стиль бутстрапа form-control всем полям таблицы если у них нет своих стилей
         for field in iter(self.fields):
             if 'class' not in self.fields[field].widget.attrs:
-                self.fields[field].widget.attrs.update({'class':'form-control'})
+                self.fields[field].widget.attrs.update({'class': 'form-control'})
 
     class Meta:
         model = Company
         fields = "__all__"
         exclude = ["id", "ticket_status",
-                   "is_global", 
-                   "is_visible", 
+                   "is_global",
+                   "is_visible",
                    "id_metaservice",
                    "status"
                    ]
@@ -174,22 +176,22 @@ class PartnerInformationUpdateForm(forms.ModelForm):
             'description': forms.Select(attrs={'class': 'form-select'}),
             'repr_id': forms.Select(attrs={'class': 'form-select'}),
         }
-        
+
 
 class PartnerInformationCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(PartnerInformationCreateForm, self).__init__(*args, **kwargs)       
+        super(PartnerInformationCreateForm, self).__init__(*args, **kwargs)
         for field in iter(self.fields):
             if 'class' not in self.fields[field].widget.attrs:
-                self.fields[field].widget.attrs.update({'class':'form-control'})
-   
+                self.fields[field].widget.attrs.update({'class': 'form-control'})
+
     # legal_name = forms.Fi()
     class Meta:
         model = Company
         fields = "__all__"
         exclude = ["id", "ticket_status",
-                   "is_global", 
-                   "is_visible", 
+                   "is_global",
+                   "is_visible",
                    "id_metaservice",
                    "status"
                    ]
@@ -198,7 +200,6 @@ class PartnerInformationCreateForm(forms.ModelForm):
             'description': forms.Select(attrs={'class': 'form-select'}),
             'repr_id': forms.Select(attrs={'class': 'form-select'}),
         }
-
 
         #     username = forms.CharField(label="Номер телефона",
         # widget=forms.TextInput(attrs={'class':'form-control'}))

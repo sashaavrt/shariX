@@ -1,10 +1,10 @@
 from django.contrib.auth import get_user_model
-
-from django_tables2 import SingleTableView
-from sharix_admin.tables import UserInfoTable
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext as _
+from django_tables2 import SingleTableView
+
+from sharix_admin.tables import UserInfoTable
 
 
 class UserListView(UserPassesTestMixin, SingleTableView):
@@ -20,7 +20,7 @@ class UserListView(UserPassesTestMixin, SingleTableView):
             'groups': Group.objects.all()
         })
         return context
-    
+
     def test_func(self) -> bool or None:
         group_names = ('PROVIDER')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:

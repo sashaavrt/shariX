@@ -1,15 +1,14 @@
+from dbsynce.models import Company, Documents, DocumentFile
+from django.contrib import messages
 from django.core.files.storage import default_storage
+from django.db import transaction
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.edit import FormView
-from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib import messages
-from django.db import transaction
 
-from dbsynce.models import Company, Documents, DocumentFile
 from sharix_admin.forms import CompanyForm, DocumentUploadForm
 from sharix_admin.utils import *
-
 from .base import BaseView
 
 
@@ -26,7 +25,7 @@ class PartnerDetailView(PartnerBaseView, DetailView):
     template_name = 'sharix_admin/partner.html'
     context_object_name = 'company'
     page_title = 'О партнере'
-   
+
     def get_object(self, queryset=None):
         return get_object_or_404(Company, repr_id=self.request.user)
 
@@ -38,7 +37,7 @@ class PartnerDetailView(PartnerBaseView, DetailView):
             company_id=self.object
         ).prefetch_related('files').order_by('doc_type')
 
-        context.update({ "docs": docs }) 
+        context.update({"docs": docs})
 
         return context
 
@@ -114,14 +113,16 @@ class PartnerDocUploadView(PartnerBaseView, FormView):
             # Создание нового тикета и архивация старого
             if self.doc.ticket_status:
                 self.doc.ticket_status.archive()
-            
-            self.doc.expire_date = self.request.POST.get('doc_expire_date') if self.request.POST['doc_expire_date'] else None
+
+            self.doc.expire_date = self.request.POST.get('doc_expire_date') if self.request.POST[
+                'doc_expire_date'] else None
             self.doc.ticket_status = create_ticket_partner_docs_verification(self.request.user, self.company, self.doc)
-            
+
             self.doc.save()
 
         # Отправляем пользователю уведомление на страницу об успехе операции
-        messages.success(self.request, f'Файлы документа "{self.doc_name}" успешно загружены и теперь проходят проверку!')
+        messages.success(self.request,
+                         f'Файлы документа "{self.doc_name}" успешно загружены и теперь проходят проверку!')
         return super().form_valid(form)
 
 
@@ -132,7 +133,7 @@ class PartnerDocView(PartnerBaseView, DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         self.company = get_object_or_404(Company, repr_id=self.request.user)
-        
+
         self.doc = Documents.objects.filter(
             user_id=self.request.user,
             company_id=self.company,
@@ -153,5 +154,5 @@ class PartnerDocView(PartnerBaseView, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         doc_files = DocumentFile.objects.filter(document=self.doc)
-        context.update({ "doc_files": doc_files }) 
+        context.update({"doc_files": doc_files})
         return context

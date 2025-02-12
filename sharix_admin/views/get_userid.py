@@ -1,7 +1,8 @@
-from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+
 
 @csrf_exempt
 def get_user_by_phone_number(request, phone_number):

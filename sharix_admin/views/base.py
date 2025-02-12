@@ -1,5 +1,5 @@
-from django.views import View
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.views import View
 
 
 class BaseView(UserPassesTestMixin, View):
@@ -9,6 +9,7 @@ class BaseView(UserPassesTestMixin, View):
     Предоставляет общие методы и функционал, который
     может быть использован в других представлениях админ-панели.
     """
+
     def dispatch(self, request, *args, **kwargs):
         self.user_groups = self.request.user.groups.values_list('name', flat=True)
         return super().dispatch(request, *args, **kwargs)
@@ -24,5 +25,5 @@ class BaseView(UserPassesTestMixin, View):
             'current_page': self.page_name,
             'user_groups': self.user_groups
         })
-        
+
         return context

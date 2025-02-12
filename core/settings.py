@@ -1,12 +1,8 @@
+import core.settings_vars as sv
 import os
-
-from pathlib import Path
-
 from django.contrib.messages import constants as message_constants
 from django.utils.translation import gettext_lazy as _
-
-import core.settings_vars as sv
-
+from pathlib import Path
 
 ########
 #
@@ -23,7 +19,7 @@ SECRET_KEY = sv.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = sv.DEBUG
 CSRF_TRUSTED_ORIGINS = sv.CSRF_TRUSTED_ORIGINS
-ALLOWED_HOSTS = sv.ALLOWED_HOSTS 
+ALLOWED_HOSTS = sv.ALLOWED_HOSTS
 INTERNAL_IPS = sv.INTERNAL_IPS
 
 # Application definition
@@ -231,10 +227,10 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
 
         # Url that gets reversed (Permissions can be added)
-        {"name": "Главная",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Главная", "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        #{"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        # {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "sharix_admin.SharixUser"},
@@ -309,10 +305,10 @@ JAZZMIN_SETTINGS = {
     # # UI Tweaks #
     # #############
     # # Relative paths to custom CSS/JS scripts (must be present in static files)
-        "custom_css": None,
-        "custom_js": None,
+    "custom_css": None,
+    "custom_js": None,
     # Whether to link font from fonts.googleapis.com (use custom_css to supply font otherwise)
-        "use_google_fonts_cdn": True,
+    "use_google_fonts_cdn": True,
     # # Whether to show the UI customizer on the sidebar
     "show_ui_builder": True,
 
@@ -325,11 +321,11 @@ JAZZMIN_SETTINGS = {
     # - vertical_tabs
     # - collapsible
     # - carousel
-    #"changeform_format": "horizontal_tabs",
+    # "changeform_format": "horizontal_tabs",
     # override change forms on a per modeladmin basis
-    #"changeform_format_overrides": {"sharix_admin.SharixUser": "collapsible", "auth.group": "vertical_tabs"},
+    # "changeform_format_overrides": {"sharix_admin.SharixUser": "collapsible", "auth.group": "vertical_tabs"},
     # Add a language dropdown into the admin
-    #"language_chooser": True,
+    # "language_chooser": True,
 }
 
 JAZZMIN_UI_TWEAKS = {
@@ -376,13 +372,13 @@ API_URL = sv.API_URL
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_RENDERER_CLASSES':[
+    'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        #'rest_framework.permissions.AllowAny',
-        #'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -392,11 +388,11 @@ REST_FRAMEWORK = {
 }
 
 SPAGHETTI_SAUCE = {
-    'apps': ['auth', 'sharix_admin', 
-                'tickets', 'admin', 
-                'flatpages', 'sessions', 'sites', 'dbsynce'],
+    'apps': ['auth', 'sharix_admin',
+             'tickets', 'admin',
+             'flatpages', 'sessions', 'sites', 'dbsynce'],
     'show_fields': False,
-    'show_proxy':True,
+    'show_proxy': True,
 }
 
 GRAPH_MODELS = {
@@ -409,6 +405,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = sv.EMAIL_HOST
 EMAIL_PORT = sv.EMAIL_PORT
 EMAIL_USE_TLS = sv.EMAIL_USE_TLS
-EMAIL_HOST_USER = sv.EMAIL_HOST_USER 
+EMAIL_HOST_USER = sv.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = sv.EMAIL_HOST_PASSWORD
 DEFAULT_FROM_EMAIL = sv.DEFAULT_FROM_EMAIL

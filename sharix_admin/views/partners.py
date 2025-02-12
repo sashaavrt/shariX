@@ -1,11 +1,11 @@
-from django_tables2 import SingleTableView
-from sharix_admin.utils import group_required
-from sharix_admin.tables import PartnersTable
-from django.contrib.auth.decorators import login_required
 from dbsynce.models import Company
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
+from django_tables2 import SingleTableView
 
+from sharix_admin.tables import PartnersTable
+from sharix_admin.utils import group_required
 from .base import BaseView
 
 
@@ -22,7 +22,7 @@ class PartnersListView(BaseView, SingleTableView):
             'object_list': context['object_list'],
         })
         return context
-    
+
     def test_func(self):
         group_names = ('METASERVICE-ADMIN')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:

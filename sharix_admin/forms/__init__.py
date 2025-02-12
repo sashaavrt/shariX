@@ -1,6 +1,5 @@
-from .base import BaseForm
 from .auth import *
-
-from .service import *
+from .base import BaseForm
 from .company import *
 from .document import *
+from .service import *

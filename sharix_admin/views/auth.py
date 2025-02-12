@@ -1,7 +1,7 @@
-from django.views.generic.edit import CreateView
-from django.views.generic import TemplateView
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
+from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
 
 from sharix_admin.forms import ShariXSignUpForm, ShariXLoginForm
 

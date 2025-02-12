@@ -1,8 +1,7 @@
 from datetime import datetime, timedelta
-
-from tickets.models import Ticket, TicketList
-from dbsynce.models import DocumentFile
 from dbsynce.lib.core import get_admin_url
+from dbsynce.models import DocumentFile
+from tickets.models import Ticket, TicketList
 
 
 def create_ticket_partner_activation(user, сompany):
@@ -19,7 +18,7 @@ def create_ticket_partner_activation(user, сompany):
         ticket_type=4,
         due_date=datetime.now().date() + timedelta(days=30),
         created_by=user,
-        
+
         note=f"""
             Пользователь {user} #{user.pk} отправил заявку на становление партнером сервиса:\n
             - Имя: {сompany.legal_name}\n
@@ -43,11 +42,11 @@ def create_ticket_partner_docs_verification(user, company, doc):
     doc_name = doc.get_doc_type_display()
     doc_files = DocumentFile.objects.filter(document=doc)
 
-    note=f"Пользователь {user} #{user.pk} добавил новые файлы документа <a href='{get_admin_url(doc)}'>{doc_name}</a> партнера <a href='{get_admin_url(company)}'>{company.legal_name}</a> требующие проверки:<ul>"
+    note = f"Пользователь {user} #{user.pk} добавил новые файлы документа <a href='{get_admin_url(doc)}'>{doc_name}</a> партнера <a href='{get_admin_url(company)}'>{company.legal_name}</a> требующие проверки:<ul>"
     for file in doc_files:
         note += f"<li><a href='{file.file.url}' target='_blank'>{file}</a></li>"
     note += "</ul>"
-    
+
     return Ticket.objects.create(
         title=f"Проверка документа '{doc_name}' партнера '{company.legal_name}'",
         ticket_list=TicketList.objects.get(pk=2103),
@@ -55,4 +54,4 @@ def create_ticket_partner_docs_verification(user, company, doc):
         due_date=datetime.now().date() + timedelta(days=30),
         created_by=user,
         note=note
-    )    
+    )
