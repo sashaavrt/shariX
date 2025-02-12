@@ -17,8 +17,8 @@ class ServiceTariffUpdateForm(forms.ModelForm):
         fields = [
             'status',
             'ticket_status',
-            'servicetype',
-            'resource',
+            'servicetype_id',
+            'resource_id',
             'requirements',
             'price_alg',
             'price_km',
@@ -32,8 +32,8 @@ class ServiceTariffUpdateForm(forms.ModelForm):
             'status': forms.TextInput(attrs={'readonly': True}, ),
             'ticket_status': forms.TextInput(attrs={'readonly': True}),
             
-            'servicetype': forms.Select(attrs={'class': 'form-select'}),
-            'resource': forms.Select(attrs={'class': 'form-select'}),
+            'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
+            'resource_id': forms.Select(attrs={'class': 'form-select'}),
         }
 
 
