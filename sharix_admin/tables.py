@@ -99,8 +99,8 @@ class ProviderTable(tables.Table):
 class ServiceTariffTable(tables.Table):
 
     id = tables.Column(verbose_name=_('ID'), attrs={"td":{"width":"5%"}})
-    servicetype_id = tables.LinkColumn('service_tariff/edit/', verbose_name=_('Name of the tariff'), text = lambda record: record.servicetype.caption,
-                                       args=[tables.A('pk')], attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
+    servicetype_id = tables.LinkColumn('service_tariff/edit/', verbose_name=_('Name of the tariff'), text = lambda record: record.servicetype_id.caption,
+        args=[tables.A('pk')], attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
     ticket_status = tables.Column(verbose_name=_('Name of the service scheme'), attrs={'th':{'scope':'col'}, "td":{"width":"20%"}}) 
     check = tables.BooleanColumn(verbose_name=_('Activity'), orderable=False, attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
 
