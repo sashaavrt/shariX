@@ -32,7 +32,7 @@ class CooperateView(BaseView, FormView):
             instance = form.save(commit=False)
         
             # Присваиваем полю repr_id идентификатор текущего пользователя
-            instance.repr = self.request.user
+            instance.repr_id = self.request.user
 
             # Создаем новую запись в БД, чтобы иметь доступ к ID
             instance.save() 
