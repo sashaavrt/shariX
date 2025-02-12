@@ -12,4 +12,14 @@ class CompanyForm(forms.ModelForm):
 
     class Meta:
         model = Company
-        fields = ['legal_name', 'inn', 'kpp', 'ogrn', 'bank_name', 'bik', 'rs', 'ks', 'address']
+        fields = [
+            'legal_name',
+            'inn',
+            'kpp',
+            'ogrn',
+            'bank_name',
+            'bik',
+            'rs',
+            'ks',
+            'address'
+        ]
