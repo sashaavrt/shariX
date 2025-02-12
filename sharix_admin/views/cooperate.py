@@ -28,8 +28,8 @@ class CooperateView(BaseView, FormView):
             # Сохраняем форму, чтобы получить объект компании
             instance = form.save(commit=False)
 
-            # Присваиваем полю repr_id идентификатор текущего пользователя
-            instance.repr_id = self.request.user
+            # Присваиваем полю repr идентификатор текущего пользователя
+            instance.repr = self.request.user
 
             # Создаем новую запись в БД, чтобы иметь доступ к ID
             instance.save()
