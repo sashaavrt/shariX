@@ -27,7 +27,7 @@ class PartnerDetailView(PartnerBaseView, DetailView):
     page_title = 'О партнере'
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Company, repr_id=self.request.user)
+        return get_object_or_404(Company, repr=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -50,7 +50,7 @@ class PartnerEditView(PartnerBaseView, FormView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['instance'] = get_object_or_404(Company, repr_id=self.request.user)
+        kwargs['instance'] = get_object_or_404(Company, repr=self.request.user)
         return kwargs
 
     def form_valid(self, form):
@@ -78,7 +78,7 @@ class PartnerDocUploadView(PartnerBaseView, FormView):
     success_url = reverse_lazy('partner_detail')
 
     def dispatch(self, request, *args, **kwargs):
-        self.company = get_object_or_404(Company, repr_id=self.request.user)
+        self.company = get_object_or_404(Company, repr=self.request.user)
         self.doc = Documents.objects.filter(
             user_id=self.request.user,
             company_id=self.company,
@@ -132,7 +132,7 @@ class PartnerDocView(PartnerBaseView, DetailView):
     context_object_name = 'doc'
 
     def dispatch(self, request, *args, **kwargs):
-        self.company = get_object_or_404(Company, repr_id=self.request.user)
+        self.company = get_object_or_404(Company, repr=self.request.user)
 
         self.doc = Documents.objects.filter(
             user_id=self.request.user,

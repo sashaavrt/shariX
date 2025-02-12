@@ -87,9 +87,9 @@ class PartnersTable(tables.Table):
             "td": {"width": "20%"}
         }
     )
-    repr_id = tables.Column(
-        accessor='repr_id.full_name',
-        order_by=('repr_id.first_name', 'repr_id.last_name'),
+    repr = tables.Column(
+        accessor='repr.full_name',
+        order_by=('repr.first_name', 'repr.last_name'),
         verbose_name=_('Responsible'),
         attrs={
             "td": {"width": "15%"}

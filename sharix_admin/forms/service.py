@@ -135,7 +135,7 @@ class ServiceInformationUpdateForm(forms.ModelForm):
             # 'ticket_status': forms.TextInput(attrs={'readonly': True}),
 
             'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
-            # 'repr_id': forms.Select(attrs={'class': 'form-select'}),
+            # 'repr': forms.Select(attrs={'class': 'form-select'}),
             # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
         }
 
@@ -165,7 +165,7 @@ class ServiceInformationCreateForm(forms.ModelForm):
             # 'servicetype_id': forms.CharField(max_length=255)
             # 'legal_name': forms.TextInput(label = 'Название')
             # 'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
-            # 'repr_id': forms.Select(attrs={'class': 'form-select'}),
+            # 'repr': forms.Select(attrs={'class': 'form-select'}),
             # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
             # 'ticket_status': forms.Select(attrs={'class': 'form-select'}),
         }
@@ -192,7 +192,7 @@ class PartnerInformationUpdateForm(forms.ModelForm):
         ]
         widgets = {
             'description': forms.Select(attrs={'class': 'form-select'}),
-            'repr_id': forms.Select(attrs={'class': 'form-select'}),
+            'repr': forms.Select(attrs={'class': 'form-select'}),
         }
 
 
@@ -218,7 +218,7 @@ class PartnerInformationCreateForm(forms.ModelForm):
 
         widgets = {
             'description': forms.Select(attrs={'class': 'form-select'}),
-            'repr_id': forms.Select(attrs={'class': 'form-select'}),
+            'repr': forms.Select(attrs={'class': 'form-select'}),
         }
 
         #     username = forms.CharField(label="Номер телефона",
