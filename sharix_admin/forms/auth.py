@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.contrib.auth.models import Group
 
-from sharix_admin.forms import BaseForm
+from sharix_admin.forms.base import BaseForm
 
 
 class ShariXSignUpForm(BaseForm, UserCreationForm):
