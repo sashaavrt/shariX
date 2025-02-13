@@ -272,10 +272,10 @@ class ServiceTariffTable(tables.Table):
             "td": {"width": "5%"}
         }
     )
-    servicetype_id = tables.LinkColumn(
+    servicetype = tables.LinkColumn(
         'service_tariff/edit/',
         verbose_name=_('Name of the tariff'),
-        text=lambda record: record.servicetype_id.caption,
+        text=lambda record: record.servicetype.caption,
         args=[tables.A('pk')],
         attrs={
             'th': {'scope': 'col'},
@@ -403,9 +403,9 @@ class ServiceTable(tables.Table):
             "td": {"width": "5%"}
         }
     )
-    servicetype_id = tables.Column(
+    servicetype = tables.Column(
         verbose_name=_('Description of the service'),
-        accessor='servicetype_id.caption',
+        accessor='servicetype.caption',
         attrs={
             'th': {'scope': 'col'},
             "td": {"width": "20%"}}
