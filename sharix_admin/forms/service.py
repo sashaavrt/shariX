@@ -17,7 +17,7 @@ class ServiceTariffUpdateForm(forms.ModelForm):
         fields = [
             'status',
             'ticket_status',
-            'servicetype_id',
+            'servicetype',
             'resource_id',
             'requirements',
             'price_alg',
@@ -32,7 +32,7 @@ class ServiceTariffUpdateForm(forms.ModelForm):
             'status': forms.TextInput(attrs={'readonly': True}, ),
             'ticket_status': forms.TextInput(attrs={'readonly': True}),
 
-            'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
+            'servicetype': forms.Select(attrs={'class': 'form-select'}),
             'resource_id': forms.Select(attrs={'class': 'form-select'}),
         }
 
@@ -51,7 +51,7 @@ class ServiceTariffCreateForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
+            'servicetype': forms.Select(attrs={'class': 'form-select'}),
             'resource_id': forms.Select(attrs={'class': 'form-select'}),
             'ticket_status': forms.TextInput(attrs={'readonly': True}),
         }
@@ -127,14 +127,14 @@ class ServiceInformationUpdateForm(forms.ModelForm):
     class Meta:
         model = Service
         fields = [
-            'servicetype_id'
+            'servicetype'
         ]
 
         widgets = {
             # 'status': forms.TextInput(attrs={'readonly': True}),
             # 'ticket_status': forms.TextInput(attrs={'readonly': True}),
 
-            'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
+            'servicetype': forms.Select(attrs={'class': 'form-select'}),
             # 'repr': forms.Select(attrs={'class': 'form-select'}),
             # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
         }
@@ -162,9 +162,9 @@ class ServiceInformationCreateForm(forms.ModelForm):
         ]
 
         widgets = {
-            # 'servicetype_id': forms.CharField(max_length=255)
+            # 'servicetype': forms.CharField(max_length=255)
             # 'legal_name': forms.TextInput(label = 'Название')
-            # 'servicetype_id': forms.Select(attrs={'class': 'form-select'}),
+            # 'servicetype': forms.Select(attrs={'class': 'form-select'}),
             # 'repr': forms.Select(attrs={'class': 'form-select'}),
             # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
             # 'ticket_status': forms.Select(attrs={'class': 'form-select'}),
