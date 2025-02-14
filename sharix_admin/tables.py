@@ -152,10 +152,10 @@ class ResourceTable(tables.Table):
             "td": {"width": "5%"}
         }
     )
-    # В user_id ссылка LinkColumn на страницу Аси "Информация о партнере" страница partner_information_form
-    user_id = tables.Column(
-        accessor='user_id.full_name',
-        order_by=('user_id.first_name', 'user_id.last_name'),
+    # В user ссылка LinkColumn на страницу Аси "Информация о партнере" страница partner_information_form
+    user = tables.Column(
+        accessor='user.full_name',
+        order_by=('user.first_name', 'user.last_name'),
         verbose_name=_('Responsible'),
         attrs={
             "td": {"width": "15%"}
@@ -211,9 +211,9 @@ class ProviderTable(tables.Table):
             "td": {"width": "5%"}
         }
     )
-    user_id = tables.Column(
-        accessor='user_id.full_name',
-        order_by=('user_id.first_name', 'user_id.last_name'),
+    user = tables.Column(
+        accessor='user.full_name',
+        order_by=('user.first_name', 'user.last_name'),
         verbose_name=_('Full Name'),
         attrs={
             "td": {"width": "15%"}

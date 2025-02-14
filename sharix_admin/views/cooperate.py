@@ -65,7 +65,7 @@ class CooperateView(BaseView, FormView):
             Documents.objects.bulk_create([
                 Documents(
                     company=instance,
-                    user_id=self.request.user,
+                    user=self.request.user,
                     doc_type=doc_code
                 ) for doc_code in doc_codes
             ])
