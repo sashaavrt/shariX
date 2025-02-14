@@ -242,7 +242,7 @@ class ProviderTable(tables.Table):
         }
         exclude = (
             'type',
-            'company_id',
+            'company',
             'id_metaservice',
             'requirements',
             'ticket_status',
