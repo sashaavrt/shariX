@@ -11,13 +11,13 @@
     <script>
       // Запрос на изменения статуса ресурса
       $('.status-toggle').change(function() {
-        var resource_id = $(this).data('resource-id');
+        var resource = $(this).data('resource-id');
         var new_status = $(this).prop('checked') ? 'active' : 'deactivated';
         $.ajax({
           url: '{% url "resource/change_status" %}',
           type: 'POST',
           data: {
-            'resource_id': resource_id,
+            'resource': resource,
             'new_status': new_status,
             'csrfmiddlewaretoken': '{{ csrf_token }}'
           },

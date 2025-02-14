@@ -33,10 +33,10 @@ class ResourceListView(UserPassesTestMixin, SingleTableView):
 @group_required('PARTNER-ADMIN')
 def change_resource_status(request):
     if request.method == 'POST':
-        resource_id = request.POST.get('resource_id')
+        resource = request.POST.get('resource')
         new_status = request.POST.get('new_status')
 
-        resource = Resource.objects.get(pk=resource_id)
+        resource = Resource.objects.get(pk=resource)
         resource.status = new_status
         resource.save()
         return JsonResponse({'status': 'success'})

@@ -18,7 +18,7 @@ class ServiceTariffUpdateForm(forms.ModelForm):
             'status',
             'ticket_status',
             'servicetype',
-            'resource_id',
+            'resource',
             'requirements',
             'price_alg',
             'price_km',
@@ -33,7 +33,7 @@ class ServiceTariffUpdateForm(forms.ModelForm):
             'ticket_status': forms.TextInput(attrs={'readonly': True}),
 
             'servicetype': forms.Select(attrs={'class': 'form-select'}),
-            'resource_id': forms.Select(attrs={'class': 'form-select'}),
+            'resource': forms.Select(attrs={'class': 'form-select'}),
         }
 
 
@@ -52,7 +52,7 @@ class ServiceTariffCreateForm(forms.ModelForm):
 
         widgets = {
             'servicetype': forms.Select(attrs={'class': 'form-select'}),
-            'resource_id': forms.Select(attrs={'class': 'form-select'}),
+            'resource': forms.Select(attrs={'class': 'form-select'}),
             'ticket_status': forms.TextInput(attrs={'readonly': True}),
         }
 
@@ -136,7 +136,7 @@ class ServiceInformationUpdateForm(forms.ModelForm):
 
             'servicetype': forms.Select(attrs={'class': 'form-select'}),
             # 'repr': forms.Select(attrs={'class': 'form-select'}),
-            # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
+            # 'resource': forms.Select(attrs={'class': 'form-select'}),
         }
 
 
@@ -158,7 +158,7 @@ class ServiceInformationCreateForm(forms.ModelForm):
             "is_visible",
             "ticket_status",
             "id_metaservice",
-            "resource_id"
+            "resource"
         ]
 
         widgets = {
@@ -166,7 +166,7 @@ class ServiceInformationCreateForm(forms.ModelForm):
             # 'legal_name': forms.TextInput(label = 'Название')
             # 'servicetype': forms.Select(attrs={'class': 'form-select'}),
             # 'repr': forms.Select(attrs={'class': 'form-select'}),
-            # 'resource_id': forms.Select(attrs={'class': 'form-select'}),
+            # 'resource': forms.Select(attrs={'class': 'form-select'}),
             # 'ticket_status': forms.Select(attrs={'class': 'form-select'}),
         }
 

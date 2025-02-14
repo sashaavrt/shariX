@@ -34,7 +34,7 @@ class PartnerDetailView(PartnerBaseView, DetailView):
 
         docs = Documents.objects.filter(
             user_id=self.request.user,
-            company_id=self.object
+            company=self.object
         ).prefetch_related('files').order_by('doc_type')
 
         context.update({"docs": docs})
@@ -81,7 +81,7 @@ class PartnerDocUploadView(PartnerBaseView, FormView):
         self.company = get_object_or_404(Company, repr=self.request.user)
         self.doc = Documents.objects.filter(
             user_id=self.request.user,
-            company_id=self.company,
+            company=self.company,
             doc_type=kwargs.get('doc_code')
         ).first()
 
@@ -136,7 +136,7 @@ class PartnerDocView(PartnerBaseView, DetailView):
 
         self.doc = Documents.objects.filter(
             user_id=self.request.user,
-            company_id=self.company,
+            company=self.company,
             doc_type=kwargs.get('doc_code')
         ).first()
 
