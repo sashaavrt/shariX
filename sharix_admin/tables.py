@@ -304,7 +304,7 @@ class ServiceTariffTable(tables.Table):
             "class": "table table-layout-fixed"
         }
         exclude = (
-            'resource_id',
+            'resource',
             'price_alg',
             'price_min',
             'price_amount',
@@ -442,7 +442,7 @@ class ServiceTable(tables.Table):
             "class": "table table-layout-fixed"
         }
         exclude = (
-            'resource_id',
+            'resource',
             'requirements',
             'id_metaservice',
             'price_alg',
