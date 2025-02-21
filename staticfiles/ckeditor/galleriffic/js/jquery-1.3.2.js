@@ -1,0 +1,1 @@
+/Users/sasha/Desktop/sharix-open-webapp-base/venv/lib/python3.9/site-packages/ckeditor/static/ckeditor/galleriffic/js/jquery-1.3.2.js

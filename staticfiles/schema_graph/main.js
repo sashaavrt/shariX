@@ -1,0 +1,1 @@
+/Users/sasha/Desktop/sharix-open-webapp-base/venv/lib/python3.9/site-packages/schema_graph/static/schema_graph/main.js

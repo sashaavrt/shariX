@@ -1,0 +1,1 @@
+/Users/sasha/Desktop/sharix-open-webapp-base/venv/lib/python3.9/site-packages/django/contrib/admin/static/admin/css/vendor/select2/LICENSE-SELECT2.md

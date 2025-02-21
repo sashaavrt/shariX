@@ -1,0 +1,1 @@
+/Users/sasha/Desktop/sharix-open-webapp-base/venv/lib/python3.9/site-packages/drf_yasg/static/drf-yasg/swagger-ui-dist/swagger-ui-standalone-preset.js
