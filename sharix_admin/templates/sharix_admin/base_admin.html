@@ -15,12 +15,12 @@
 
     <ul class="d-flex flex-column nav nav-pills rounded box-shadow border p-2 bg-white">
       <li class="nav-item">
-        <a href="{% url "sharix_admin:main" %}" class="nav-link {% if current_page == "main" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:main' %}" class="nav-link {% if current_page == 'main' %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
               src="
-                {% if current_page == "main" %}
+                {% if current_page == 'main' %}
                   {% static 'sharix_admin/img/menu/house_w.svg' %}
                 {% else %}
                   {% static 'sharix_admin/img/menu/house.svg' %}
@@ -30,12 +30,12 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="{% url 'tickets:ticket_list_list' %}" class="nav-link {% if current_page == "tickets" %}active rounded{% endif %}">
+        <a href="{% url 'tickets:ticket_list_list' %}" class="nav-link {% if current_page == 'tickets' %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
               src="
-                {% if current_page == "tickets" %}
+                {% if current_page == 'tickets' %}
                   {% static 'sharix_admin/img/menu/tickets_w.svg' %}
                 {% else %}
                   {% static 'sharix_admin/img/menu/tickets.svg' %}
@@ -45,12 +45,27 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="http://study.reversea.net/" class="nav-link {% if current_page == "education" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:service' %}" class="nav-link {% if current_page == 'service' %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
               src="
-                {% if current_page == "education" %}
+                {% if current_page == 'service' %}
+                  {% static 'sharix_admin/img/menu/briefcase_w.svg' %}
+                {% else %}
+                  {% static 'sharix_admin/img/menu/briefcase.svg' %}
+                {% endif %}"> 
+            <span class="menu-bar-label">Услуги сервиса</span>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="http://study.reversea.net/" class="nav-link {% if current_page == 'education' %}active rounded{% endif %}">
+          <div class="link d-flex align-items-center">
+            <img
+              class="nav-img"
+              src="
+                {% if current_page == 'education' %}
                   {% static 'sharix_admin/img/menu/education_w.svg' %}
                 {% else %}
                   {% static 'sharix_admin/img/menu/education.svg' %}
@@ -60,12 +75,12 @@
         </a>
       </li>
       {% comment %} <li class="nav-item">
-        <a href="{% url "sharix_admin:partners" %}" class="nav-link {% if current_page == "partners" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:partners' %}" class="nav-link {% if current_page == 'partners' %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
               src="
-                {% if current_page == "partners" %}
+                {% if current_page == 'partners' %}
                   {% static 'sharix_admin/img/menu/people_w.svg' %}
                 {% else %}
                   {% static 'sharix_admin/img/menu/people.svg' %}
@@ -76,12 +91,12 @@
       </li> {% endcomment %}
       {% if not "PARTNER-ADMIN" in user_groups %}
         <li class="nav-item">
-          <a href="{% url "sharix_admin:cooperate" %}" class="nav-link {% if current_page == "cooperate" %}active rounded{% endif %}">
+          <a href="{% url 'sharix_admin:cooperate' %}" class="nav-link {% if current_page == 'cooperate' %}active rounded{% endif %}">
             <div class="link d-flex align-items-center">
               <img
                 class="nav-img"
                 src="
-                  {% if current_page == "cooperate" %}
+                  {% if current_page == 'cooperate' %}
                     {% static 'sharix_admin/img/menu/handshake_w.svg' %}
                   {% else %}
                     {% static 'sharix_admin/img/menu/handshake.svg' %}
@@ -92,12 +107,12 @@
         </li>
       {% endif %}
       {% comment %} <li class="nav-item">
-        <a href="{% url 'sharix_admin:user_information' %}" class="nav-link {% if current_page == "none" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:user_information' %}" class="nav-link {% if current_page == 'none' %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
               src="
-                {% if current_page == "none" %}
+                {% if current_page == 'none' %}
                   {% static 'sharix_admin/img/menu/hdd-network_w.svg' %}
                 {% else %}
                   {% static 'sharix_admin/img/menu/hdd-network.svg' %}
@@ -107,12 +122,12 @@
         </a>
       </li> {% endcomment %}
       {% comment %} <li class="nav-item">
-        <a href="{% url 'sharix_admin:service_type' %}" class="nav-link {% if current_page == "service_type" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:service_type' %}" class="nav-link {% if current_page == 'service_type' %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
               src="
-                {% if current_page == "service_type" %}
+                {% if current_page == 'service_type' %}
                   {% static 'sharix_admin/img/menu/briefcase_w.svg' %}
                 {% else %}
                   {% static 'sharix_admin/img/menu/briefcase.svg' %}
@@ -122,12 +137,12 @@
         </a>
       </li> {% endcomment %}
       {% comment %} <li class="nav-item">
-        <a href="{% url 'sharix_admin:transactions' %}" class="nav-link {% if current_page == "transactions" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:transactions' %}" class="nav-link {% if current_page == 'transactions' %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
               src="
-                {% if current_page == "transactions" %}
+                {% if current_page == 'transactions' %}
                   {% static 'sharix_admin/img/menu/clock-history_w.svg' %}
                 {% else %}
                   {% static 'sharix_admin/img/menu/clock-history.svg' %}
@@ -154,12 +169,12 @@
         </li>
       {% endif %}
       {% comment %} <li class="nav-item">
-        <a href="{% url 'sharix_admin:service_information-add' %}" class="nav-link {% if current_page == "service_info" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:service_information-add' %}" class="nav-link {% if current_page == 'service_info' %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
               src="
-                {% if current_page == "service_info" %}
+                {% if current_page == 'service_info' %}
                   {% static 'sharix_admin/img/menu/person_w.svg' %}
                 {% else %}
                   {% static 'sharix_admin/img/menu/person.svg' %}
@@ -169,12 +184,12 @@
         </a>
       </li> {% endcomment %}
       {% comment %} <li class="nav-item">
-        <a href="{% url 'sharix_admin:payment' %}" class="nav-link {% if current_page == "payment" %}active rounded{% endif %}">
+        <a href="{% url 'sharix_admin:payment' %}" class="nav-link {% if current_page == 'payment' %}active rounded{% endif %}">
           <div class="link d-flex align-items-center">
             <img
               class="nav-img"
               src="
-                {% if current_page == "payment" %}
+                {% if current_page == 'payment' %}
                   {% static 'sharix_admin/img/menu/credit-card_w.svg' %}
                 {% else %}
                   {% static 'sharix_admin/img/menu/credit-card.svg' %}
@@ -212,7 +227,7 @@
         <a href="https://wiki.sharix-app.org/doku.php">Помощь</a>
     </div>
 
-    <form method="post" action="{% url "sharix_admin:auth_logout" %}">
+    <form method="post" action="{% url 'sharix_admin:auth_logout' %}">
       {% csrf_token %}
       <button class="btn btn-sm btn-outline-secondary text-nowrap" type="submit">
         Выйти

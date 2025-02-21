@@ -1,0 +1,9 @@
+{% extends 'sharix_admin/base_admin.html' %}
+
+{% block view %}
+<form method="post" class="d-flex flex-column align-items-end">
+    {% csrf_token %}
+    {% include 'sharix_admin/include/form.html' %}
+    <button class="btn btn-primary" type="submit">Отправить</button>
+</form>
+{% endblock %}

@@ -1,4 +1,4 @@
-from dbsynce.models import Service
+from dbsynce.models import Service, ServiceType
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.translation import gettext as _
@@ -6,6 +6,7 @@ from django_tables2 import SingleTableView
 
 from sharix_admin.tables import ServiceTable
 from sharix_admin.utils import group_required
+from django.http import HttpResponse
 
 
 class ServiceListView(UserPassesTestMixin, SingleTableView):
@@ -16,12 +17,12 @@ class ServiceListView(UserPassesTestMixin, SingleTableView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            'title': _('Rates'),
+            'title': _('Услуги сервиса'),
             'object_list': context['object_list']
         })
         return context
 
-    def test_func(self) -> bool or None:
+    def test_func(self) -> bool or None: # type: ignore
         group_names = ('PROVIDER')
         if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
             return True
@@ -38,3 +39,9 @@ def change_service_status(request):
         service = Service.objects.get(pk=service_id)
         service.status = new_status
         service.save()
+
+def change_status():
+    return None
+
+def service_edit(id):
+    return id

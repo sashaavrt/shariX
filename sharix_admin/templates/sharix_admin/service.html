@@ -1,22 +1,27 @@
-{% extends 'sharix_admin/index.html' %}
+{% extends 'sharix_admin/base_admin.html' %}
 {% load render_table from django_tables2 %}
+{% load static %}
 
-
-{% block contenthome %}
-    <p class="h1">{{ title }}</p>
-    <p class="description_service">Это система управления государством, источником власти в которой является сам народ. Именно народ решает, какие законы и нормы необходимы для гармоничного существования и развития государства. Таким образом, каждый человек в демократическом обществе 
-      Получает определенный набор свобод и обязательств сформированных с учетом интересов всего сообщества. Исходя из вышесказанного, можно заключить, что демократия – это возможность для каждого человека свободно участвовать в непосредственном управлении своим государством, обществом и личной судьбой в конечном счете.</p>
-    <div class="container text-center mt-2">
-      {% render_table table %}
+{% block view %}
+    <p class="description_service">Это то, что ShariX предлагает своим клиентам и партнерам. Добавляйте новые услуги и редактируйте существующие.  Новая услуга добавляется неактивной – активируйте ее в Заявках.</p>
+      <p class="description_service">Партнеры выбирают услуги из предложенных и уточняют их в заданных рамках.</p>
+  
+    <div>
+      <details>
+      <summary>
+        Как пользоваться?
+      </summary>
+      <p>А тут ответ как пользоваться</p>
+    </details>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <!-- <script>
       // Запрос на изменения статуса исполнителя
       $('.status-toggle').change(function() {
         var service_id = $(this).data('service-id');
         var new_status = $(this).prop('checked') ? 'active' : 'deactivated';
         $.ajax({
-          url: '{% url "service/change_status" %}',
+          url: '#',
           type: 'POST',
           data: {
             'service_id': service_id,
@@ -33,8 +38,19 @@
           }
         });
       });
-    </script>
+    </script> -->
     
-
+<div class="row">
+  <div class="col">
+    <input>
+  </div>
+  <div class="col"></div>
+  <div class="col">
+    <button class="btn btn-primary">+ Услугу</button>
+  </div>
+</div>
+<div>
+  {% render_table table %}
+</div>
     
-{% endblock contenthome %}
+{% endblock %}

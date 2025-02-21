@@ -4,6 +4,9 @@ from dbsynce.models import *
 from django.contrib.auth import get_user_model
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
+from django_tables2.utils import A 
+from sharix_admin.views import *
+from sharix_admin.urls import *
 
 
 class TransactionsWalletTable(tables.Table):
@@ -398,17 +401,24 @@ class ServiceTypeTable(tables.Table):
 
 class ServiceTable(tables.Table):
     id = tables.Column(
-        verbose_name=_('ID'),
+        verbose_name=_('id'),
         attrs={
             "td": {"width": "5%"}
         }
     )
     servicetype = tables.Column(
-        verbose_name=_('Description of the service'),
+        verbose_name=_('Услуга'),
         accessor='servicetype.caption',
         attrs={
             'th': {'scope': 'col'},
             "td": {"width": "20%"}}
+    )
+    servicedescription = tables.Column(
+        verbose_name=_('Описание'),
+        accessor='servicetype.description',
+        attrs={
+            'th': {'scope': 'col'},
+            "td": {"width": "40%"}}
     )
 
     # description = tables.Column(verbose_name='Название тарифа', attrs={'th':{'scope':'col'}, "td":{"width":"20%"}})
@@ -435,13 +445,17 @@ class ServiceTable(tables.Table):
             "td": {"width": "20%"}
         }
     )
-
+    edit = tables.LinkColumn('sharix_admin:service_edit', text=lambda record:record.id, args=[A('id')])
     class Meta:
         model = Service
         attrs = {
             "class": "table table-layout-fixed"
         }
         exclude = (
+            'company_comission',
+            'price_amount',
+            'price_min',
+            'price_km',
             'resource',
             'requirements',
             'id_metaservice',

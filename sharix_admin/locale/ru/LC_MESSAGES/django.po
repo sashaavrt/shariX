@@ -400,8 +400,8 @@ msgid "Partner Information"
 msgstr "Информация о партнере"
 
 #: .\views\context.py:29 .\views\service.py:18
-msgid "Rates"
-msgstr "Тарифы"
+msgid "Services"
+msgstr "Услуги сервиса"
 
 #: .\views\context.py:31 .\views\user_info.py:17
 msgid "User Management"

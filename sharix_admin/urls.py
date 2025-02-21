@@ -31,7 +31,6 @@ urlpatterns = [
 
     # Страница "Сотрудничество" (запрос на подключение к сервису)
     path('cooperate/', login_required(CooperateView.as_view()), name='cooperate'),
-
     # Страница "О партнере"
     path('partner/', login_required(PartnerDetailView.as_view()), name='partner_detail'),
     path('partner/edit/', login_required(PartnerEditView.as_view()), name='partner_edit'),
@@ -68,8 +67,9 @@ urlpatterns = [
 
     path('service/', ServiceListView.as_view(), name='service'),
     path('service/change_status/', change_service_status, name='service/change_status'),
+    path('service/edit', service_edit, name='service_edit'),
 
-    # path('partner_information/', login_required(PartnerInfoView.as_view()), name='partner_information/'),
+    #path('partner_information/', login_required(PartnerBaseView.as_view()), name='partner_information/'),
     # path('partner_information/add/', login_required(PartnerInformationCreate.as_view()), name='partner_information/add/'),
     # path('partner_information/edit/<int:pk>', login_required(PartnerInformationUpdateView.as_view()), name='partner_information/edit/'),
 
