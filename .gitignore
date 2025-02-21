@@ -1,7 +1,7 @@
-# Virtualenv
-env/
-venv/
-.venv/
+# # Virtualenv
+# env/
+# venv/
+# .venv/
 
 #config for concrete service
 # bin/install.cfg
