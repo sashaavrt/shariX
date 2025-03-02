@@ -1,10 +1,10 @@
 # # Virtualenv
-# env/
-# venv/
-# .venv/
+env/
+venv/
+.venv/
 
 #config for concrete service
-# bin/install.cfg
+bin/install.cfg
 
 # # Editors
 # .vscode

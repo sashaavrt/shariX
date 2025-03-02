@@ -10,14 +10,15 @@ from django.views.generic.edit import FormView
 from sharix_admin.forms import CompanyForm, DocumentUploadForm
 from sharix_admin.utils import *
 from .base import BaseView
+from django.utils.translation import gettext as _
 
 
 class PartnerBaseView(BaseView):
     page_name = 'partner'
 
     # Проверяем состояит ли текущий пользователь в группе PARTNER-ADMIN
-    def test_func(self):
-        return "PARTNER-ADMIN" in self.user_groups
+    # def test_func(self):
+    #     return "PARTNER-ADMIN" in self.user_groups
 
 
 class PartnerDetailView(PartnerBaseView, DetailView):

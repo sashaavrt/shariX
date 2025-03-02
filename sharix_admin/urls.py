@@ -7,6 +7,7 @@ from schema_graph.views import Schema
 
 from sharix_admin.apiviews import *
 from sharix_admin.views import *
+from sharix_admin.views.services import ServiceListView, change_service_status
 
 router = routers.SimpleRouter()
 router.register(r'sharix-users', SharixUserMVS)
@@ -67,8 +68,8 @@ urlpatterns = [
 
     path('service/', ServiceListView.as_view(), name='service'),
     path('service/change_status/', change_service_status, name='service/change_status'),
-    path('service/edit', service_edit, name='service_edit'),
-
+    path('service/edit/', login_required(ServiceEditView.as_view()), name='service_edit'),
+    path('service_about/', login_required(ServiceDetailView.as_view()), name='service_detail'),
     #path('partner_information/', login_required(PartnerBaseView.as_view()), name='partner_information/'),
     # path('partner_information/add/', login_required(PartnerInformationCreate.as_view()), name='partner_information/add/'),
     # path('partner_information/edit/<int:pk>', login_required(PartnerInformationUpdateView.as_view()), name='partner_information/edit/'),

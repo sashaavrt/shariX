@@ -3,45 +3,50 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.translation import gettext as _
 from django_tables2 import SingleTableView
-
+from django.contrib import messages
+from django.db import transaction
 from sharix_admin.tables import ServiceTable
 from sharix_admin.utils import group_required
 from django.http import HttpResponse
+from django.shortcuts import render
+from .base import BaseView
+from django.views.generic.edit import FormView
+from sharix_admin.forms import *
+from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import DetailView
+
+class ServiceBaseView(BaseView):
+    page_name = 'service'
 
 
-class ServiceListView(UserPassesTestMixin, SingleTableView):
-    table_class = ServiceTable
-    queryset = Service.objects.all()
-    template_name = 'sharix_admin/service.html'
+class ServiceDetailView(ServiceBaseView, DetailView):
+    model = Service
+    template_name = 'sharix_admin/service_about.html'
+    context_object_name = 'service'
+    page_title = 'Об услуге'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Service, id=Service.id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({
-            'title': _('Услуги сервиса'),
-            'object_list': context['object_list']
-        })
         return context
 
-    def test_func(self) -> bool or None: # type: ignore
-        group_names = ('PROVIDER')
-        if bool(self.request.user.groups.filter(name=group_names)) or self.request.user.is_superuser:
-            return True
-        return False
 
+class ServiceEditView(ServiceBaseView, FormView):
+    template_name = 'sharix_admin/service_edit.html'
+    form_class = ServiceInformationUpdateForm
+    success_url = reverse_lazy('partner_detail')
+    page_title = 'Изменение данных услуги'
 
-@login_required
-@group_required('PROVIDER')
-def change_service_status(request):
-    if request.method == 'POST':
-        service_id = request.POST.get('service_id')
-        new_status = request.POST.get('new_status')
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['instance'] = get_object_or_404(Service, repr=self.request.user)
+        return kwargs
 
-        service = Service.objects.get(pk=service_id)
-        service.status = new_status
-        service.save()
-
-def change_status():
-    return None
-
-def service_edit(id):
-    return id
+    def form_valid(self, form):
+        with transaction.atomic():
+            form.save()
+        messages.success(self.request, 'Данные успешно изменены и теперь проходят проверку!')
+        return super().form_valid(form)

@@ -445,7 +445,12 @@ class ServiceTable(tables.Table):
             "td": {"width": "20%"}
         }
     )
-    edit = tables.LinkColumn('sharix_admin:service_edit', text=lambda record:record.id, args=[A('id')])
+    edit = tables.LinkColumn("sharix_admin:service_edit", text=lambda record:record.id,
+      
+        attrs={
+            'th': {'scope': 'col'},
+            "td": {"width": "10%"}
+        })
     class Meta:
         model = Service
         attrs = {

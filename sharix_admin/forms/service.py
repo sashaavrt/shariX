@@ -127,7 +127,9 @@ class ServiceInformationUpdateForm(forms.ModelForm):
     class Meta:
         model = Service
         fields = [
-            'servicetype'
+            "servicetype",
+            "price_alg",
+            "requirements",
         ]
 
         widgets = {
@@ -135,6 +137,8 @@ class ServiceInformationUpdateForm(forms.ModelForm):
             # 'ticket_status': forms.TextInput(attrs={'readonly': True}),
 
             'servicetype': forms.Select(attrs={'class': 'form-select'}),
+            'price_alg': forms.Select(attrs={'class': 'form-select'}),
+            'requirements':forms.Select(attrs={'class': 'form-select'}),
             # 'repr': forms.Select(attrs={'class': 'form-select'}),
             # 'resource': forms.Select(attrs={'class': 'form-select'}),
         }
