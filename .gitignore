@@ -6,34 +6,34 @@ venv/
 #config for concrete service
 bin/install.cfg
 
-# # Editors
-# .vscode
-# .idea
+# Editors
+.vscode
+.idea
 
-# # Python
-# __pycache__/
-# *.py[cod]
-# *$py.class
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 
-# # Apps
-# tickets/
-# dbsynce/
-# conf/
-# design_template/
-# webservice_running/
-# landing/
-# user/
+# Apps
+tickets/
+dbsynce/
+conf/
+design_template/
+webservice_running/
+landing/
+user/
 
-# # Django
-# migrations/
-# staticfiles/
-# media/
+# Django
+migrations/
+staticfiles/
+media/
 
-# # Other
-# *.sqlite3
-# *.*~
-# *.*.swp
-# .DS_Store
+# Other
+*.sqlite3
+*.*~
+*.*.swp
+.DS_Store
 
-# # Project configuration variables
-# core/settings_vars.py
+# Project configuration variables
+core/settings_vars.py
